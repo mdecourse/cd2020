@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>2020 協同產品設計實習 - Misc</title><link href="https://mdecourse.github.io/cd2020/blog/" rel="alternate"></link><link href="https://mdecourse.github.io/cd2020/blog/feeds/misc.atom.xml" rel="self"></link><id>https://mdecourse.github.io/cd2020/blog/</id><updated>2020-01-25T11:00:00+08:00</updated><entry><title>2020 CD 課程</title><link href="https://mdecourse.github.io/cd2020/blog/2020-CD-Project1.html" rel="alternate"></link><published>2020-01-25T11:00:00+08:00</published><updated>2020-01-25T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:mdecourse.github.io,2020-01-25:/cd2020/blog/2020-CD-Project1.html</id><summary type="html">&lt;p&gt;CoppeliaSim, Webots and Onshape&lt;/p&gt;
+</summary><content type="html">&lt;p&gt;CoppeliaSim, Webots and Onshape&lt;/p&gt;
+
+
+&lt;h2&gt;CoppeliaSim&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://www.coppeliarobotics.com/"&gt;CoppeliaSim&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://cyberbotics.com/doc/guide/index"&gt;Webots&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://learn.onshape.com/catalog?labels=%5B%22Self-Paced%20Courses%22%5D&amp;amp;values=%5B%22All%22%5D"&gt;Onshape&lt;/a&gt;&lt;/p&gt;</content><category term="Misc"></category><category term="2020CD"></category></entry></feed>

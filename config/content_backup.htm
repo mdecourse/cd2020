@@ -1,5 +1,13 @@
 <h1>About</h1>
-<h2>KMOL2020</h2>
+<p>國立虎尾科技大學 機械設計工程系 KMOL 協同產品設計實習 課程網頁</p>
+<p>倉儲: <a href="https://github.com/mdecourse/cd2020">https://github.com/mdecourse/cd2020</a></p>
+<p>網頁: <a href="https://mde.tw/cd2020">https://mde.tw/cd2020</a> </p>
+<p>網誌: <a href="https://mde.tw/cd2020/blog">https://mde.tw/cd2020/blog</a> </p>
+<p>簡報: <a href="https://mde.tw/cd2020/reveal">https://mde.tw/cd2020/reveal</a> </p>
+<hr/>
+<h4><span><a href="https://drive.google.com/open?id=1cZFSsLEoGOBYojzKzFEf4YH2l--pbS-9"></a></span>電腦輔助設計室與協同設計室行事曆</h4>
+<p><a href="https://calendar.google.com/calendar/embed?src=mde.nfu.edu.tw_3439313938333136353439%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei&amp;mode=week&amp;src=mde.nfu.edu.tw_35303530373431313438%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei">全頁檢視</a></p>
+<p><iframe height="600" src="https://calendar.google.com/calendar/embed?src=mde.nfu.edu.tw_3439313938333136353439%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei&amp;mode=week&amp;src=mde.nfu.edu.tw_35303530373431313438%40resource.calendar.google.com&amp;ctz=Asia%2FTaipei" width="800"></iframe></p><h2>KMOL2020</h2>
 <h4>Create Portable Programming System for Windows 10:</h4>
 <p>PortableGit: <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></p>
 <p>MSYS2: <a href="https://www.msys2.org/">https://www.msys2.org/</a></p>
@@ -18,7 +26,87 @@
 <p>Fossil SCM: <a href="https://www.fossil-scm.org/">https://www.fossil-scm.org/</a></p>
 <p>Jupyterlab: <a href="https://github.com/jupyterlab/jupyterlab">https://github.com/jupyterlab/jupyterlab</a></p>
 <p>Flutter: <a href="https://github.com/flutter/flutter">https://github.com/flutter/flutter</a></p>
-<p>Visual Studio Code: <a href="https://github.com/microsoft/vscode">https://github.com/microsoft/vscode</a></p><h2>Grading</h2>
+<p>Visual Studio Code: <a href="https://github.com/microsoft/vscode">https://github.com/microsoft/vscode</a></p>
+<h3>Python</h3>
+<p>Create a Portable Python:</p>
+<p>Install Python 3.8.1 without pip</p>
+<p><a href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH">PYTHONPATH</a></p>
+<p><a href="https://bootstrap.pypa.io/get-pip.py">get-pip.py</a></p>
+<h4>start.bat</h4>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">@echo off
+set Disk=y
+subst %Disk%: "data"
+
+%Disk%:
+
+set HomePath=%Disk%:\home_mdecourse
+set HomeDrive=%Disk%:\home_mdecourse
+set Home=%Disk%:\home_mdecourse
+set USERPROFILE=%Disk%:\home_mdecourse
+
+REM 將系統 Python 程式的 io 設為 utf-8
+set PYTHONIOENCODING="utf-8"
+
+set PYTHONPATH=%Disk%:\py38\DLLs;%Disk%:\py38\Lib;%Disk%:\py38\Lib\site-packages;
+set PYTHONHOME=%Disk%:\py38
+
+REM for flutter
+set java_home=%Disk%:\java\jdk8u222-b10
+set ANDROID_SDK_home=%Disk%:\home_mdecourse
+set GRADLE_USER_home=%Disk%:\home_mdecourse
+set ANDROID_SDK_ROOT=%Disk%:\android\sdk
+set ANDROID_Home=%Disk%:\android\sdk\tools
+
+REM for putty
+set GIT_HOME=%CDisk%:\portablegit\bin\
+set GIT_SSH=%Disk%:\putty\plink.exe
+
+set path_python=%Disk%:\py38;%Disk%:\py38\Scripts;
+set path_msys2=%Disk%:\msys64\mingw64\bin;
+REM coreutils is for compiling fossil scm
+set path_coreutils=%Disk%:\coreutils-5.3.0\bin;%Disk%:\depends22_x64;
+set path_tcc=%Disk%:\tcc;
+set path_cmake=%Disk%:\cmake-3.10.1-win64-x64\bin;
+set path_nodejs=%Disk%:\nodejs;%Disk%:\nodejs\appdata\roaming\npm;
+set path_git=%Disk%:\portablegit\bin;
+set path_xming=%Disk%:\Xming;
+set path_latex=%Disk%:\Pandoc;%Disk%:\TinyTeX\bin\win32;
+set path_flutter=%Disk%:\java\jdk8u222-b10\bin;%Disk%:\flutter\bin;%Disk%:\Android\sdk;%Disk%:\Android\sdk\tools;%Disk%:\Android\sdk\tools\bin;%Disk%:\Android\sdk\platform-tools;%Disk%:\flutter\bin\cache\dart-sdk\bin;%Disk%:\vscode;
+set path_putty=%Disk%:\putty;
+
+path=%Disk%:;%path_python%;%path_msys2%;%path_tcc%;%path_git%;%path_cmake%;%path_coreutils%;%path_flutter%;%path_putty%;%path_latex%;%path%;
+
+start /MIN cmd.exe
+start /MIN cmd.exe
+start /MIN cmd.exe
+start /MIN cmd.exe
+
+start /MIN %Disk%:\kmolScite\SciTE.exe
+start /MIN %Disk%:\kmolScite\SciTE.exe
+
+Exit</pre>
+<h3>MSYS2</h3>
+<p><a href="https://www.msys2.org/">https://www.msys2.org/</a></p>
+<p>Y:\py38\Lib\distutils\distutils.cfg</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[build]
+compiler=mingw32
+
+[build_ext]
+compiler=mingw32</pre>
+<h4>Reference</h4>
+<p style="padding-left: 30px;"><a href="https://github.com/KmolYuan/pyslvs/blob/master/platform/set_pycompiler.bat">https://github.com/KmolYuan/pyslvs/blob/master/platform/set_pycompiler.bat</a></p>
+<h3>Pyslvs-UI</h3>
+<p>according to <a href="https://pyslvs-ui.readthedocs.io/en/stable/">https://pyslvs-ui.readthedocs.io/en/stable/</a></p>
+<p>git clone --recurse-submodules https://github.com/KmolYuan/Pyslvs-UI.git</p>
+<p>cd pyslvs-ui</p>
+<p>python -m pip install -r requirements.txt</p>
+<p>mingw32-make build-kernel</p>
+<p>python setup.py install</p>
+<h4>執行 launch_pyslvs.py:</h4>
+<p>y:\py38\pythonw -u "launch_pyslvs.py"<br/>Traceback (most recent call last):<br/> File "launch_pyslvs.py", line 11, in &lt;module&gt;<br/> from pyslvs_ui.__main__ import main<br/> File "Y:\tmp\Pyslvs-UI\pyslvs_ui\__init__.py", line 10, in &lt;module&gt;<br/> from pyslvs import __version__<br/> File "y:\py38\lib\site-packages\pyslvs-20.2.0.dev0-py3.8-win-amd64.egg\pyslvs\__init__.py", line 12, in &lt;module&gt;<br/> from .bfgs import SolverSystem<br/>ImportError: DLL load failed while importing bfgs: The specified module could not be found.</p>
+<p></p>
+<p></p>
+<p></p><h2>Grading</h2>
 <p>自評 (30%)</p>
 <p>互評 (30%)</p>
 <p>教師評分 (40%)</p>
@@ -54,4 +142,6 @@
 <p><a href="https://github.com/CarGuo/gsy_flutter_book">https://github.com/CarGuo/gsy_flutter_book</a></p>
 <p><a href="https://www.youtube.com/playlist?list=PLV2Iw811jLpWdAHToUqTuWYhYbjVfwS80">https://www.youtube.com/playlist?list=PLV2Iw811jLpWdAHToUqTuWYhYbjVfwS80</a></p>
 <p><a href="https://flutterbyexample.com/">https://flutterbyexample.com/</a></p>
+<h2>AI</h2>
+<p><a href="https://artint.info/2e/html/ArtInt2e.html">https://artint.info/2e/html/ArtInt2e.html</a></p>
 <p></p>

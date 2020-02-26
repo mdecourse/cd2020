@@ -1,3 +1,5 @@
 # Byte-compiled
 __pycache__/
+*.js.deps
+*.js.map
 

@@ -60,6 +60,20 @@ grouping() {
     }
     // 列出全班分組數列
     output.text += cp2019.toString() + "\n";
+    // 列出已經排序後的分組名單
+    output.text += '=' * 25 + "\n";
+    output.text += '以下為排序後的各組成員名單: \n';
+    gth = 1;
+    for (i=0; i < cp2019.length; i++){
+      // 列印區隔符號
+      output.text += '=' * 20 + "\n";
+      output.text += "group $gth \n";
+      gpList = [];
+      for (j=0; j < cp2019[i].length; j++){
+        output.text += cp2019[i][j] + "\n";
+      }
+      gth = gth + 1;
+    }
   });
 }
 

@@ -117,30 +117,23 @@ compiler=mingw32</pre>
 <p>專案三 (20%)</p>
 <p>專案四 (20%)</p><h1>Grouping</h1>
 <h4>亂數分組:</h4>
-<p>學員名單 URL: <input id="studListUrl" size="70" type="text" value="https://mde.tw/cd2020/downloads/2020spring_cd_2a_list.txt"/><br/> 每組人數: <input id="grpNum" size="3" type="text" value="10"/><br/> <input id="submit" type="submit" value="開始分組"/><br/> <textarea cols="80" id="output" rows="10"></textarea></p>
-<script src="https://mde.tw/cp2019/downloads/dart_ex/random_grouping/random_grouping.js"></script>
-<p><a href="https://dartpad.github.io/embed-html.html?gh_owner=mdecourse&amp;gh_repo=cp2019&amp;gh_path=downloads/dart_ex/random_grouping&amp;theme=dark">Dart source code for random grouping</a></p>
-<h4>main.dart:</h4>
+<p>學員名單 URL: <input id="studListUrl" size="70" type="text" value="https://mde.tw/cd2020/downloads/2020spring_cd_2a_list.txt"/><br/> <input id="submit" type="submit" value="開始分組"/><br/> <textarea cols="80" id="output" rows="10"></textarea></p>
+<script src="https://mde.tw/cd2020/downloads/dart_ex/even_grouping/evenGrouping.js"></script>
+<p><a href="https://dartpad.github.io/embed-html.html?gh_owner=mdecourse&amp;gh_repo=cd2020&amp;gh_path=downloads/dart_ex/even_grouping&amp;theme=dark">Dart source code for random grouping</a></p>
+<h4>evenGrouping.dart:</h4>
 <pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">import 'dart:html';
 
-  InputElement grpNum = querySelector("#grpNum");
-  int num;
   InputElement studListUrl = querySelector("#studListUrl");
   String studUrl;
   // 將 Label 改為 Textarea, 避免產生過程結果嵌入所在頁面
   TextAreaElement output = querySelector("#output");
 
 main() {
-  querySelector("#submit").onClick.listen((e) =&gt; Grouping());
+  querySelector("#submit").onClick.listen((e) =&gt; grouping());
 }
 
-Grouping() {
+grouping() {
   output.innerHtml = "";
-  if (grpNum.value != "") {
-    num = int.parse(grpNum.value);
-  } else {
-    num = 10;
-  }
 
   if (studListUrl.value != "") {
     studUrl = studListUrl.value;
@@ -152,47 +145,74 @@ Grouping() {
   int gth = 1;
   // 迴圈序號變數
   int i;
+  int j;
+  int total;
+  int inc;
   // 每組學員暫存數列
   var gpList = [];
   // 全班分組數列
   var cp2019 = [];
+  // 各組人數數列
+  var numList = [];
 
   HttpRequest.getString(studUrl).then((String resp) {
     // 利用 trim() 去除字串最後的跳行符號, 之後再利用 split() 根據 \n 轉為數列
     var studList = resp.trim().split("\n");
     // 數列利用 shuffle() 方法以隨機方法弄亂順序
     studList.shuffle();
-    // 逐一讀取已經弄亂的學生學號數列, 利用模數運算每幾人分成一組
-    for (i = 0; i &lt; studList.length; i++) {
-      // 0, 1~(num-1), num
-      if (i % num == 0) {
-        gpList = [];
-        // 列印區隔符號
-        output.text += '=' * 20 + "\n";
-        output.text += "group $gth :" + "\n";
-        output.text += studList[i] + "\n";
+    total = studList.length;
+    output.text += "全班總計" + total.toString() + " 人\n";
+    numList = getNumList(studList.length);
+    inc = 0;
+    for (i in numList){
+      // 列印區隔符號
+      output.text += '=' * 20 + "\n";
+      output.text += "group $gth 有 " + i.toString() + " 人: \n";
+      gpList = [];
+      for (j = 0; j &lt; i; j++){
+        output.text += studList[j+inc] + "\n";
         // 在各分組數列中加入將對應的學員學號
-        gpList.add(studList[i]);
-        gth = gth + 1;
-      } else {
-        output.text += studList[i] + "\n";
-        // 在各分組數列中加入將對應的學員學號
-        gpList.add(studList[i]);
+        gpList.add(studList[j+inc]);
       }
-      if (i % num == 0) {
+      gth = gth + 1;
+      inc = inc + j;
+        //output.text += studList[j] + "\n";
         // 逐步將各組暫存的分組數列加入全班分組數列中
-        cp2019.add(gpList);
-      }
+      cp2019.add(gpList);
     }
     // 列出全班分組數列
     output.text += cp2019.toString() + "\n";
   });
 }
-</pre>
+
+List getNumList(int total){
+  // total student number
+  // int total = 65;
+  // initial each group expect to be "eachGrp" number of people
+  int eachGrp = 10;
+  // may divide into "grpNum" number of group
+  int grpNum = total ~/ eachGrp;
+  // vacant list
+  var splits = [];
+  // find remainder when total number divid into "grpNum" number of group
+  int remainder = total % grpNum;
+  // number of people in one group by calculation
+  int calGrp = total ~/ grpNum;
+
+  for (int i = 0; i &lt; grpNum; i++) {
+    splits.add(calGrp);
+  }
+  //print(splits);
+
+  for (int i = 0; i &lt; remainder; i++) {
+    splits[i] += 1;
+  }
+  //print(splits);
+  return splits;
+ }</pre>
 <h4>index.html:</h4>
 <pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;h1&gt;亂數分組:&lt;/h1&gt;
 學員名單 URL: &lt;input type="text" id="studListUrl" size="50" value="https://mde.tw/cp2019/downloads/2019fall_cp_1a_list.txt"&gt;&lt;br /&gt;
-每組人數: &lt;input type="text" id="grpNum" size="3" value="10"&gt;&lt;br /&gt;
 &lt;input type="submit" value="開始分組" id="submit"&gt;&lt;br /&gt;
 &lt;textarea id="output" cols="80" rows="10"&gt;&lt;/textarea&gt;</pre>
 <h4>style.css:</h4>

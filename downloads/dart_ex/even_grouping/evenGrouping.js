@@ -3875,6 +3875,8 @@
       return receiver.length;
     },
     $index: function(receiver, index) {
+      if (!H._isInt(index))
+        throw H.wrapException(H.diagnoseIndexError(receiver, index));
       if (index >= receiver.length || index < 0)
         throw H.wrapException(H.diagnoseIndexError(receiver, index));
       return receiver[index];
@@ -6100,7 +6102,7 @@
   };
   N.grouping_closure.prototype = {
     call$1: function(resp) {
-      var total, t1, t2, numList, t3, _i, t4, t5, t6, t7, j,
+      var total, t1, t2, numList, t3, _i, t4, t5, t6, t7, j, i,
         studList = H.setRuntimeTypeInfo(J.trim$0$s(H._checkStringNullable(resp)).split("\n"), type$.JSArray_String);
       C.JSArray_methods.shuffle$0(studList);
       total = studList.length;
@@ -6170,8 +6172,40 @@
           H.Sort__dualPivotQuicksort(t4, 0, t6, J._interceptors_JSArray__compareAny$closure(), t5);
         C.JSArray_methods.add$1(t3, t1.gpList);
       }
-      t1 = $.$get$output();
-      t1.textContent = J.$add$ansx(t1.textContent, P.IterableBase_iterableToFullString(t3, "[", "]") + "\n");
+      t2 = $.$get$output();
+      t2.textContent = J.$add$ansx(t2.textContent, P.IterableBase_iterableToFullString(t3, "[", "]") + "\n");
+      t2 = $.$get$output();
+      t2.textContent = J.$add$ansx(t2.textContent, C.JSString_methods.$mul("=", 25) + "\n");
+      t2 = $.$get$output();
+      t2.textContent = J.$add$ansx(t2.textContent, "\u4ee5\u4e0b\u70ba\u6392\u5e8f\u5f8c\u7684\u5404\u7d44\u6210\u54e1\u540d\u55ae: \n");
+      t1.gth = 1;
+      t1.i = 0;
+      t2 = 0;
+      while (t2 < t3.length) {
+        t2 = $.$get$output();
+        t2.textContent = J.$add$ansx(t2.textContent, C.JSString_methods.$mul("=", 20) + "\n");
+        t2 = $.$get$output();
+        t2.textContent = J.$add$ansx(t2.textContent, "group " + t1.gth + " \n");
+        t1.gpList = [];
+        t2 = t1.j = 0;
+        while (t2 < C.JSArray_methods.$index(t3, t1.i).length) {
+          t2 = $.$get$output();
+          t2.textContent = J.$add$ansx(t2.textContent, J.$add$ansx(C.JSArray_methods.$index(C.JSArray_methods.$index(t3, t1.i), t1.j), "\n"));
+          t2 = t1.j;
+          if (typeof t2 !== "number")
+            return t2.$add();
+          j = t2 + 1;
+          t1.j = j;
+          t2 = j;
+        }
+        ++t1.gth;
+        t2 = t1.i;
+        if (typeof t2 !== "number")
+          return t2.$add();
+        i = t2 + 1;
+        t1.i = i;
+        t2 = i;
+      }
     },
     $signature: 22
   };

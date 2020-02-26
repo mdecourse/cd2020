@@ -55,6 +55,7 @@ grouping() {
       inc = inc + j;
         //output.text += studList[j] + "\n";
         // 逐步將各組暫存的分組數列加入全班分組數列中
+      gpList.sort();
       cp2019.add(gpList);
     }
     // 列出全班分組數列

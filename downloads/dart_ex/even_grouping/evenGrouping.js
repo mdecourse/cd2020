@@ -226,6 +226,271 @@
     IterableElementError_tooMany: function() {
       return new P.StateError("Too many elements");
     },
+    Sort__doSort: function(a, left, right, compare, $E) {
+      if (right - left <= 32)
+        H.Sort__insertionSort(a, left, right, compare, $E);
+      else
+        H.Sort__dualPivotQuicksort(a, left, right, compare, $E);
+    },
+    Sort__insertionSort: function(a, left, right, compare, $E) {
+      var i, t1, el, j, t2, j0;
+      for (i = left + 1, t1 = J.getInterceptor$asx(a); i <= right; ++i) {
+        el = t1.$index(a, i);
+        j = i;
+        while (true) {
+          if (j > left) {
+            t2 = compare.call$2(t1.$index(a, j - 1), el);
+            if (typeof t2 !== "number")
+              return t2.$gt();
+            t2 = t2 > 0;
+          } else
+            t2 = false;
+          if (!t2)
+            break;
+          j0 = j - 1;
+          t1.$indexSet(a, j, t1.$index(a, j0));
+          j = j0;
+        }
+        t1.$indexSet(a, j, el);
+      }
+    },
+    Sort__dualPivotQuicksort: function(a, left, right, compare, $E) {
+      var t0, less, great, k, ak, comp, great0, less0, pivots_are_equal, comp_pivot1, comp_pivot2,
+        sixth = C.JSInt_methods._tdivFast$1(right - left + 1, 6),
+        index1 = left + sixth,
+        index5 = right - sixth,
+        index3 = C.JSInt_methods._tdivFast$1(left + right, 2),
+        index2 = index3 - sixth,
+        index4 = index3 + sixth,
+        t1 = J.getInterceptor$asx(a),
+        el1 = t1.$index(a, index1),
+        el2 = t1.$index(a, index2),
+        el3 = t1.$index(a, index3),
+        el4 = t1.$index(a, index4),
+        el5 = t1.$index(a, index5),
+        t2 = compare.call$2(el1, el2);
+      if (typeof t2 !== "number")
+        return t2.$gt();
+      if (t2 > 0) {
+        t0 = el2;
+        el2 = el1;
+        el1 = t0;
+      }
+      t2 = compare.call$2(el4, el5);
+      if (typeof t2 !== "number")
+        return t2.$gt();
+      if (t2 > 0) {
+        t0 = el5;
+        el5 = el4;
+        el4 = t0;
+      }
+      t2 = compare.call$2(el1, el3);
+      if (typeof t2 !== "number")
+        return t2.$gt();
+      if (t2 > 0) {
+        t0 = el3;
+        el3 = el1;
+        el1 = t0;
+      }
+      t2 = compare.call$2(el2, el3);
+      if (typeof t2 !== "number")
+        return t2.$gt();
+      if (t2 > 0) {
+        t0 = el3;
+        el3 = el2;
+        el2 = t0;
+      }
+      t2 = compare.call$2(el1, el4);
+      if (typeof t2 !== "number")
+        return t2.$gt();
+      if (t2 > 0) {
+        t0 = el4;
+        el4 = el1;
+        el1 = t0;
+      }
+      t2 = compare.call$2(el3, el4);
+      if (typeof t2 !== "number")
+        return t2.$gt();
+      if (t2 > 0) {
+        t0 = el4;
+        el4 = el3;
+        el3 = t0;
+      }
+      t2 = compare.call$2(el2, el5);
+      if (typeof t2 !== "number")
+        return t2.$gt();
+      if (t2 > 0) {
+        t0 = el5;
+        el5 = el2;
+        el2 = t0;
+      }
+      t2 = compare.call$2(el2, el3);
+      if (typeof t2 !== "number")
+        return t2.$gt();
+      if (t2 > 0) {
+        t0 = el3;
+        el3 = el2;
+        el2 = t0;
+      }
+      t2 = compare.call$2(el4, el5);
+      if (typeof t2 !== "number")
+        return t2.$gt();
+      if (t2 > 0) {
+        t0 = el5;
+        el5 = el4;
+        el4 = t0;
+      }
+      t1.$indexSet(a, index1, el1);
+      t1.$indexSet(a, index3, el3);
+      t1.$indexSet(a, index5, el5);
+      t1.$indexSet(a, index2, t1.$index(a, left));
+      t1.$indexSet(a, index4, t1.$index(a, right));
+      less = left + 1;
+      great = right - 1;
+      if (J.$eq$(compare.call$2(el2, el4), 0)) {
+        for (k = less; k <= great; ++k) {
+          ak = t1.$index(a, k);
+          comp = compare.call$2(ak, el2);
+          if (comp === 0)
+            continue;
+          if (typeof comp !== "number")
+            return comp.$lt();
+          if (comp < 0) {
+            if (k !== less) {
+              t1.$indexSet(a, k, t1.$index(a, less));
+              t1.$indexSet(a, less, ak);
+            }
+            ++less;
+          } else
+            for (; true;) {
+              comp = compare.call$2(t1.$index(a, great), el2);
+              if (typeof comp !== "number")
+                return comp.$gt();
+              if (comp > 0) {
+                --great;
+                continue;
+              } else {
+                great0 = great - 1;
+                if (comp < 0) {
+                  t1.$indexSet(a, k, t1.$index(a, less));
+                  less0 = less + 1;
+                  t1.$indexSet(a, less, t1.$index(a, great));
+                  t1.$indexSet(a, great, ak);
+                  great = great0;
+                  less = less0;
+                  break;
+                } else {
+                  t1.$indexSet(a, k, t1.$index(a, great));
+                  t1.$indexSet(a, great, ak);
+                  great = great0;
+                  break;
+                }
+              }
+            }
+        }
+        pivots_are_equal = true;
+      } else {
+        for (k = less; k <= great; ++k) {
+          ak = t1.$index(a, k);
+          comp_pivot1 = compare.call$2(ak, el2);
+          if (typeof comp_pivot1 !== "number")
+            return comp_pivot1.$lt();
+          if (comp_pivot1 < 0) {
+            if (k !== less) {
+              t1.$indexSet(a, k, t1.$index(a, less));
+              t1.$indexSet(a, less, ak);
+            }
+            ++less;
+          } else {
+            comp_pivot2 = compare.call$2(ak, el4);
+            if (typeof comp_pivot2 !== "number")
+              return comp_pivot2.$gt();
+            if (comp_pivot2 > 0)
+              for (; true;) {
+                comp = compare.call$2(t1.$index(a, great), el4);
+                if (typeof comp !== "number")
+                  return comp.$gt();
+                if (comp > 0) {
+                  --great;
+                  if (great < k)
+                    break;
+                  continue;
+                } else {
+                  comp = compare.call$2(t1.$index(a, great), el2);
+                  if (typeof comp !== "number")
+                    return comp.$lt();
+                  great0 = great - 1;
+                  if (comp < 0) {
+                    t1.$indexSet(a, k, t1.$index(a, less));
+                    less0 = less + 1;
+                    t1.$indexSet(a, less, t1.$index(a, great));
+                    t1.$indexSet(a, great, ak);
+                    less = less0;
+                  } else {
+                    t1.$indexSet(a, k, t1.$index(a, great));
+                    t1.$indexSet(a, great, ak);
+                  }
+                  great = great0;
+                  break;
+                }
+              }
+          }
+        }
+        pivots_are_equal = false;
+      }
+      t2 = less - 1;
+      t1.$indexSet(a, left, t1.$index(a, t2));
+      t1.$indexSet(a, t2, el2);
+      t2 = great + 1;
+      t1.$indexSet(a, right, t1.$index(a, t2));
+      t1.$indexSet(a, t2, el4);
+      H.Sort__doSort(a, left, less - 2, compare, $E);
+      H.Sort__doSort(a, great + 2, right, compare, $E);
+      if (pivots_are_equal)
+        return;
+      if (less < index1 && great > index5) {
+        for (; J.$eq$(compare.call$2(t1.$index(a, less), el2), 0);)
+          ++less;
+        for (; J.$eq$(compare.call$2(t1.$index(a, great), el4), 0);)
+          --great;
+        for (k = less; k <= great; ++k) {
+          ak = t1.$index(a, k);
+          if (compare.call$2(ak, el2) === 0) {
+            if (k !== less) {
+              t1.$indexSet(a, k, t1.$index(a, less));
+              t1.$indexSet(a, less, ak);
+            }
+            ++less;
+          } else if (compare.call$2(ak, el4) === 0)
+            for (; true;)
+              if (compare.call$2(t1.$index(a, great), el4) === 0) {
+                --great;
+                if (great < k)
+                  break;
+                continue;
+              } else {
+                comp = compare.call$2(t1.$index(a, great), el2);
+                if (typeof comp !== "number")
+                  return comp.$lt();
+                great0 = great - 1;
+                if (comp < 0) {
+                  t1.$indexSet(a, k, t1.$index(a, less));
+                  less0 = less + 1;
+                  t1.$indexSet(a, less, t1.$index(a, great));
+                  t1.$indexSet(a, great, ak);
+                  less = less0;
+                } else {
+                  t1.$indexSet(a, k, t1.$index(a, great));
+                  t1.$indexSet(a, great, ak);
+                }
+                great = great0;
+                break;
+              }
+        }
+        H.Sort__doSort(a, less, great, compare, $E);
+      } else
+        H.Sort__doSort(a, less, great, compare, $E);
+    },
     EfficientLengthIterable: function EfficientLengthIterable() {
     },
     ListIterable: function ListIterable() {
@@ -2157,6 +2422,10 @@
       list.fixed$length = Array;
       return list;
     },
+    JSArray__compareAny: function(a, b) {
+      var t1 = type$.Comparable_dynamic;
+      return J.compareTo$1$ns(t1._check(a), t1._check(b));
+    },
     JSString__isWhitespace: function(codeUnit) {
       if (codeUnit < 256)
         switch (codeUnit) {
@@ -2287,6 +2556,17 @@
         return receiver;
       return J.getNativeInterceptor(receiver);
     },
+    getInterceptor$ns: function(receiver) {
+      if (typeof receiver == "number")
+        return J.JSNumber.prototype;
+      if (typeof receiver == "string")
+        return J.JSString.prototype;
+      if (receiver == null)
+        return receiver;
+      if (!(receiver instanceof P.Object))
+        return J.UnknownJavaScriptObject.prototype;
+      return receiver;
+    },
     getInterceptor$s: function(receiver) {
       if (typeof receiver == "string")
         return J.JSString.prototype;
@@ -2344,6 +2624,9 @@
     },
     _addEventListener$3$x: function(receiver, a0, a1, a2) {
       return J.getInterceptor$x(receiver)._addEventListener$3(receiver, a0, a1, a2);
+    },
+    compareTo$1$ns: function(receiver, a0) {
+      return J.getInterceptor$ns(receiver).compareTo$1(receiver, a0);
     },
     elementAt$1$ax: function(receiver, a0) {
       return J.getInterceptor$ax(receiver).elementAt$1(receiver, a0);
@@ -3591,6 +3874,11 @@
     get$length: function(receiver) {
       return receiver.length;
     },
+    $index: function(receiver, index) {
+      if (index >= receiver.length || index < 0)
+        throw H.wrapException(H.diagnoseIndexError(receiver, index));
+      return receiver[index];
+    },
     $indexSet: function(receiver, index, value) {
       H._arrayInstanceType(receiver)._precomputed1._check(value);
       if (!!receiver.immutable$list)
@@ -3628,6 +3916,35 @@
     $isIterator: 1
   };
   J.JSNumber.prototype = {
+    compareTo$1: function(receiver, b) {
+      var bIsNegative;
+      H._checkNumNullable(b);
+      if (typeof b != "number")
+        throw H.wrapException(H.argumentErrorValue(b));
+      if (receiver < b)
+        return -1;
+      else if (receiver > b)
+        return 1;
+      else if (receiver === b) {
+        if (receiver === 0) {
+          bIsNegative = this.get$isNegative(b);
+          if (this.get$isNegative(receiver) === bIsNegative)
+            return 0;
+          if (this.get$isNegative(receiver))
+            return -1;
+          return 1;
+        }
+        return 0;
+      } else if (isNaN(receiver)) {
+        if (isNaN(b))
+          return 0;
+        return 1;
+      } else
+        return -1;
+    },
+    get$isNegative: function(receiver) {
+      return receiver === 0 ? 1 / receiver < 0 : receiver < 0;
+    },
     toString$0: function(receiver) {
       if (receiver === 0 && 1 / receiver < 0)
         return "-0.0";
@@ -3662,6 +3979,9 @@
           return receiver / other | 0;
       return this._tdivSlow$1(receiver, other);
     },
+    _tdivFast$1: function(receiver, other) {
+      return (receiver | 0) === receiver ? receiver / other | 0 : this._tdivSlow$1(receiver, other);
+    },
     _tdivSlow$1: function(receiver, other) {
       var quotient = receiver / other;
       if (quotient >= -2147483648 && quotient <= 2147483647)
@@ -3686,6 +4006,7 @@
     _shrBothPositive$1: function(receiver, other) {
       return other > 31 ? 0 : receiver >>> other;
     },
+    $isComparable: 1,
     $isnum: 1
   };
   J.JSInt.prototype = {$isint: 1};
@@ -3753,6 +4074,17 @@
       }
       return result;
     },
+    compareTo$1: function(receiver, other) {
+      var t1;
+      H._checkStringNullable(other);
+      if (typeof other != "string")
+        throw H.wrapException(H.argumentErrorValue(other));
+      if (receiver === other)
+        t1 = 0;
+      else
+        t1 = receiver < other ? -1 : 1;
+      return t1;
+    },
     toString$0: function(receiver) {
       return receiver;
     },
@@ -3770,6 +4102,7 @@
     get$length: function(receiver) {
       return receiver.length;
     },
+    $isComparable: 1,
     $isPattern: 1,
     $isString: 1
   };
@@ -5016,7 +5349,7 @@
       return "null";
     }
   };
-  P.num.prototype = {};
+  P.num.prototype = {$isComparable: 1};
   P.Object.prototype = {constructor: P.Object, $isObject: 1,
     $eq: function(_, other) {
       return this === other;
@@ -5032,7 +5365,7 @@
     }
   };
   P.StackTrace.prototype = {};
-  P.String.prototype = {$isPattern: 1};
+  P.String.prototype = {$isComparable: 1, $isPattern: 1};
   P.StringBuffer.prototype = {
     get$length: function(_) {
       return this._contents.length;
@@ -5231,6 +5564,15 @@
           t2.appendChild(t1.firstChild);
       return;
     },
+    $indexSet: function(_, index, value) {
+      var t1, t2;
+      type$.Node._check(value);
+      t1 = this._this;
+      t2 = t1.childNodes;
+      if (index < 0 || index >= t2.length)
+        return H.ioore(t2, index);
+      t1.replaceChild(value, t2[index]);
+    },
     get$iterator: function(_) {
       var t1 = this._this.childNodes;
       return new W.FixedSizeListIterator(t1, t1.length, H.instanceType(t1)._eval$1("FixedSizeListIterator<ImmutableListMixin.E>"));
@@ -5265,6 +5607,10 @@
       if (index >>> 0 !== index || index >= receiver.length)
         throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
       return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      type$.Node._check(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
     },
     elementAt$1: function(receiver, index) {
       if (index < 0 || index >= receiver.length)
@@ -5343,6 +5689,10 @@
       if (index >>> 0 !== index || index >= receiver.length)
         throw H.wrapException(P.IndexError$(index, receiver, null, null, null));
       return receiver[index];
+    },
+    $indexSet: function(receiver, index, value) {
+      type$.Node._check(value);
+      throw H.wrapException(P.UnsupportedError$("Cannot assign element of immutable List."));
     },
     elementAt$1: function(receiver, index) {
       if (index < 0 || index >= receiver.length)
@@ -5767,7 +6117,8 @@
         t4 = $.$get$output();
         t4.textContent = J.$add$ansx(t4.textContent, "group " + t1.gth + " \u6709 " + J.toString$0$(t1.i) + " \u4eba: \n");
         t1.gpList = [];
-        t4 = t1.j = 0;
+        t1.j = 0;
+        t4 = 0;
         while (true) {
           t5 = t1.i;
           if (typeof t5 !== "number")
@@ -5806,6 +6157,17 @@
         if (typeof t5 !== "number")
           return t5.$add();
         t1.inc = t5 + t4;
+        t4 = t1.gpList;
+        t5 = H._arrayInstanceType(t4);
+        t5._eval$1("int(1,1)")._check(null);
+        if (!!t4.immutable$list)
+          H.throwExpression(P.UnsupportedError$("sort"));
+        t5 = t5._precomputed1;
+        t6 = t4.length - 1;
+        if (t6 - 0 <= 32)
+          H.Sort__insertionSort(t4, 0, t6, J._interceptors_JSArray__compareAny$closure(), t5);
+        else
+          H.Sort__dualPivotQuicksort(t4, 0, t6, J._interceptors_JSArray__compareAny$closure(), t5);
         C.JSArray_methods.add$1(t3, t1.gpList);
       }
       t1 = $.$get$output();
@@ -5826,10 +6188,12 @@
     _.super$_SimpleNodeValidator$allowsAttribute = _.allowsAttribute$3;
   })();
   (function installTearOffs() {
-    var _static_1 = hunkHelpers._static_1,
+    var _static_2 = hunkHelpers._static_2,
+      _static_1 = hunkHelpers._static_1,
       _static_0 = hunkHelpers._static_0,
       _instance = hunkHelpers.installInstanceTearOff,
       _static = hunkHelpers.installStaticTearOff;
+    _static_2(J, "_interceptors_JSArray__compareAny$closure", "JSArray__compareAny", 23);
     _static_1(P, "async__AsyncRun__scheduleImmediateJsOverride$closure", "_AsyncRun__scheduleImmediateJsOverride", 2);
     _static_1(P, "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", "_AsyncRun__scheduleImmediateWithSetImmediate", 2);
     _static_1(P, "async__AsyncRun__scheduleImmediateWithTimer$closure", "_AsyncRun__scheduleImmediateWithTimer", 2);
@@ -5889,8 +6253,8 @@
     _mixin(W.__NamedNodeMap_Interceptor_ListMixin, P.ListMixin);
     _mixin(W.__NamedNodeMap_Interceptor_ListMixin_ImmutableListMixin, W.ImmutableListMixin);
   })();
-  var init = {typeUniverse: {eC: new Map(), tR: {}, eT: {}, tPV: {}, sEA: []}, mangledGlobalNames: {int: "int", double: "double", num: "num", String: "String", bool: "bool", Null: "Null", List: "List"}, mangledNames: {}, getTypeFromName: getGlobalFromName, metadata: [], types: ["Null()", "~()", "~(~())", "@(@)", "Null(@)", "bool(NodeValidator)", "bool(String)", "bool(Element,String,String,_Html5NodeValidator)", "@(@,String)", "@(String)", "Null(~())", "~(Object[StackTrace])", "Null(@[StackTrace])", "_Future<@>(@)", "Null(@,@)", "bool(Node)", "String(HttpRequest)", "Null(ProgressEvent)", "@(Event)", "String(String)", "~(Node,Node)", "@(MouseEvent)", "Null(String)"], interceptorsByTag: null, leafTags: null};
-  H._Universe_addRules(init.typeUniverse, JSON.parse('{"AbortPaymentEvent":"Event","ExtendableEvent":"Event","AElement":"SvgElement","GraphicsElement":"SvgElement","_ResourceProgressEvent":"ProgressEvent","AudioElement":"HtmlElement","MediaElement":"HtmlElement","HtmlDocument":"Node","Document":"Node","Window":"EventTarget","PointerEvent":"MouseEvent","CompositionEvent":"UIEvent","CDataSection":"CharacterData","Text":"CharacterData","JSBool":{"bool":[]},"JSNull":{"Null":[]},"JavaScriptFunction":{"Function":[]},"JSArray":{"List":["1"],"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"Iterable":["1"]},"ArrayIterator":{"Iterator":["1"]},"JSNumber":{"num":[]},"JSInt":{"int":[],"num":[]},"JSDouble":{"num":[]},"JSString":{"String":[],"Pattern":[]},"EfficientLengthIterable":{"Iterable":["1"]},"ListIterable":{"Iterable":["1"]},"ListIterator":{"Iterator":["1"]},"MappedListIterable":{"ListIterable":["2"],"Iterable":["2"],"ListIterable.E":"2","Iterable.E":"2"},"WhereIterable":{"Iterable":["1"],"Iterable.E":"1"},"WhereIterator":{"Iterator":["1"]},"NullError":{"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"_AssertionError":{"Error":[]},"JsLinkedHashMap":{"MapMixin":["1","2"],"Map":["1","2"],"MapMixin.K":"1","MapMixin.V":"2"},"LinkedHashMapKeyIterable":{"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapKeyIterator":{"Iterator":["1"]},"_Error":{"Error":[]},"_CastError":{"Error":[]},"_TypeError":{"Error":[]},"_AsyncCompleter":{"_Completer":["1"]},"_Future":{"Future":["1"]},"AsyncError":{"Error":[]},"_Zone":{"Zone":[]},"_RootZone":{"Zone":[]},"_LinkedHashSet":{"_SetBase":["1"],"Set":["1"],"Iterable":["1"]},"_LinkedHashSetIterator":{"Iterator":["1"]},"ListBase":{"ListMixin":["1"],"List":["1"],"Iterable":["1"]},"MapBase":{"MapMixin":["1","2"],"Map":["1","2"]},"MapMixin":{"Map":["1","2"]},"_SetBase":{"Set":["1"],"Iterable":["1"]},"double":{"num":[]},"AssertionError":{"Error":[]},"NullThrownError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"StateError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"OutOfMemoryError":{"Error":[]},"StackOverflowError":{"Error":[]},"CyclicInitializationError":{"Error":[]},"int":{"num":[]},"List":{"Iterable":["1"]},"String":{"Pattern":[]},"HtmlElement":{"Element":[],"Node":[],"EventTarget":[]},"AnchorElement":{"Element":[],"Node":[],"EventTarget":[]},"AreaElement":{"Element":[],"Node":[],"EventTarget":[]},"BaseElement":{"Element":[],"Node":[],"EventTarget":[]},"BodyElement":{"Element":[],"Node":[],"EventTarget":[]},"CharacterData":{"Node":[],"EventTarget":[]},"Element":{"Node":[],"EventTarget":[]},"FormElement":{"Element":[],"Node":[],"EventTarget":[]},"HttpRequest":{"EventTarget":[]},"HttpRequestEventTarget":{"EventTarget":[]},"InputElement":{"Element":[],"Node":[],"EventTarget":[]},"MouseEvent":{"Event":[]},"_ChildNodeListLazy":{"ListMixin":["Node"],"List":["Node"],"Iterable":["Node"],"ListMixin.E":"Node"},"Node":{"EventTarget":[]},"NodeList":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"Iterable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"ProgressEvent":{"Event":[]},"SelectElement":{"Element":[],"Node":[],"EventTarget":[]},"TableElement":{"Element":[],"Node":[],"EventTarget":[]},"TableRowElement":{"Element":[],"Node":[],"EventTarget":[]},"TableSectionElement":{"Element":[],"Node":[],"EventTarget":[]},"TemplateElement":{"Element":[],"Node":[],"EventTarget":[]},"TextAreaElement":{"Element":[],"Node":[],"EventTarget":[]},"UIEvent":{"Event":[]},"_Attr":{"Node":[],"EventTarget":[]},"_NamedNodeMap":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"Iterable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"_AttributeMap":{"MapMixin":["String","String"],"Map":["String","String"]},"_ElementAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"_EventStream":{"Stream":["1"]},"_ElementEventStreamImpl":{"_EventStream":["1"],"Stream":["1"]},"_Html5NodeValidator":{"NodeValidator":[]},"NodeValidatorBuilder":{"NodeValidator":[]},"_SimpleNodeValidator":{"NodeValidator":[]},"_TemplatingNodeValidator":{"NodeValidator":[]},"_SvgNodeValidator":{"NodeValidator":[]},"FixedSizeListIterator":{"Iterator":["1"]},"_SameOriginUriPolicy":{"UriPolicy":[]},"_ValidatingTreeSanitizer":{"NodeTreeSanitizer":[]},"_JSRandom":{"Random":[]},"ScriptElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"SvgElement":{"Element":[],"Node":[],"EventTarget":[]}}'));
+  var init = {typeUniverse: {eC: new Map(), tR: {}, eT: {}, tPV: {}, sEA: []}, mangledGlobalNames: {int: "int", double: "double", num: "num", String: "String", bool: "bool", Null: "Null", List: "List"}, mangledNames: {}, getTypeFromName: getGlobalFromName, metadata: [], types: ["Null()", "~()", "~(~())", "@(@)", "Null(@)", "bool(NodeValidator)", "bool(String)", "bool(Element,String,String,_Html5NodeValidator)", "@(@,String)", "@(String)", "Null(~())", "~(Object[StackTrace])", "Null(@[StackTrace])", "_Future<@>(@)", "Null(@,@)", "bool(Node)", "String(HttpRequest)", "Null(ProgressEvent)", "@(Event)", "String(String)", "~(Node,Node)", "@(MouseEvent)", "Null(String)", "int(@,@)"], interceptorsByTag: null, leafTags: null};
+  H._Universe_addRules(init.typeUniverse, JSON.parse('{"AbortPaymentEvent":"Event","ExtendableEvent":"Event","AElement":"SvgElement","GraphicsElement":"SvgElement","_ResourceProgressEvent":"ProgressEvent","AudioElement":"HtmlElement","MediaElement":"HtmlElement","HtmlDocument":"Node","Document":"Node","Window":"EventTarget","PointerEvent":"MouseEvent","CompositionEvent":"UIEvent","CDataSection":"CharacterData","Text":"CharacterData","JSBool":{"bool":[]},"JSNull":{"Null":[]},"JavaScriptFunction":{"Function":[]},"JSArray":{"List":["1"],"Iterable":["1"]},"JSUnmodifiableArray":{"JSArray":["1"],"List":["1"],"Iterable":["1"]},"ArrayIterator":{"Iterator":["1"]},"JSNumber":{"num":[],"Comparable":["num"]},"JSInt":{"int":[],"num":[],"Comparable":["num"]},"JSDouble":{"num":[],"Comparable":["num"]},"JSString":{"String":[],"Pattern":[],"Comparable":["String"]},"EfficientLengthIterable":{"Iterable":["1"]},"ListIterable":{"Iterable":["1"]},"ListIterator":{"Iterator":["1"]},"MappedListIterable":{"ListIterable":["2"],"Iterable":["2"],"ListIterable.E":"2","Iterable.E":"2"},"WhereIterable":{"Iterable":["1"],"Iterable.E":"1"},"WhereIterator":{"Iterator":["1"]},"NullError":{"Error":[]},"JsNoSuchMethodError":{"Error":[]},"UnknownJsTypeError":{"Error":[]},"_StackTrace":{"StackTrace":[]},"Closure":{"Function":[]},"TearOffClosure":{"Function":[]},"StaticClosure":{"Function":[]},"BoundClosure":{"Function":[]},"RuntimeError":{"Error":[]},"_AssertionError":{"Error":[]},"JsLinkedHashMap":{"MapMixin":["1","2"],"Map":["1","2"],"MapMixin.K":"1","MapMixin.V":"2"},"LinkedHashMapKeyIterable":{"Iterable":["1"],"Iterable.E":"1"},"LinkedHashMapKeyIterator":{"Iterator":["1"]},"_Error":{"Error":[]},"_CastError":{"Error":[]},"_TypeError":{"Error":[]},"_AsyncCompleter":{"_Completer":["1"]},"_Future":{"Future":["1"]},"AsyncError":{"Error":[]},"_Zone":{"Zone":[]},"_RootZone":{"Zone":[]},"_LinkedHashSet":{"_SetBase":["1"],"Set":["1"],"Iterable":["1"]},"_LinkedHashSetIterator":{"Iterator":["1"]},"ListBase":{"ListMixin":["1"],"List":["1"],"Iterable":["1"]},"MapBase":{"MapMixin":["1","2"],"Map":["1","2"]},"MapMixin":{"Map":["1","2"]},"_SetBase":{"Set":["1"],"Iterable":["1"]},"double":{"num":[],"Comparable":["num"]},"AssertionError":{"Error":[]},"NullThrownError":{"Error":[]},"ArgumentError":{"Error":[]},"RangeError":{"Error":[]},"IndexError":{"Error":[]},"UnsupportedError":{"Error":[]},"UnimplementedError":{"Error":[]},"StateError":{"Error":[]},"ConcurrentModificationError":{"Error":[]},"OutOfMemoryError":{"Error":[]},"StackOverflowError":{"Error":[]},"CyclicInitializationError":{"Error":[]},"int":{"num":[],"Comparable":["num"]},"List":{"Iterable":["1"]},"num":{"Comparable":["num"]},"String":{"Pattern":[],"Comparable":["String"]},"HtmlElement":{"Element":[],"Node":[],"EventTarget":[]},"AnchorElement":{"Element":[],"Node":[],"EventTarget":[]},"AreaElement":{"Element":[],"Node":[],"EventTarget":[]},"BaseElement":{"Element":[],"Node":[],"EventTarget":[]},"BodyElement":{"Element":[],"Node":[],"EventTarget":[]},"CharacterData":{"Node":[],"EventTarget":[]},"Element":{"Node":[],"EventTarget":[]},"FormElement":{"Element":[],"Node":[],"EventTarget":[]},"HttpRequest":{"EventTarget":[]},"HttpRequestEventTarget":{"EventTarget":[]},"InputElement":{"Element":[],"Node":[],"EventTarget":[]},"MouseEvent":{"Event":[]},"_ChildNodeListLazy":{"ListMixin":["Node"],"List":["Node"],"Iterable":["Node"],"ListMixin.E":"Node"},"Node":{"EventTarget":[]},"NodeList":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"Iterable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"ProgressEvent":{"Event":[]},"SelectElement":{"Element":[],"Node":[],"EventTarget":[]},"TableElement":{"Element":[],"Node":[],"EventTarget":[]},"TableRowElement":{"Element":[],"Node":[],"EventTarget":[]},"TableSectionElement":{"Element":[],"Node":[],"EventTarget":[]},"TemplateElement":{"Element":[],"Node":[],"EventTarget":[]},"TextAreaElement":{"Element":[],"Node":[],"EventTarget":[]},"UIEvent":{"Event":[]},"_Attr":{"Node":[],"EventTarget":[]},"_NamedNodeMap":{"ImmutableListMixin":["Node"],"ListMixin":["Node"],"List":["Node"],"JavaScriptIndexingBehavior":["Node"],"Iterable":["Node"],"ListMixin.E":"Node","ImmutableListMixin.E":"Node"},"_AttributeMap":{"MapMixin":["String","String"],"Map":["String","String"]},"_ElementAttributeMap":{"MapMixin":["String","String"],"Map":["String","String"],"MapMixin.K":"String","MapMixin.V":"String"},"_EventStream":{"Stream":["1"]},"_ElementEventStreamImpl":{"_EventStream":["1"],"Stream":["1"]},"_Html5NodeValidator":{"NodeValidator":[]},"NodeValidatorBuilder":{"NodeValidator":[]},"_SimpleNodeValidator":{"NodeValidator":[]},"_TemplatingNodeValidator":{"NodeValidator":[]},"_SvgNodeValidator":{"NodeValidator":[]},"FixedSizeListIterator":{"Iterator":["1"]},"_SameOriginUriPolicy":{"UriPolicy":[]},"_ValidatingTreeSanitizer":{"NodeTreeSanitizer":[]},"_JSRandom":{"Random":[]},"ScriptElement0":{"SvgElement":[],"Element":[],"Node":[],"EventTarget":[]},"SvgElement":{"Element":[],"Node":[],"EventTarget":[]}}'));
   H._Universe_addErasedTypes(init.typeUniverse, JSON.parse('{"EfficientLengthIterable":1,"StreamSubscription":1,"ListBase":1,"MapBase":2,"_ListBase_Object_ListMixin":1}'));
   var type$ = (function rtii() {
     var findType = H.findType;
@@ -5898,6 +6262,7 @@
       AsyncError: findType("AsyncError"),
       BaseElement: findType("BaseElement"),
       BodyElement: findType("BodyElement"),
+      Comparable_dynamic: findType("Comparable<@>"),
       Element: findType("Element"),
       Error: findType("Error"),
       Event: findType("Event"),

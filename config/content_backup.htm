@@ -178,6 +178,7 @@ grouping() {
       inc = inc + j;
         //output.text += studList[j] + "\n";
         // 逐步將各組暫存的分組數列加入全班分組數列中
+      gpList.sort();
       cp2019.add(gpList);
     }
     // 列出全班分組數列
@@ -209,7 +210,8 @@ List getNumList(int total){
   }
   //print(splits);
   return splits;
- }</pre>
+ }
+</pre>
 <h4>index.html:</h4>
 <pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;h1&gt;亂數分組:&lt;/h1&gt;
 學員名單 URL: &lt;input type="text" id="studListUrl" size="50" value="https://mde.tw/cp2019/downloads/2019fall_cp_1a_list.txt"&gt;&lt;br /&gt;

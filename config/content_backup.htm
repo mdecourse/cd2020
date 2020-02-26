@@ -115,7 +115,112 @@ compiler=mingw32</pre>
 <p> 專案一 (15%)</p>
 <p>專案二 (15%)</p>
 <p>專案三 (20%)</p>
-<p>專案四 (20%)</p><h1>Project</h1>
+<p>專案四 (20%)</p><h1>Grouping</h1>
+<h4>亂數分組:</h4>
+<p>學員名單 URL: <input id="studListUrl" size="70" type="text" value="https://mde.tw/cd2020/downloads/2020spring_cd_2a_list.txt"/><br/> 每組人數: <input id="grpNum" size="3" type="text" value="10"/><br/> <input id="submit" type="submit" value="開始分組"/><br/> <textarea cols="80" id="output" rows="10"></textarea></p>
+<script src="https://mde.tw/cp2019/downloads/dart_ex/random_grouping/random_grouping.js"></script>
+<p><a href="https://dartpad.github.io/embed-html.html?gh_owner=mdecourse&amp;gh_repo=cp2019&amp;gh_path=downloads/dart_ex/random_grouping&amp;theme=dark">Dart source code for random grouping</a></p>
+<h4>main.dart:</h4>
+<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">import 'dart:html';
+
+  InputElement grpNum = querySelector("#grpNum");
+  int num;
+  InputElement studListUrl = querySelector("#studListUrl");
+  String studUrl;
+  // 將 Label 改為 Textarea, 避免產生過程結果嵌入所在頁面
+  TextAreaElement output = querySelector("#output");
+
+main() {
+  querySelector("#submit").onClick.listen((e) =&gt; Grouping());
+}
+
+Grouping() {
+  output.innerHtml = "";
+  if (grpNum.value != "") {
+    num = int.parse(grpNum.value);
+  } else {
+    num = 10;
+  }
+
+  if (studListUrl.value != "") {
+    studUrl = studListUrl.value;
+  } else {
+    studUrl = 'https://mde.tw/cp2019/downloads/2019fall_cp_1a_list.txt';
+  }
+
+  // 組序由 1 開始
+  int gth = 1;
+  // 迴圈序號變數
+  int i;
+  // 每組學員暫存數列
+  var gpList = [];
+  // 全班分組數列
+  var cp2019 = [];
+
+  HttpRequest.getString(studUrl).then((String resp) {
+    // 利用 trim() 去除字串最後的跳行符號, 之後再利用 split() 根據 \n 轉為數列
+    var studList = resp.trim().split("\n");
+    // 數列利用 shuffle() 方法以隨機方法弄亂順序
+    studList.shuffle();
+    // 逐一讀取已經弄亂的學生學號數列, 利用模數運算每幾人分成一組
+    for (i = 0; i &lt; studList.length; i++) {
+      // 0, 1~(num-1), num
+      if (i % num == 0) {
+        gpList = [];
+        // 列印區隔符號
+        output.text += '=' * 20 + "\n";
+        output.text += "group $gth :" + "\n";
+        output.text += studList[i] + "\n";
+        // 在各分組數列中加入將對應的學員學號
+        gpList.add(studList[i]);
+        gth = gth + 1;
+      } else {
+        output.text += studList[i] + "\n";
+        // 在各分組數列中加入將對應的學員學號
+        gpList.add(studList[i]);
+      }
+      if (i % num == 0) {
+        // 逐步將各組暫存的分組數列加入全班分組數列中
+        cp2019.add(gpList);
+      }
+    }
+    // 列出全班分組數列
+    output.text += cp2019.toString() + "\n";
+  });
+}
+</pre>
+<h4>index.html:</h4>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;h1&gt;亂數分組:&lt;/h1&gt;
+學員名單 URL: &lt;input type="text" id="studListUrl" size="50" value="https://mde.tw/cp2019/downloads/2019fall_cp_1a_list.txt"&gt;&lt;br /&gt;
+每組人數: &lt;input type="text" id="grpNum" size="3" value="10"&gt;&lt;br /&gt;
+&lt;input type="submit" value="開始分組" id="submit"&gt;&lt;br /&gt;
+&lt;textarea id="output" cols="80" rows="10"&gt;&lt;/textarea&gt;</pre>
+<h4>style.css:</h4>
+<pre class="brush:css;auto-links:false;toolbar:false" contenteditable="false">body {
+  color: white;
+  font-size: 20px;
+}
+
+input, select, textarea {
+font-size: 100%;
+}</pre>
+<p></p><h1>Topics</h1>
+<h4>Design Process and Implementation</h4>
+<p>Login to your gm email account and download <a href="https://drive.google.com/file/d/1n-Tx36x6qfbXRuk_os7Z6cvSM1YpxjZu/view?usp=sharing">2019_DesigningElectronicProductEnclosures.pdf</a>.</p>
+<p style="padding-left: 30px;">Successful Design</p>
+<p style="padding-left: 30px;">Building the Design</p>
+<p style="padding-left: 30px;">Structural Considerations</p>
+<p style="padding-left: 30px;">Materials and Processes</p>
+<p style="padding-left: 30px;">User Interface</p>
+<p style="padding-left: 30px;">Documentation</p>
+<p style="padding-left: 30px;">Continuous Improvement</p>
+<h4>Simulation of a pendulum rolling ball clock</h4>
+<p>Login to your gm email account and download <a href="https://drive.google.com/file/d/17SX7nVvW-sQCsadChOqoKLgjJcA2nql_/view?usp=sharing">PendulumRollingBallClock.mp4</a> and <a href="https://drive.google.com/file/d/1y8aqfCce4tMPLcEyKBF1LwvKpXjlsyVX/view?usp=sharing">MarbleStrikeClock.mp4</a></p>
+<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/UHBHCsrqYMw" width="560"></iframe></p>
+<p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/WTQ-oCj-Gf8" width="560"></iframe></p>
+<p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-fourbar-three-position-synthesis.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-fourbar-three-position-synthesis.html</a></p>
+<p>Login to your gm email account and <a href="https://drive.google.com/drive/folders/1h2bc9HqF3yhB3BwZwJD_vPUdOPGroQtv?usp=sharing">download all reference files</a>.</p>
+<p style="padding-left: 30px;"></p><h1>Project</h1>
 <p>專案執行流程:</p>
 <p style="padding-left: 30px;">Grouping - 分組</p>
 <p style="padding-left: 30px;">Design - 設計</p>
@@ -132,8 +237,7 @@ compiler=mingw32</pre>
 <p style="padding-left: 30px;"><a href="https://learn.onshape.com/catalog?labels=%5B%22Self-Paced%20Courses%22%5D&amp;values=%5B%22All%22%5D">Self-paced Course</a></p>
 <p><span>W14-W17: 專案四</span></p>
 <p style="padding-left: 30px;"><span>協同產品設計專案</span></p>
-<p>W18: 期末報告</p>
-<h2>Dart</h2>
+<p>W18: 期末報告</p><h2>Dart</h2>
 <p><a href="https://flutter.dev/docs/reference/tutorials">https://flutter.dev/docs/reference/tutorials</a></p>
 <p><a href="https://www.raywenderlich.com/4529993-getting-started-with-flutter">https://www.raywenderlich.com/4529993-getting-started-with-flutter</a></p>
 <p><a href="https://www.raywenderlich.com/flutter/">https://www.raywenderlich.com/flutter/</a></p>
@@ -212,17 +316,18 @@ int callback(void *NotUsed, int argc, char **argv,
 <h4>SQLite3 and Python:</h4>
 <p style="padding-left: 30px;"><a href="https://github.com/mdecourse/wcms-scrum1">https://github.com/mdecourse/wcms-scrum1</a></p>
 <h4>SQLite3 and Dart:</h4>
-<p style="padding-left: 30px;">from <a href="https://www.sqlite.org/download.html">https://www.sqlite.org/download.html</a> download C source code as an amalgamation</p>
-<p style="padding-left: 30px;">use MSYS2:</p>
-<p style="padding-left: 60px;">gcc -shared sqlite3.c -o sqlite3.dll</p>
-<p style="padding-left: 30px;">get sqlite3.dll</p>
-<p style="padding-left: 30px;">use git sparse-checkout from <a href="https://github.com/dart-lang/sdk">https://github.com/dart-lang/sdk</a> get</p>
-<p style="padding-left: 30px;"><a href="https://github.com/dart-lang/sdk/tree/master/samples/ffi/sqlite">https://github.com/dart-lang/sdk/tree/master/samples/ffi/sqlite</a></p>
-<p style="padding-left: 60px;">cd y:\tmp<br/>mkdir dart_sqlite<br/>cd dart_sqlite<br/>git init<br/>git config core.sparsecheckout true<br/>git remote add -f origin https://github.com/dart-lang/sdk.git<br/>echo samples/ffi/sqlite &gt;&gt; .git/info/sparse-checkout<br/>git pull origin master</p>
-<p style="padding-left: 30px;">cd y:\tmp\<span>samples\ffi\sqlite</span></p>
-<p style="padding-left: 30px;"><span>pub get</span></p>
-<p style="padding-left: 30px;"><span>copy sqlite3.dll and <a href="https://github.com/mdecourse/lookupdict/blob/master/webster_vocabulary.sqlite">webster_vocabulary.sqlite</a> into y:\tmp\<span>samples\ffi\sqlite\example</span></span></p>
-<h4><span><span>use SciTE execute main.dart:</span></span></h4>
+<h4 style="padding-left: 30px;">dart:ffi only for mobile and desktop</h4>
+<p style="padding-left: 60px;">from <a href="https://www.sqlite.org/download.html">https://www.sqlite.org/download.html</a> download C source code as an amalgamation</p>
+<p style="padding-left: 60px;">use <a href="https://www.msys2.org/">MSYS2</a>:</p>
+<p style="padding-left: 90px;">gcc -shared sqlite3.c -o sqlite3.dll</p>
+<p style="padding-left: 60px;">to get sqlite3.dll</p>
+<p style="padding-left: 60px;">use git sparse-checkout from <a href="https://github.com/dart-lang/sdk">https://github.com/dart-lang/sdk</a> get</p>
+<p style="padding-left: 60px;"><a href="https://github.com/dart-lang/sdk/tree/master/samples/ffi/sqlite">https://github.com/dart-lang/sdk/tree/master/samples/ffi/sqlite</a></p>
+<p style="padding-left: 90px;">cd y:\tmp<br/>mkdir dart_sqlite<br/>cd dart_sqlite<br/>git init<br/>git config core.sparsecheckout true<br/>git remote add -f origin https://github.com/dart-lang/sdk.git<br/>echo samples/ffi/sqlite &gt;&gt; .git/info/sparse-checkout<br/>git pull origin master</p>
+<p style="padding-left: 60px;">cd y:\tmp\<span>samples\ffi\sqlite</span></p>
+<p style="padding-left: 60px;"><span>pub get</span></p>
+<p style="padding-left: 60px;"><span>copy sqlite3.dll and <a href="https://github.com/mdecourse/lookupdict/blob/master/webster_vocabulary.sqlite">webster_vocabulary.sqlite</a> into y:\tmp\<span>samples\ffi\sqlite\example</span></span></p>
+<h4 style="padding-left: 60px;"><span><span>use SciTE to execute main.dart:</span></span></h4>
 <pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">import "../lib/sqlite.dart";
 
 void main() {
@@ -239,6 +344,11 @@ void main() {
   d.close();
 }
 </pre>
-<p style="padding-left: 30px;"></p><h2>AI</h2>
+<h4 style="padding-left: 30px;"><a href="https://pub.dev/packages/js">package:js</a> is for web</h4>
+<p style="padding-left: 60px;"><a href="https://github.com/simolus3/moor/blob/master/moor/lib/src/web/sql_js.dart">https://github.com/simolus3/moor/blob/master/moor/lib/src/web/sql_js.dart</a></p>
+<p>References:</p>
+<p style="padding-left: 30px;"><a href="https://pub.dev/packages/f_orm_m8_sqlite">https://pub.dev/packages/f_orm_m8_sqlite</a></p>
+<p style="padding-left: 30px;"></p>
+<p style="padding-left: 60px;"></p><h2>AI</h2>
 <p><a href="https://artint.info/2e/html/ArtInt2e.html">https://artint.info/2e/html/ArtInt2e.html</a></p>
 <p></p>

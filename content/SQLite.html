@@ -143,7 +143,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li class='has-children'><a href='KMOL2020.html'>KMOL2020</a><ul class='dropdown'><li><a href='Python.html'>Python</a><li><a href='MSYS2.html'>MSYS2</a><li><a href='Pyslvs-UI.html'>Pyslvs-UI</a></li></ul><li><a href='Grading.html'>Grading</a></li></ul><li class='has-children'><a href='Project.html'>Project</a><ul class='dropdown'><li><a href='Dart.html'>Dart</a><li><a href='SQLite.html'>SQLite</a><li><a href='AI.html'>AI</a></li>
+                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li class='has-children'><a href='KMOL2020.html'>KMOL2020</a><ul class='dropdown'><li><a href='Python.html'>Python</a><li><a href='MSYS2.html'>MSYS2</a><li><a href='Pyslvs-UI.html'>Pyslvs-UI</a></li></ul><li><a href='Grading.html'>Grading</a></li></ul><li><a href='Grouping.html'>Grouping</a><li><a href='Topics.html'>Topics</a><li class='has-children'><a href='Project.html'>Project</a><ul class='dropdown'><li><a href='Dart.html'>Dart</a><li><a href='SQLite.html'>SQLite</a><li><a href='AI.html'>AI</a></li>
                       </ul>
                 </nav>
               </div>
@@ -224,17 +224,18 @@ int callback(void *NotUsed, int argc, char **argv,
 <h4>SQLite3 and Python:</h4>
 <p style="padding-left: 30px;"><a href="https://github.com/mdecourse/wcms-scrum1">https://github.com/mdecourse/wcms-scrum1</a></p>
 <h4>SQLite3 and Dart:</h4>
-<p style="padding-left: 30px;">from <a href="https://www.sqlite.org/download.html">https://www.sqlite.org/download.html</a> download C source code as an amalgamation</p>
-<p style="padding-left: 30px;">use <a href="https://www.msys2.org/">MSYS2</a>:</p>
-<p style="padding-left: 60px;">gcc -shared sqlite3.c -o sqlite3.dll</p>
-<p style="padding-left: 30px;">to get sqlite3.dll</p>
-<p style="padding-left: 30px;">use git sparse-checkout from <a href="https://github.com/dart-lang/sdk">https://github.com/dart-lang/sdk</a> get</p>
-<p style="padding-left: 30px;"><a href="https://github.com/dart-lang/sdk/tree/master/samples/ffi/sqlite">https://github.com/dart-lang/sdk/tree/master/samples/ffi/sqlite</a></p>
-<p style="padding-left: 60px;">cd y:\tmp<br/>mkdir dart_sqlite<br/>cd dart_sqlite<br/>git init<br/>git config core.sparsecheckout true<br/>git remote add -f origin https://github.com/dart-lang/sdk.git<br/>echo samples/ffi/sqlite &gt;&gt; .git/info/sparse-checkout<br/>git pull origin master</p>
-<p style="padding-left: 30px;">cd y:\tmp\<span>samples\ffi\sqlite</span></p>
-<p style="padding-left: 30px;"><span>pub get</span></p>
-<p style="padding-left: 30px;"><span>copy sqlite3.dll and <a href="https://github.com/mdecourse/lookupdict/blob/master/webster_vocabulary.sqlite">webster_vocabulary.sqlite</a> into y:\tmp\<span>samples\ffi\sqlite\example</span></span></p>
-<h4><span><span>use SciTE execute main.dart:</span></span></h4>
+<h4 style="padding-left: 30px;">dart:ffi only for mobile and desktop</h4>
+<p style="padding-left: 60px;">from <a href="https://www.sqlite.org/download.html">https://www.sqlite.org/download.html</a> download C source code as an amalgamation</p>
+<p style="padding-left: 60px;">use <a href="https://www.msys2.org/">MSYS2</a>:</p>
+<p style="padding-left: 90px;">gcc -shared sqlite3.c -o sqlite3.dll</p>
+<p style="padding-left: 60px;">to get sqlite3.dll</p>
+<p style="padding-left: 60px;">use git sparse-checkout from <a href="https://github.com/dart-lang/sdk">https://github.com/dart-lang/sdk</a> get</p>
+<p style="padding-left: 60px;"><a href="https://github.com/dart-lang/sdk/tree/master/samples/ffi/sqlite">https://github.com/dart-lang/sdk/tree/master/samples/ffi/sqlite</a></p>
+<p style="padding-left: 90px;">cd y:\tmp<br/>mkdir dart_sqlite<br/>cd dart_sqlite<br/>git init<br/>git config core.sparsecheckout true<br/>git remote add -f origin https://github.com/dart-lang/sdk.git<br/>echo samples/ffi/sqlite &gt;&gt; .git/info/sparse-checkout<br/>git pull origin master</p>
+<p style="padding-left: 60px;">cd y:\tmp\<span>samples\ffi\sqlite</span></p>
+<p style="padding-left: 60px;"><span>pub get</span></p>
+<p style="padding-left: 60px;"><span>copy sqlite3.dll and <a href="https://github.com/mdecourse/lookupdict/blob/master/webster_vocabulary.sqlite">webster_vocabulary.sqlite</a> into y:\tmp\<span>samples\ffi\sqlite\example</span></span></p>
+<h4 style="padding-left: 60px;"><span><span>use SciTE to execute main.dart:</span></span></h4>
 <pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">import "../lib/sqlite.dart";
 
 void main() {
@@ -251,7 +252,12 @@ void main() {
   d.close();
 }
 </pre>
-<p style="padding-left: 30px;"></p><br />Dart << <a href='Dart.html'>Previous</a> <a href='AI.html'>Next</a> >> AI</div>
+<h4 style="padding-left: 30px;"><a href="https://pub.dev/packages/js">package:js</a> is for web</h4>
+<p style="padding-left: 60px;"><a href="https://github.com/simolus3/moor/blob/master/moor/lib/src/web/sql_js.dart">https://github.com/simolus3/moor/blob/master/moor/lib/src/web/sql_js.dart</a></p>
+<p>References:</p>
+<p style="padding-left: 30px;"><a href="https://pub.dev/packages/f_orm_m8_sqlite">https://pub.dev/packages/f_orm_m8_sqlite</a></p>
+<p style="padding-left: 30px;"></p>
+<p style="padding-left: 60px;"></p><br />Dart << <a href='Dart.html'>Previous</a> <a href='AI.html'>Next</a> >> AI</div>
         
     <!-- footer -->
       <div class="container">

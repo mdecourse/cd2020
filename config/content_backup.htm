@@ -90,7 +90,20 @@ start /MIN %Disk%:\kmolScite\SciTE.exe
 start /MIN %Disk%:\kmolScite\SciTE.exe
 
 Exit</pre>
-<h3>MSYS2</h3>
+<h3>Microcontroller</h3>
+<p>Login to your gm email and download </p>
+<p style="padding-left: 30px;"><a href="https://drive.google.com/file/d/1mmmgiOFO-SVaj8LNID8gTWYgt6aKr6HN/view?usp=sharing">2019_ArduinoApplied.pdf</a></p>
+<p style="padding-left: 30px;">and </p>
+<p style="padding-left: 30px;"><a href="https://drive.google.com/file/d/1vzffEBY1HK9yY1-t5MXO1TdeoGh2BHLq/view?usp=sharing">2018_BeginningRoboticsWithRaspberry.pdf</a></p>
+<h4>Arduino Simulator</h4>
+<p style="padding-left: 30px;"><a href="https://www.sites.google.com/site/unoardusim/">https://www.sites.google.com/site/unoardusim/</a></p>
+<h4>PIC Simulator Labortory</h4>
+<p style="padding-left: 30px;"><a href="https://github.com/lcgamboa/picsimlab">https://github.com/lcgamboa/picsimlab</a></p>
+<p style="padding-left: 30px;"><a href="https://lcgamboa.github.io/">https://lcgamboa.github.io/</a></p>
+<h4>Rasberry Pi</h4>
+<p style="padding-left: 30px;"><a href="https://github.com/gavinlyonsrepo/RpiMotorLib">https://github.com/gavinlyonsrepo/RpiMotorLib</a></p>
+<h4>Python-exemplary</h4>
+<p style="padding-left: 30px;"><a href="http://www.python-exemplary.com/">http://www.python-exemplary.com/</a></p><h3>MSYS2</h3>
 <p><a href="https://www.msys2.org/">https://www.msys2.org/</a></p>
 <p>Y:\py38\Lib\distutils\distutils.cfg</p>
 <pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[build]
@@ -99,19 +112,20 @@ compiler=mingw32
 [build_ext]
 compiler=mingw32</pre>
 <h4>Reference</h4>
-<p style="padding-left: 30px;"><a href="https://github.com/KmolYuan/pyslvs/blob/master/platform/set_pycompiler.bat">https://github.com/KmolYuan/pyslvs/blob/master/platform/set_pycompiler.bat</a></p>
-<h3>Pyslvs-UI</h3>
-<p>according to <a href="https://pyslvs-ui.readthedocs.io/en/stable/">https://pyslvs-ui.readthedocs.io/en/stable/</a></p>
-<p>git clone --recurse-submodules https://github.com/KmolYuan/Pyslvs-UI.git</p>
-<p>cd pyslvs-ui</p>
-<p>python -m pip install -r requirements.txt</p>
-<p>mingw32-make build-kernel</p>
-<p>python setup.py install</p>
-<h4>執行 launch_pyslvs.py:</h4>
-<p>y:\py38\pythonw -u "launch_pyslvs.py"<br/>Traceback (most recent call last):<br/> File "launch_pyslvs.py", line 11, in &lt;module&gt;<br/> from pyslvs_ui.__main__ import main<br/> File "Y:\tmp\Pyslvs-UI\pyslvs_ui\__init__.py", line 10, in &lt;module&gt;<br/> from pyslvs import __version__<br/> File "y:\py38\lib\site-packages\pyslvs-20.2.0.dev0-py3.8-win-amd64.egg\pyslvs\__init__.py", line 12, in &lt;module&gt;<br/> from .bfgs import SolverSystem<br/>ImportError: DLL load failed while importing bfgs: The specified module could not be found.</p>
-<p></p>
-<p></p>
-<p></p><h2>Grading</h2>
+<p style="padding-left: 30px;"><a href="https://github.com/KmolYuan/pyslvs/blob/master/platform/set_pycompiler.bat">https://github.com/KmolYuan/pyslvs/blob/master/platform/set_pycompiler.bat</a></p><h3>Pyslvs-UI</h3>
+<h4>Compile and install python_solvespace library</h4>
+<p>Pyslvs-UI requires <a href="https://github.com/mdecourse/solvespace">https://github.com/mdecourse/solvespace</a> python_solvespace pyd dynamic library of the python branch.</p>
+<p style="padding-left: 30px;">git clone --recurse-submodules <a href="https://github.com/mdecourse/solvespace.git">https://github.com/mdecourse/solvespace.git</a> </p>
+<p style="padding-left: 30px;">cd solvespace</p>
+<p style="padding-left: 30px;">git checkout python</p>
+<p style="padding-left: 30px;">cd cython</p>
+<p style="padding-left: 30px;">python setup.py install</p>
+<h4>Compile and install Pyslvs-UI</h4>
+<p style="padding-left: 30px;">git clone --recurse-submodules <a href="https://github.com/mdecourse/pyslvs-UI.git">https://github.com/mdecourse/pyslvs-UI.git</a></p>
+<p style="padding-left: 30px;">cd pyslvs-UI</p>
+<p style="padding-left: 30px;">python -m pip install -r requirements.txt</p>
+<p style="padding-left: 30px;"><span>mingw32-make install</span></p>
+<p style="padding-left: 30px;"><span></span></p><h2>Grading</h2>
 <p>自評 (30%)</p>
 <p>互評 (30%)</p>
 <p>教師評分 (40%)</p>
@@ -436,7 +450,7 @@ if __name__ == '__main__':
 <p>I started in the drafting room running blue prints in 1964. By taking night school classes in drafting, I soon was given the chance to apprentice as a tool and die designer where I got experience in the basic skills of designing jigs and fixtures. Lincoln Electric is "world famous" for their profit sharing program and work ethic. (I would later teach beginning drafting at Chabot College, California, in 1980).</p>
 <h4><a href="https://www.llnl.gov/">Lawrence Livermore National Laboratory</a></h4>
 <p>My first job after getting my master’s degree in mechanical engineering (from the University of Arizona, 1977) was in the Material Fabrication Group. Our mission to design and build a lathe capable of 0.000001 inch accuracy provided great experience. Additional experience in the design of experiments for laboratory programs proved invaluable for future work.</p>
-<h4><a href="https://www.intel.com/">Intel Corporation</a></h4>
+<h4><a href="https://www.intel.com/content/www/us/en/homepage.html">Intel Corporation</a></h4>
 <p>This is my first experience with the design of computer housings for "silicon valley." Intel was just expanding beyond chips and printed circuit board products, and they had plans to get into building computer systems. I’m on the cover of "Intel News" shown trying to measure fan noise of a prototype "tower computer" in 1982. I was very fortunate to experience the tremendous work ethic in the culture at Intel.</p>
 <h4><a href="https://en.wikipedia.org/wiki/Sytek_Inc">Sytek Corporation</a></h4>
 <p>This is my first design position where I had the responsibility of taking my own design thru all the stages of prototyping, tooling, testing, and manufacturing delivery. We installed our first CAD systems (CADAM) in 1986.</p>
@@ -469,8 +483,7 @@ if __name__ == '__main__':
 <p><a href="https://book.flutterchina.club/">https://book.flutterchina.club/</a></p>
 <p><a href="https://github.com/CarGuo/gsy_flutter_book">https://github.com/CarGuo/gsy_flutter_book</a></p>
 <p><a href="https://www.youtube.com/playlist?list=PLV2Iw811jLpWdAHToUqTuWYhYbjVfwS80">https://www.youtube.com/playlist?list=PLV2Iw811jLpWdAHToUqTuWYhYbjVfwS80</a></p>
-<p><a href="https://flutterbyexample.com/">https://flutterbyexample.com/</a></p>
-<h2>SQLite</h2>
+<p><a href="https://flutterbyexample.com/">https://flutterbyexample.com/</a></p><h2>SQLite</h2>
 <p>Build iOS Database Apps with Swift and SQLite (2016)</p>
 <p style="padding-left: 30px;"><a href="https://link.springer.com/book/10.1007/978-1-4842-2232-4">https://link.springer.com/book/10.1007/978-1-4842-2232-4</a></p>
 <p>Introducing SQLite for Mobile Developers (2015)</p>
@@ -579,4 +592,7 @@ void main() {
 <p><a href="https://github.com/jupyterlab/jupyterlab">https://github.com/jupyterlab/jupyterlab</a></p>
 <h2>AI</h2>
 <p><a href="https://artint.info/2e/html/ArtInt2e.html">https://artint.info/2e/html/ArtInt2e.html</a></p>
+<p><a href="https://github.com/SullyChen/Autopilot-TensorFlow">https://github.com/SullyChen/Autopilot-TensorFlow</a></p>
+<p><a href="https://towardsdatascience.com/how-a-high-school-junior-made-a-self-driving-car-705fa9b6e860">https://towardsdatascience.com/how-a-high-school-junior-made-a-self-driving-car-705fa9b6e860</a></p>
+<p><a href="https://github.com/UvinduW/RCAutopilot">https://github.com/UvinduW/RCAutopilot</a></p>
 <p></p>

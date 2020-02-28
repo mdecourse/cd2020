@@ -143,7 +143,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li class='has-children'><a href='KMOL2020.html'>KMOL2020</a><ul class='dropdown'><li><a href='Python.html'>Python</a><li><a href='MSYS2.html'>MSYS2</a><li><a href='Pyslvs-UI.html'>Pyslvs-UI</a></li></ul><li><a href='Grading.html'>Grading</a></li></ul><li><a href='Grouping.html'>Grouping</a><li class='has-children'><a href='Topics.html'>Topics</a><ul class='dropdown'><li class='has-children'><a href='Mechanical Design.html'>Mechanical Design</a><ul class='dropdown'><li><a href='Topic1Author.html'>Topic1Author</a></li></li></ul></ul><li class='has-children'><a href='Project.html'>Project</a><ul class='dropdown'><li><a href='Dart.html'>Dart</a><li><a href='SQLite.html'>SQLite</a><li><a href='Fossil SCM.html'>Fossil SCM</a><li><a href='Jupyterlab.html'>Jupyterlab</a><li><a href='AI.html'>AI</a></li>
+                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li class='has-children'><a href='KMOL2020.html'>KMOL2020</a><ul class='dropdown'><li><a href='Python.html'>Python</a><li><a href='Microcontroller.html'>Microcontroller</a><li><a href='MSYS2.html'>MSYS2</a><li><a href='Pyslvs-UI.html'>Pyslvs-UI</a></li></ul><li><a href='Grading.html'>Grading</a></li></ul><li><a href='Grouping.html'>Grouping</a><li class='has-children'><a href='Topics.html'>Topics</a><ul class='dropdown'><li class='has-children'><a href='Mechanical Design.html'>Mechanical Design</a><ul class='dropdown'><li><a href='Topic1Author.html'>Topic1Author</a></li></li></ul></ul><li class='has-children'><a href='Project.html'>Project</a><ul class='dropdown'><li><a href='Dart.html'>Dart</a><li><a href='SQLite.html'>SQLite</a><li><a href='Fossil SCM.html'>Fossil SCM</a><li><a href='Jupyterlab.html'>Jupyterlab</a><li><a href='AI.html'>AI</a></li>
                       </ul>
                 </nav>
               </div>
@@ -155,17 +155,19 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">MSYS2 << <a href='MSYS2.html'>Previous</a> <a href='Grading.html'>Next</a> >> Grading<br /><h1>Pyslvs-UI</h1>
-<p>according to <a href="https://pyslvs-ui.readthedocs.io/en/stable/">https://pyslvs-ui.readthedocs.io/en/stable/</a></p>
-<p>git clone --recurse-submodules https://github.com/KmolYuan/Pyslvs-UI.git</p>
-<p>cd pyslvs-ui</p>
-<p>python -m pip install -r requirements.txt</p>
-<p>mingw32-make build-kernel</p>
-<p>python setup.py install</p>
-<h4>執行 launch_pyslvs.py:</h4>
-<p>y:\py38\pythonw -u "launch_pyslvs.py"<br/>Traceback (most recent call last):<br/> File "launch_pyslvs.py", line 11, in &lt;module&gt;<br/> from pyslvs_ui.__main__ import main<br/> File "Y:\tmp\Pyslvs-UI\pyslvs_ui\__init__.py", line 10, in &lt;module&gt;<br/> from pyslvs import __version__<br/> File "y:\py38\lib\site-packages\pyslvs-20.2.0.dev0-py3.8-win-amd64.egg\pyslvs\__init__.py", line 12, in &lt;module&gt;<br/> from .bfgs import SolverSystem<br/>ImportError: DLL load failed while importing bfgs: The specified module could not be found.</p>
-<p></p>
-<p></p>
-<p></p><br />MSYS2 << <a href='MSYS2.html'>Previous</a> <a href='Grading.html'>Next</a> >> Grading</div>
+<h4>Compile and install python_solvespace library</h4>
+<p>Pyslvs-UI requires <a href="https://github.com/mdecourse/solvespace">https://github.com/mdecourse/solvespace</a> python_solvespace pyd dynamic library of the python branch.</p>
+<p style="padding-left: 30px;">git clone --recurse-submodules <a href="https://github.com/mdecourse/solvespace.git">https://github.com/mdecourse/solvespace.git</a> </p>
+<p style="padding-left: 30px;">cd solvespace</p>
+<p style="padding-left: 30px;">git checkout python</p>
+<p style="padding-left: 30px;">cd cython</p>
+<p style="padding-left: 30px;">python setup.py install</p>
+<h4>Compile and install Pyslvs-UI</h4>
+<p style="padding-left: 30px;">git clone --recurse-submodules <a href="https://github.com/mdecourse/pyslvs-UI.git">https://github.com/mdecourse/pyslvs-UI.git</a></p>
+<p style="padding-left: 30px;">cd pyslvs-UI</p>
+<p style="padding-left: 30px;">python -m pip install -r requirements.txt</p>
+<p style="padding-left: 30px;"><span>mingw32-make install</span></p>
+<p style="padding-left: 30px;"><span></span></p><br />MSYS2 << <a href='MSYS2.html'>Previous</a> <a href='Grading.html'>Next</a> >> Grading</div>
         
     <!-- footer -->
       <div class="container">

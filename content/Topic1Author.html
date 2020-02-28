@@ -143,7 +143,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li class='has-children'><a href='KMOL2020.html'>KMOL2020</a><ul class='dropdown'><li><a href='Python.html'>Python</a><li><a href='MSYS2.html'>MSYS2</a><li><a href='Pyslvs-UI.html'>Pyslvs-UI</a></li></ul><li><a href='Grading.html'>Grading</a></li></ul><li><a href='Grouping.html'>Grouping</a><li class='has-children'><a href='Topics.html'>Topics</a><ul class='dropdown'><li><a href='Mechanical Design Process.html'>Mechanical Design Process</a></li></ul><li class='has-children'><a href='Project.html'>Project</a><ul class='dropdown'><li><a href='Dart.html'>Dart</a><li><a href='SQLite.html'>SQLite</a><li><a href='AI.html'>AI</a></li>
+                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li class='has-children'><a href='KMOL2020.html'>KMOL2020</a><ul class='dropdown'><li><a href='Python.html'>Python</a><li><a href='MSYS2.html'>MSYS2</a><li><a href='Pyslvs-UI.html'>Pyslvs-UI</a></li></ul><li><a href='Grading.html'>Grading</a></li></ul><li><a href='Grouping.html'>Grouping</a><li class='has-children'><a href='Topics.html'>Topics</a><ul class='dropdown'><li class='has-children'><a href='Mechanical Design.html'>Mechanical Design</a><ul class='dropdown'><li><a href='Topic1Author.html'>Topic1Author</a></li></li></ul></ul><li class='has-children'><a href='Project.html'>Project</a><ul class='dropdown'><li><a href='Dart.html'>Dart</a><li><a href='SQLite.html'>SQLite</a><li><a href='Fossil SCM.html'>Fossil SCM</a><li><a href='Jupyterlab.html'>Jupyterlab</a><li><a href='AI.html'>AI</a></li>
                       </ul>
                 </nav>
               </div>
@@ -154,158 +154,23 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Topics << <a href='Topics.html'>Previous</a> <a href='Project.html'>Next</a> >> Project<br /><h1>Mechanical Design Process</h1>
-<p>Frontend - backend and design process</p>
-<p>Frontend Dart:</p>
-<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">// 因為要使用超文件表單, 因此導入 html 程式庫
-import "dart:html";
-
-// 每一個 Dart 程式都從 main() 開始執行
-main() {
-  // 透過表單, 取得使用者輸入的溫度值, 語法為數字加上 C 或 F
-  InputElement tempInput = querySelector("#temp");
-  querySelector("#submit").onClick.listen((e) =&gt; pyconvert(tempInput.value));
-}
-
-pyconvert(String data) {
-  // 準備將轉換結果顯示在 output Label 區
-  LabelElement output = querySelector("#output");
-  // 將 data 送到遠端 python flask 程式區
-  request(data);
-} // pyconvert
-
-request(String asset) {
-  var response = document.querySelector('#response');
-  var url = 'http://localhost:5000/${asset}';
-
-  HttpRequest.getString(url, onProgress: (_) =&gt; response.text = 'Loading ...')
-      .then((resp) =&gt; response.setInnerHtml('&lt;pre&gt;${resp}&lt;/pre&gt;'))
-      .catchError((error) =&gt; response.text = 'ERROR !!!: ${error.toString()}');
-}
-
-/* 以下為 Python Flask 伺服器端的程式碼, 可以接受 Dart 前端送來的字串, 進行溫度轉換運算後, 將結果傳回
-import flask
-# 導入 flask_cors 模組中的 CORS
-# 目的在讓伺服器可以被遠端的 Dart 程式跨網域擷取資料
-from flask_cors import CORS
-
-app = flask.Flask(__name__)
-# 讓應用程式啟動後, 可以跨網域被截取資料
-CORS(app, support_credentials=False)
-global data
-
-@app.route('/', methods =['POST', 'GET'])
-def root():
-    if flask.request.method == 'POST': 
-        data = flask.request.form['data'] 
-        print(data)
-        resp = {"data": data}
-        output = flask.json.dumps(data)
-    else:
-        # 將 Python 中的 dictionary 資料透過 json 格式送出後
-        # 讓遠端的 Dart 程式可以擷取
-        data = {"a": 1, "b": data+"yen", "c": "字串"}
-        output = flask.json.dumps(data)
-    return output
-    
-@app.route('/&lt;name&gt;', methods=['POST', 'GET'])
-def convert(name):
-    #name[-1] 為字串最後一個字元
-    # name[:-1] 則為數字
-    if name[-1] is "F" or name[-1] is "f":
-        # 表示要將華氏溫度轉為攝氏
-        return FtoC(name[:-1])
-    else:
-        return CtoF(name[:-1])
-    
-#celsius = 5/9 ( fahrenheit − 32)
-#定義一個 celsius 轉 fahrenheit  函式
-def CtoF(c):
-    return "攝氏" + c + "度=華氏" + str(round(int(c)*9/5 + 32, 2)) + "度"
-
-#定義一個 celsius 轉 fahrenheit  函式
-def FtoC(f):
-    return "華氏" + f + "度=攝氏" + str(round((int(f) - 32)*5/9, 2)) + "度"
-
-
-if __name__ == '__main__':
-    # 內建的 Flask Web 啟動埠號為 5000
-    app.run()
-*/</pre>
-<p>Backend Python:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import flask
-# 導入 flask_cors 模組中的 CORS
-# 目的在讓伺服器可以被遠端的 Dart 程式跨網域擷取資料
-from flask_cors import CORS
- 
-app = flask.Flask(__name__)
-# 讓應用程式啟動後, 可以跨網域被截取資料
-CORS(app, support_credentials=False)
-global data
- 
-@app.route('/', methods =['POST', 'GET'])
-def root():
-    if flask.request.method == 'POST': 
-        data = flask.request.form['data'] 
-        print(data)
-        resp = {"data": data}
-        output = flask.json.dumps(data)
-    else:
-        # 將 Python 中的 dictionary 資料透過 json 格式送出後
-        # 讓遠端的 Dart 程式可以擷取
-        data = {"a": 1, "b": data+"yen", "c": "字串"}
-        output = flask.json.dumps(data)
-    return output
-     
-@app.route('/&lt;name&gt;', methods=['POST', 'GET'])
-def convert(name):
-    #name[-1] 為字串最後一個字元
-    # name[:-1] 則為數字
-    if name[-1] is "F" or name[-1] is "f":
-        # 表示要將華氏溫度轉為攝氏
-        return FtoC(name[:-1])
-    else:
-        return CtoF(name[:-1])
-     
-#celsius = 5/9 ( fahrenheit − 32)
-#定義一個 celsius 轉 fahrenheit  函式
-def CtoF(c):
-    return "攝氏" + c + "度=華氏" + str(round(int(c)*9/5 + 32, 2)) + "度"
- 
-#定義一個 celsius 轉 fahrenheit  函式
-def FtoC(f):
-    return "華氏" + f + "度=攝氏" + str(round((int(f) - 32)*5/9, 2)) + "度"
- 
- 
-if __name__ == '__main__':
-    # 內建的 Flask Web 啟動埠號為 5000
-    app.run()</pre>
-<p>What can these programs do to the mechanical design process?</p>
-<p style="padding-left: 30px;"><a href="https://flutter.dev/">Flutter</a> mobile frontend and Python backend?</p>
-<p style="padding-left: 30px;">Learning Python?</p>
-<p style="padding-left: 60px;">Login to gm account and download</p>
-<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/17_LCSvwgtnIG8FnpezfUlEdbo3Y6G6CP/view?usp=sharing">2019_ABeginnersGuideToPython3Programming.pdf</a></p>
-<p style="padding-left: 90px;">and</p>
-<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1z6v5j4TtFwBmo00URNpBBoLfQVmlTSZv/view?usp=sharing">2019_AdvancedGuideToPython3Programming.pdf</a></p>
-<p style="padding-left: 30px;">Learning Dart and Flutter?</p>
-<p style="padding-left: 60px;">Login to gm account and download </p>
-<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1RyCFxXrh0skRAWafX7nyYFVHuMO68iTS/view?usp=sharing">2020_ QuickStartGuideToDartProgramming.pdf</a></p>
-<p style="padding-left: 90px;">and</p>
-<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1RyCFxXrh0skRAWafX7nyYFVHuMO68iTS/view?usp=sharing">2019_BeginningAppDevelopmentWithFlutter.pdf</a></p>
-<p style="padding-left: 30px;"><a href="https://flutter.dev/">Flutter</a> mobile frontend, Python backend and <a href="https://www.coppeliarobotics.com/">CoppeliaSim</a> through <a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiOverview.htm">remote API</a>?</p>
-<p style="padding-left: 30px;"><a href="https://flutter.dev/">Flutter</a> mobile frontend, <a href="https://cython.org/">Cython</a> backend and <a href="https://github.com/solvespace/solvespace">Solvespace</a> through <a href="https://github.com/KmolYuan/solvespace/tree/python">Python Geometric Constranin Solver</a>?</p>
-<p style="padding-left: 60px;">Learning C++?</p>
-<p style="padding-left: 90px;">Login to gm account and download <a href="https://drive.google.com/file/d/1KZCqddCxs1CCK-thaYpM1ssuz3nMNn3t/view?usp=sharing">2018_Book_BeginningC17.pdf</a>.</p>
-<p style="padding-left: 90px;">Also check into <a href="https://www.msys2.org/">MSYS2</a> for reference.</p>
-<p style="padding-left: 30px;">Where can we save the data during a web/mobile frontend and backend based design process?</p>
-<p style="padding-left: 60px;">Login to gm account and download</p>
-<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1u3PHIbGWz3r4bct_molJg8FODkS8tf02/view?usp=sharing">2019_BuildingRESTAPIsWithFlask.pdf</a> </p>
-<p style="padding-left: 90px;">and</p>
-<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1REP4GKqo_RkLmPj2MqiuG-YR59TTqHPF/view?usp=sharing">2010_TheDefinitiveGuideToSQLite.pdf</a></p>
-<p style="padding-left: 60px;">Also check into <a href="https://github.com/chiamingyen/pygrouf">https://github.com/chiamingyen/pygrouf</a>, <a href="https://github.com/mdecourse/wcms-scrum1">https://github.com/mdecourse/wcms-scrum1</a> and <a href="https://wcms-scrum1.herokuapp.com/gear_index">https://wcms-scrum1.herokuapp.com/gear_index</a> for reference.</p>
-<h4>Recall application of <a href="https://www.google.com/search?q=pro%2Fweblink">Pro/Weblink</a></h4>
-<p>Take <a href="https://support.ptc.com/help/creo/creo_pma/usascii/index.html#page/fundamentals/fundamentals/fund_three_sub/About_Pro_Web_Link.html">Pro/Weblink</a> as an example. Javascript is used as the frontend working with a local host Pro/Engineer under the trusted Internet Explorer environment to enable programmable 3d mechanical Part and Assembly processes.</p>
-<p>Download <a href="https://drive.google.com/file/d/1CKB_lZ0ujiUC3zx2juRACUJaA8VCAHhW/view?usp=sharing">2002_ProEweblinkUserGuide.pdf</a></p><br />Topics << <a href='Topics.html'>Previous</a> <a href='Project.html'>Next</a> >> Project</div>
+    <div id="tipue_search_content">Mechanical Design << <a href='Mechanical Design.html'>Previous</a> <a href='Project.html'>Next</a> >> Project<br /><h1>Topic1Author</h1>
+<p>Login to your gm account and download <a href="/get_page/ME%20Credentials/2019_DesigningElectronicProductEnclosures.pdf">2019_DesigningElectronicProductEnclosures.pdf</a> (where the topic1 material taken from)</p>
+<h4>Author’s Credentials</h4>
+<p>By listing some of the corporations where I have worked, this should provide some background on where my experience comes from.</p>
+<h4><a href="https://www.lincolnelectric.com/">Lincoln Electric Company</a></h4>
+<p>I started in the drafting room running blue prints in 1964. By taking night school classes in drafting, I soon was given the chance to apprentice as a tool and die designer where I got experience in the basic skills of designing jigs and fixtures. Lincoln Electric is "world famous" for their profit sharing program and work ethic. (I would later teach beginning drafting at Chabot College, California, in 1980).</p>
+<h4><a href="https://www.llnl.gov/">Lawrence Livermore National Laboratory</a></h4>
+<p>My first job after getting my master’s degree in mechanical engineering (from the University of Arizona, 1977) was in the Material Fabrication Group. Our mission to design and build a lathe capable of 0.000001 inch accuracy provided great experience. Additional experience in the design of experiments for laboratory programs proved invaluable for future work.</p>
+<h4><a href="https://www.intel.com/content/www/us/en/homepage.html">Intel Corporation</a></h4>
+<p>This is my first experience with the design of computer housings for "silicon valley." Intel was just expanding beyond chips and printed circuit board products, and they had plans to get into building computer systems. I’m on the cover of "Intel News" shown trying to measure fan noise of a prototype "tower computer" in 1982. I was very fortunate to experience the tremendous work ethic in the culture at Intel.</p>
+<h4><a href="https://en.wikipedia.org/wiki/Sytek_Inc">Sytek Corporation</a></h4>
+<p>This is my first design position where I had the responsibility of taking my own design thru all the stages of prototyping, tooling, testing, and manufacturing delivery. We installed our first CAD systems (CADAM) in 1986.</p>
+<p>This is the first company where I assumed some management responsibility and thus saw a more complete picture of where (mechanical) product design fits into a larger picture of the entire product delivery process.</p>
+<h4><a href="https://www.trimble.com/">Trimble Navigation Limited</a></h4>
+<p>This is my first designer position where I designed and documented with a CAD system (AutoCAD).</p>
+<p>My work here spanned nearly 25 years from 1988 thru 2013. We installed our first 3D CAD system (ProEngineer) in 1992. Trimble’s products (portable GPS instruments) are intended to work in outdoor environments, and their customers need these products to function under adverse conditions (shock, vibration, temperature extremes, rain).</p>
+<p>I spent my early years in the Marine Division, moved on to the Survey Division, and became manager of a Mechanical Engineering Group in 1995. While manager, I was responsible for budgeting, resourcing, prioritization, design, and documentation. I also served as (overall) project manager on a number of projects and thus experienced how the "mechanical piece" fits into the overall design of products.<br/> <br/>All of the above corporations had different accepted working processes for overall product design and different corporate cultures to operate in. It’s hoped that most of the words written here serve as a valuable contribution to the reader’s design process regardless of the corporate cultures they are in. The above work resume certainly spans<br/>a history of both how computers came to be used in the design process and how the industries evolved in their design processes. The design tools and products made for the marketplace will continue to evolve in the future, but we will still need basic mechanical design fundamentals to positively affect the overall product design process.</p><br />Mechanical Design << <a href='Mechanical Design.html'>Previous</a> <a href='Project.html'>Next</a> >> Project</div>
         
     <!-- footer -->
       <div class="container">

@@ -248,13 +248,14 @@ font-size: 100%;
 <p></p><h1>Topics</h1>
 <h4>Mechanical Design Process</h4>
 <p>Login to your gm email account and download <a href="https://drive.google.com/file/d/13THamnfayiRT4Wa9KzmjXQSP4ZW2jIej/view?usp=sharing">MechanicalDesignProcess.pdf</a>.</p>
-<p style="padding-left: 30px;">(Can we build online tools to facilitate these process?)</p>
+<p style="padding-left: 30px;">(Can we build online tools to facilitate these processes?)</p>
 <p style="padding-left: 30px;">Successful Design</p>
 <p style="padding-left: 30px;">Building the Design</p>
 <p style="padding-left: 30px;">Structural Considerations</p>
 <p style="padding-left: 30px;">Materials and Processes</p>
 <h4>Mechatronic System Design</h4>
 <p>Login to your gm email account and download <a href="https://drive.google.com/file/d/1KRb8vX_LB_3hkLwK1z1LOP8wl_StIZOR/view?usp=sharing">MSModelingAndTFApproaches.pdf</a>.</p>
+<p style="padding-left: 30px;"><span>(Can we build online tools to facilitate these processes?)</span></p>
 <p style="padding-left: 30px;">Mechatronic Systems</p>
 <p style="padding-left: 30px;">Mathematical Modeling</p>
 <p style="padding-left: 30px;">Transfer Function Approaches</p>
@@ -275,7 +276,159 @@ font-size: 100%;
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/UHBHCsrqYMw" width="560"></iframe></p>
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/WTQ-oCj-Gf8" width="560"></iframe></p>
 <p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-fourbar-three-position-synthesis.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-fourbar-three-position-synthesis.html</a></p>
-<p>Login to your gm email account and <a href="https://drive.google.com/drive/folders/1h2bc9HqF3yhB3BwZwJD_vPUdOPGroQtv?usp=sharing">download all reference files</a>.</p><h1>Project</h1>
+<p>Login to your gm email account and <a href="https://drive.google.com/drive/folders/1h2bc9HqF3yhB3BwZwJD_vPUdOPGroQtv?usp=sharing">download all reference files</a>.</p>
+<h2>Mechanical Design Process</h2>
+<p>Frontend - backend and design process</p>
+<p>Frontend Dart:</p>
+<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">// 因為要使用超文件表單, 因此導入 html 程式庫
+import "dart:html";
+
+// 每一個 Dart 程式都從 main() 開始執行
+main() {
+  // 透過表單, 取得使用者輸入的溫度值, 語法為數字加上 C 或 F
+  InputElement tempInput = querySelector("#temp");
+  querySelector("#submit").onClick.listen((e) =&gt; pyconvert(tempInput.value));
+}
+
+pyconvert(String data) {
+  // 準備將轉換結果顯示在 output Label 區
+  LabelElement output = querySelector("#output");
+  // 將 data 送到遠端 python flask 程式區
+  request(data);
+} // pyconvert
+
+request(String asset) {
+  var response = document.querySelector('#response');
+  var url = 'http://localhost:5000/${asset}';
+
+  HttpRequest.getString(url, onProgress: (_) =&gt; response.text = 'Loading ...')
+      .then((resp) =&gt; response.setInnerHtml('&lt;pre&gt;${resp}&lt;/pre&gt;'))
+      .catchError((error) =&gt; response.text = 'ERROR !!!: ${error.toString()}');
+}
+
+/* 以下為 Python Flask 伺服器端的程式碼, 可以接受 Dart 前端送來的字串, 進行溫度轉換運算後, 將結果傳回
+import flask
+# 導入 flask_cors 模組中的 CORS
+# 目的在讓伺服器可以被遠端的 Dart 程式跨網域擷取資料
+from flask_cors import CORS
+
+app = flask.Flask(__name__)
+# 讓應用程式啟動後, 可以跨網域被截取資料
+CORS(app, support_credentials=False)
+global data
+
+@app.route('/', methods =['POST', 'GET'])
+def root():
+    if flask.request.method == 'POST': 
+        data = flask.request.form['data'] 
+        print(data)
+        resp = {"data": data}
+        output = flask.json.dumps(data)
+    else:
+        # 將 Python 中的 dictionary 資料透過 json 格式送出後
+        # 讓遠端的 Dart 程式可以擷取
+        data = {"a": 1, "b": data+"yen", "c": "字串"}
+        output = flask.json.dumps(data)
+    return output
+    
+@app.route('/&lt;name&gt;', methods=['POST', 'GET'])
+def convert(name):
+    #name[-1] 為字串最後一個字元
+    # name[:-1] 則為數字
+    if name[-1] is "F" or name[-1] is "f":
+        # 表示要將華氏溫度轉為攝氏
+        return FtoC(name[:-1])
+    else:
+        return CtoF(name[:-1])
+    
+#celsius = 5/9 ( fahrenheit − 32)
+#定義一個 celsius 轉 fahrenheit  函式
+def CtoF(c):
+    return "攝氏" + c + "度=華氏" + str(round(int(c)*9/5 + 32, 2)) + "度"
+
+#定義一個 celsius 轉 fahrenheit  函式
+def FtoC(f):
+    return "華氏" + f + "度=攝氏" + str(round((int(f) - 32)*5/9, 2)) + "度"
+
+
+if __name__ == '__main__':
+    # 內建的 Flask Web 啟動埠號為 5000
+    app.run()
+*/</pre>
+<p>Backend Python:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import flask
+# 導入 flask_cors 模組中的 CORS
+# 目的在讓伺服器可以被遠端的 Dart 程式跨網域擷取資料
+from flask_cors import CORS
+ 
+app = flask.Flask(__name__)
+# 讓應用程式啟動後, 可以跨網域被截取資料
+CORS(app, support_credentials=False)
+global data
+ 
+@app.route('/', methods =['POST', 'GET'])
+def root():
+    if flask.request.method == 'POST': 
+        data = flask.request.form['data'] 
+        print(data)
+        resp = {"data": data}
+        output = flask.json.dumps(data)
+    else:
+        # 將 Python 中的 dictionary 資料透過 json 格式送出後
+        # 讓遠端的 Dart 程式可以擷取
+        data = {"a": 1, "b": data+"yen", "c": "字串"}
+        output = flask.json.dumps(data)
+    return output
+     
+@app.route('/&lt;name&gt;', methods=['POST', 'GET'])
+def convert(name):
+    #name[-1] 為字串最後一個字元
+    # name[:-1] 則為數字
+    if name[-1] is "F" or name[-1] is "f":
+        # 表示要將華氏溫度轉為攝氏
+        return FtoC(name[:-1])
+    else:
+        return CtoF(name[:-1])
+     
+#celsius = 5/9 ( fahrenheit − 32)
+#定義一個 celsius 轉 fahrenheit  函式
+def CtoF(c):
+    return "攝氏" + c + "度=華氏" + str(round(int(c)*9/5 + 32, 2)) + "度"
+ 
+#定義一個 celsius 轉 fahrenheit  函式
+def FtoC(f):
+    return "華氏" + f + "度=攝氏" + str(round((int(f) - 32)*5/9, 2)) + "度"
+ 
+ 
+if __name__ == '__main__':
+    # 內建的 Flask Web 啟動埠號為 5000
+    app.run()</pre>
+<p>What can these programs do to the mechanical design process?</p>
+<p style="padding-left: 30px;"><a href="https://flutter.dev/">Flutter</a> mobile frontend and Python backend?</p>
+<p style="padding-left: 30px;">Learning Python?</p>
+<p style="padding-left: 60px;">Login to gm account and download</p>
+<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/17_LCSvwgtnIG8FnpezfUlEdbo3Y6G6CP/view?usp=sharing">2019_ABeginnersGuideToPython3Programming.pdf</a></p>
+<p style="padding-left: 90px;">and</p>
+<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1z6v5j4TtFwBmo00URNpBBoLfQVmlTSZv/view?usp=sharing">2019_AdvancedGuideToPython3Programming.pdf</a></p>
+<p style="padding-left: 30px;">Learning Dart and Flutter?</p>
+<p style="padding-left: 60px;">Login to gm account and download </p>
+<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1RyCFxXrh0skRAWafX7nyYFVHuMO68iTS/view?usp=sharing">2020_ QuickStartGuideToDartProgramming.pdf</a></p>
+<p style="padding-left: 90px;">and</p>
+<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1RyCFxXrh0skRAWafX7nyYFVHuMO68iTS/view?usp=sharing">2019_BeginningAppDevelopmentWithFlutter.pdf</a></p>
+<p style="padding-left: 30px;"><a href="https://flutter.dev/">Flutter</a> mobile frontend, Python backend and <a href="https://www.coppeliarobotics.com/">CoppeliaSim</a> through <a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiOverview.htm">remote API</a>?</p>
+<p style="padding-left: 30px;"><a href="https://flutter.dev/">Flutter</a> mobile frontend, <a href="https://cython.org/">Cython</a> backend and <a href="https://github.com/solvespace/solvespace">Solvespace</a> through <a href="https://github.com/KmolYuan/solvespace/tree/python">Python Geometric Constranin Solver</a>?</p>
+<p style="padding-left: 60px;">Learning C++?</p>
+<p style="padding-left: 90px;">Login to gm account and download <a href="https://drive.google.com/file/d/1KZCqddCxs1CCK-thaYpM1ssuz3nMNn3t/view?usp=sharing">2018_Book_BeginningC17.pdf</a>.</p>
+<p style="padding-left: 90px;">Also check into <a href="https://www.msys2.org/">MSYS2</a> for reference.</p>
+<p style="padding-left: 30px;">Where can we save the data during a web/mobile frontend and backend based design process?</p>
+<p style="padding-left: 60px;">Login to gm account and download</p>
+<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1u3PHIbGWz3r4bct_molJg8FODkS8tf02/view?usp=sharing">2019_BuildingRESTAPIsWithFlask.pdf</a> </p>
+<p style="padding-left: 90px;">and</p>
+<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1REP4GKqo_RkLmPj2MqiuG-YR59TTqHPF/view?usp=sharing">2010_TheDefinitiveGuideToSQLite.pdf</a></p>
+<p style="padding-left: 60px;">Also check into <a href="https://github.com/chiamingyen/pygrouf">https://github.com/chiamingyen/pygrouf</a> for reference.</p>
+<h4>Recall application of <a href="https://www.google.com/search?q=pro%2Fweblink">Pro/Weblink</a></h4>
+<p>Take <a href="https://support.ptc.com/help/creo/creo_pma/usascii/index.html#page/fundamentals/fundamentals/fund_three_sub/About_Pro_Web_Link.html">Pro/Weblink</a> as an example. Javascript is used as the frontend working with a local host Pro/Engineer under the trusted Internet Explorer environment to enable programmable 3d mechanical Part and Assembly processes.</p>
+<p>Download <a href="https://drive.google.com/file/d/1CKB_lZ0ujiUC3zx2juRACUJaA8VCAHhW/view?usp=sharing">2002_ProEweblinkUserGuide.pdf</a></p><h1>Project</h1>
 <p>專案執行流程:</p>
 <p style="padding-left: 30px;">Grouping - 分組</p>
 <p style="padding-left: 30px;">Design - 設計</p>

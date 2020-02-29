@@ -13,133 +13,10 @@
 <p>請登入 gm 電子郵箱後, 填寫下列表單:</p>
 <p style="padding-left: 30px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSfetOEX-l_KYPUZuUuPft5IC1t-FttkoX1s_Nh9FRxYZXKYWA/viewform?usp=sf_link">選課學員基本資料</a></p>
 <p style="padding-left: 30px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdSvo89BOMfQOxFflhx-b3eDa_kYP0lUkTLfotdr1AEyQbItw/viewform?usp=sf_link">課程回饋表單</a></p>
-<p style="padding-left: 30px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSeBw2zOZZvLzREkonbtrEeMLixmSVqsxGwq7LZekra2lcBXgQ/viewform?usp=sf_link">協同產品設計實習自評與互評表單</a></p><h2>KMOL2020</h2>
-<h4>Create Portable Programming System for Windows 10:</h4>
-<p>PortableGit: <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></p>
-<p>MSYS2: <a href="https://www.msys2.org/">https://www.msys2.org/</a></p>
-<p>Python 3.8.1: <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
-<p style="padding-left: 30px;">CMSiMDE: <a href="https://github.com/mdecourse/cmsimde">https://github.com/mdecourse/cmsimde</a></p>
-<p style="padding-left: 60px;">Flask: <a href="https://github.com/pallets/flask">https://github.com/pallets/flask</a></p>
-<p style="padding-left: 60px;">lxml: <a href="https://github.com/lxml/lxml">https://github.com/lxml/lxml</a></p>
-<p style="padding-left: 60px;">bs4: <a href="https://pypi.org/project/beautifulsoup4/">https://pypi.org/project/beautifulsoup4/</a></p>
-<p style="padding-left: 60px;">markdown: <a href="https://github.com/Python-Markdown/markdown">https://github.com/Python-Markdown/markdown</a></p>
-<p style="padding-left: 60px;">flask-cors: <a href="https://github.com/corydolphin/flask-cors">https://github.com/corydolphin/flask-cors</a></p>
-<p style="padding-left: 60px;">Pelican: <a href="https://github.com/getpelican/pelican">https://github.com/getpelican/pelican</a></p>
-<p style="padding-left: 60px;">Reveal.js: <a href="https://github.com/hakimel/reveal.js/">https://github.com/hakimel/reveal.js/</a></p>
-<p style="padding-left: 30px;">Leo Editor: <a href="https://github.com/leo-editor/leo-editor">https://github.com/leo-editor/leo-editor</a></p>
-<p>SciTE: <a href="https://www.scintilla.org/SciTEDownload.html">https://www.scintilla.org/SciTEDownload.html</a></p>
-<p>Tiny C Compiler: <a href="https://github.com/TinyCC/tinycc">https://github.com/TinyCC/tinycc</a></p>
-<p>Fossil SCM: <a href="https://www.fossil-scm.org/">https://www.fossil-scm.org/</a></p>
-<p>Jupyterlab: <a href="https://github.com/jupyterlab/jupyterlab">https://github.com/jupyterlab/jupyterlab</a></p>
-<p>Flutter: <a href="https://github.com/flutter/flutter">https://github.com/flutter/flutter</a></p>
-<p>Visual Studio Code: <a href="https://github.com/microsoft/vscode">https://github.com/microsoft/vscode</a></p>
-<h3>Python</h3>
-<p>Create a Portable Python:</p>
-<p>Install Python 3.8.1 without pip</p>
-<p><a href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH">PYTHONPATH</a></p>
-<p><a href="https://bootstrap.pypa.io/get-pip.py">get-pip.py</a></p>
-<h4>start.bat</h4>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">@echo off
-set Disk=y
-subst %Disk%: "data"
-
-%Disk%:
-
-set HomePath=%Disk%:\home_mdecourse
-set HomeDrive=%Disk%:\home_mdecourse
-set Home=%Disk%:\home_mdecourse
-set USERPROFILE=%Disk%:\home_mdecourse
-
-REM 將系統 Python 程式的 io 設為 utf-8
-set PYTHONIOENCODING="utf-8"
-
-set PYTHONPATH=%Disk%:\py38\DLLs;%Disk%:\py38\Lib;%Disk%:\py38\Lib\site-packages;
-set PYTHONHOME=%Disk%:\py38
-
-REM for flutter
-set java_home=%Disk%:\java\jdk8u222-b10
-set ANDROID_SDK_home=%Disk%:\home_mdecourse
-set GRADLE_USER_home=%Disk%:\home_mdecourse
-set ANDROID_SDK_ROOT=%Disk%:\android\sdk
-set ANDROID_Home=%Disk%:\android\sdk\tools
-
-REM for putty
-set GIT_HOME=%CDisk%:\portablegit\bin\
-set GIT_SSH=%Disk%:\putty\plink.exe
-
-set path_python=%Disk%:\py38;%Disk%:\py38\Scripts;
-set path_msys2=%Disk%:\msys64\mingw64\bin;
-REM coreutils is for compiling fossil scm
-set path_coreutils=%Disk%:\coreutils-5.3.0\bin;%Disk%:\depends22_x64;
-set path_tcc=%Disk%:\tcc;
-set path_cmake=%Disk%:\cmake-3.10.1-win64-x64\bin;
-set path_nodejs=%Disk%:\nodejs;%Disk%:\nodejs\appdata\roaming\npm;
-set path_git=%Disk%:\portablegit\bin;
-set path_xming=%Disk%:\Xming;
-set path_latex=%Disk%:\Pandoc;%Disk%:\TinyTeX\bin\win32;
-set path_flutter=%Disk%:\java\jdk8u222-b10\bin;%Disk%:\flutter\bin;%Disk%:\Android\sdk;%Disk%:\Android\sdk\tools;%Disk%:\Android\sdk\tools\bin;%Disk%:\Android\sdk\platform-tools;%Disk%:\flutter\bin\cache\dart-sdk\bin;%Disk%:\vscode;
-set path_putty=%Disk%:\putty;
-
-path=%Disk%:;%path_python%;%path_msys2%;%path_tcc%;%path_git%;%path_cmake%;%path_coreutils%;%path_flutter%;%path_putty%;%path_latex%;%path%;
-
-start /MIN cmd.exe
-start /MIN cmd.exe
-start /MIN cmd.exe
-start /MIN cmd.exe
-
-start /MIN %Disk%:\kmolScite\SciTE.exe
-start /MIN %Disk%:\kmolScite\SciTE.exe
-
-Exit</pre>
-<h3>Microcontroller</h3>
-<p>Login to your gm email and download </p>
-<p style="padding-left: 30px;"><a href="https://drive.google.com/file/d/1mmmgiOFO-SVaj8LNID8gTWYgt6aKr6HN/view?usp=sharing">2019_ArduinoApplied.pdf</a></p>
-<p style="padding-left: 30px;">and </p>
-<p style="padding-left: 30px;"><a href="https://drive.google.com/file/d/1vzffEBY1HK9yY1-t5MXO1TdeoGh2BHLq/view?usp=sharing">2018_BeginningRoboticsWithRaspberry.pdf</a></p>
-<h4>Arduino Simulator</h4>
-<p style="padding-left: 30px;"><a href="https://www.sites.google.com/site/unoardusim/">https://www.sites.google.com/site/unoardusim/</a></p>
-<h4>PIC Simulator Labortory</h4>
-<p style="padding-left: 30px;"><a href="https://github.com/lcgamboa/picsimlab">https://github.com/lcgamboa/picsimlab</a></p>
-<p style="padding-left: 30px;"><a href="https://lcgamboa.github.io/">https://lcgamboa.github.io/</a></p>
-<p style="padding-left: 30px;"><a href="https://mplabxpress.microchip.com/mplabcloud/ide">https://mplabxpress.microchip.com/mplabcloud/ide</a></p>
-<p style="padding-left: 30px;">Login to your gm account and <a href="https://drive.google.com/drive/folders/1ucVrqPEzyidXDzM6H1K4U6uhzkvTKFSd?usp=sharing">download all Microchip related tools</a>.</p>
-<h4>Rasberry Pi</h4>
-<p style="padding-left: 30px;"><a href="https://github.com/gavinlyonsrepo/RpiMotorLib">https://github.com/gavinlyonsrepo/RpiMotorLib</a></p>
-<h4>Python-exemplary</h4>
-<p style="padding-left: 30px;"><a href="http://www.python-exemplary.com/">http://www.python-exemplary.com/</a></p><h3>MSYS2</h3>
-<p><a href="https://www.msys2.org/">https://www.msys2.org/</a></p>
-<p>Y:\py38\Lib\distutils\distutils.cfg</p>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[build]
-compiler=mingw32
-
-[build_ext]
-compiler=mingw32</pre>
-<h4>Reference</h4>
-<p style="padding-left: 30px;"><a href="https://github.com/KmolYuan/pyslvs/blob/master/platform/set_pycompiler.bat">https://github.com/KmolYuan/pyslvs/blob/master/platform/set_pycompiler.bat</a></p><h3>Pyslvs-UI</h3>
-<h4>Compile and install python_solvespace library</h4>
-<p>Pyslvs-UI requires <a href="https://github.com/mdecourse/solvespace">https://github.com/mdecourse/solvespace</a> python_solvespace pyd dynamic library of the python branch.</p>
-<p style="padding-left: 30px;">git clone --recurse-submodules <a href="https://github.com/mdecourse/solvespace.git">https://github.com/mdecourse/solvespace.git</a> </p>
-<p style="padding-left: 30px;">cd solvespace</p>
-<p style="padding-left: 30px;">git checkout python</p>
-<p style="padding-left: 30px;">cd cython</p>
-<p style="padding-left: 30px;">python setup.py install</p>
-<h4>Compile and install Pyslvs-UI</h4>
-<p style="padding-left: 30px;">git clone --recurse-submodules <a href="https://github.com/mdecourse/pyslvs-UI.git">https://github.com/mdecourse/pyslvs-UI.git</a></p>
-<p style="padding-left: 30px;">cd pyslvs-UI</p>
-<p style="padding-left: 30px;">python -m pip install -r requirements.txt</p>
-<p style="padding-left: 30px;"><span>mingw32-make install</span></p>
-<p style="padding-left: 30px;"><span></span></p><h2>Grading</h2>
-<p>自評 (30%)</p>
-<p>互評 (30%)</p>
-<p>教師評分 (40%)</p>
-<hr/>
-<p>出席、倉儲、網站與筆記本維護 (30%)</p>
-<p> 專案一 (15%)</p>
-<p>專案二 (15%)</p>
-<p>專案三 (20%)</p>
-<p>專案四 (20%)</p><h1>Grouping</h1>
-<h4>亂數分組:</h4>
-<p>學員名單 URL: <input id="studListUrl" size="70" type="text" value="https://mde.tw/cd2020/downloads/2020spring_cd_2a_list.txt"/><br/> <input id="submit" type="submit" value="開始分組"/><br/> <textarea cols="80" id="output" rows="10"></textarea></p>
+<p style="padding-left: 30px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSeBw2zOZZvLzREkonbtrEeMLixmSVqsxGwq7LZekra2lcBXgQ/viewform?usp=sf_link">協同產品設計實習自評與互評表單</a></p>
+<h2>Grouping</h2>
+<h4>Random Grouping</h4>
+<p>Student List URL: <input id="studListUrl" size="70" type="text" value="https://mde.tw/cd2020/downloads/2020spring_cd_2a_list.txt"/><br/> <input id="submit" type="submit" value="Grouping"/><br/> <textarea cols="80" id="output" rows="10"></textarea></p>
 <script src="https://mde.tw/cd2020/downloads/dart_ex/even_grouping/evenGrouping.js"></script>
 <p><a href="https://dartpad.github.io/embed-html.html?gh_owner=mdecourse&amp;gh_repo=cd2020&amp;gh_path=downloads/dart_ex/even_grouping&amp;theme=dark">Dart source code for random grouping</a></p>
 <h4>evenGrouping.dart:</h4>
@@ -262,7 +139,135 @@ List getNumList(int total){
 input, select, textarea {
 font-size: 100%;
 }</pre>
-<p></p><h1>Topics</h1>
+<p></p>
+<h2>Grading</h2>
+<h4>Grading percentage:</h4>
+<p style="padding-left: 30px;">Self-evaluation (30%)</p>
+<p style="padding-left: 30px;">Peer Review (30%)</p>
+<p style="padding-left: 30px;">Teacher Grading (40%)</p>
+<h4>Grading content:</h4>
+<p style="padding-left: 30px;">Attendance, Github commits, website and blog maintenance, and note taking (40%)</p>
+<p style="padding-left: 30px;">Assignment 1 presentation (Youtube and Reveal.js) (10%)</p>
+<p style="padding-left: 30px;">Assignment 2 presentation (Youtube and Reveal.js) (10%)</p>
+<p style="padding-left: 30px;">Assignment 3 presentation (Youtube and Reveal.js) (10%)</p>
+<p style="padding-left: 30px;">Final Project (Youtube, Reveal.js and pdf report) (30%)</p>
+<p style="padding-left: 30px;"></p><h2>KMOL2020</h2>
+<h4>Create Portable Programming System for Windows 10:</h4>
+<p>PortableGit: <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></p>
+<p>MSYS2: <a href="https://www.msys2.org/">https://www.msys2.org/</a></p>
+<p>Python 3.8.1: <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
+<p style="padding-left: 30px;">CMSiMDE: <a href="https://github.com/mdecourse/cmsimde">https://github.com/mdecourse/cmsimde</a></p>
+<p style="padding-left: 60px;">Flask: <a href="https://github.com/pallets/flask">https://github.com/pallets/flask</a></p>
+<p style="padding-left: 60px;">lxml: <a href="https://github.com/lxml/lxml">https://github.com/lxml/lxml</a></p>
+<p style="padding-left: 60px;">bs4: <a href="https://pypi.org/project/beautifulsoup4/">https://pypi.org/project/beautifulsoup4/</a></p>
+<p style="padding-left: 60px;">markdown: <a href="https://github.com/Python-Markdown/markdown">https://github.com/Python-Markdown/markdown</a></p>
+<p style="padding-left: 60px;">flask-cors: <a href="https://github.com/corydolphin/flask-cors">https://github.com/corydolphin/flask-cors</a></p>
+<p style="padding-left: 60px;">Pelican: <a href="https://github.com/getpelican/pelican">https://github.com/getpelican/pelican</a></p>
+<p style="padding-left: 60px;">Reveal.js: <a href="https://github.com/hakimel/reveal.js/">https://github.com/hakimel/reveal.js/</a></p>
+<p style="padding-left: 30px;">Leo Editor: <a href="https://github.com/leo-editor/leo-editor">https://github.com/leo-editor/leo-editor</a></p>
+<p>SciTE: <a href="https://www.scintilla.org/SciTEDownload.html">https://www.scintilla.org/SciTEDownload.html</a></p>
+<p>Tiny C Compiler: <a href="https://github.com/TinyCC/tinycc">https://github.com/TinyCC/tinycc</a></p>
+<p>Fossil SCM: <a href="https://www.fossil-scm.org/">https://www.fossil-scm.org/</a></p>
+<p>Jupyterlab: <a href="https://github.com/jupyterlab/jupyterlab">https://github.com/jupyterlab/jupyterlab</a></p>
+<p>Flutter: <a href="https://github.com/flutter/flutter">https://github.com/flutter/flutter</a></p>
+<p>Visual Studio Code: <a href="https://github.com/microsoft/vscode">https://github.com/microsoft/vscode</a></p><h3>Python</h3>
+<p>Create a Portable Python:</p>
+<p>Install Python 3.8.1 without pip</p>
+<p><a href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH">PYTHONPATH</a></p>
+<p><a href="https://bootstrap.pypa.io/get-pip.py">get-pip.py</a></p>
+<h4>start.bat</h4>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">@echo off
+set Disk=y
+subst %Disk%: "data"
+
+%Disk%:
+
+set HomePath=%Disk%:\home_mdecourse
+set HomeDrive=%Disk%:\home_mdecourse
+set Home=%Disk%:\home_mdecourse
+set USERPROFILE=%Disk%:\home_mdecourse
+
+REM 將系統 Python 程式的 io 設為 utf-8
+set PYTHONIOENCODING="utf-8"
+
+set PYTHONPATH=%Disk%:\py38\DLLs;%Disk%:\py38\Lib;%Disk%:\py38\Lib\site-packages;
+set PYTHONHOME=%Disk%:\py38
+
+REM for flutter
+set java_home=%Disk%:\java\jdk8u222-b10
+set ANDROID_SDK_home=%Disk%:\home_mdecourse
+set GRADLE_USER_home=%Disk%:\home_mdecourse
+set ANDROID_SDK_ROOT=%Disk%:\android\sdk
+set ANDROID_Home=%Disk%:\android\sdk\tools
+
+REM for putty
+set GIT_HOME=%CDisk%:\portablegit\bin\
+set GIT_SSH=%Disk%:\putty\plink.exe
+
+set path_python=%Disk%:\py38;%Disk%:\py38\Scripts;
+set path_msys2=%Disk%:\msys64\mingw64\bin;
+REM coreutils is for compiling fossil scm
+set path_coreutils=%Disk%:\coreutils-5.3.0\bin;%Disk%:\depends22_x64;
+set path_tcc=%Disk%:\tcc;
+set path_cmake=%Disk%:\cmake-3.10.1-win64-x64\bin;
+set path_nodejs=%Disk%:\nodejs;%Disk%:\nodejs\appdata\roaming\npm;
+set path_git=%Disk%:\portablegit\bin;
+set path_xming=%Disk%:\Xming;
+set path_latex=%Disk%:\Pandoc;%Disk%:\TinyTeX\bin\win32;
+set path_flutter=%Disk%:\java\jdk8u222-b10\bin;%Disk%:\flutter\bin;%Disk%:\Android\sdk;%Disk%:\Android\sdk\tools;%Disk%:\Android\sdk\tools\bin;%Disk%:\Android\sdk\platform-tools;%Disk%:\flutter\bin\cache\dart-sdk\bin;%Disk%:\vscode;
+set path_putty=%Disk%:\putty;
+
+path=%Disk%:;%path_python%;%path_msys2%;%path_tcc%;%path_git%;%path_cmake%;%path_coreutils%;%path_flutter%;%path_putty%;%path_latex%;%path%;
+
+start /MIN cmd.exe
+start /MIN cmd.exe
+start /MIN cmd.exe
+start /MIN cmd.exe
+
+start /MIN %Disk%:\kmolScite\SciTE.exe
+start /MIN %Disk%:\kmolScite\SciTE.exe
+
+Exit</pre>
+<h3>Microcontroller</h3>
+<p>Login to your gm email and download </p>
+<p style="padding-left: 30px;"><a href="https://drive.google.com/file/d/1mmmgiOFO-SVaj8LNID8gTWYgt6aKr6HN/view?usp=sharing">2019_ArduinoApplied.pdf</a></p>
+<p style="padding-left: 30px;">and </p>
+<p style="padding-left: 30px;"><a href="https://drive.google.com/file/d/1vzffEBY1HK9yY1-t5MXO1TdeoGh2BHLq/view?usp=sharing">2018_BeginningRoboticsWithRaspberry.pdf</a></p>
+<h4>Arduino Simulator</h4>
+<p style="padding-left: 30px;"><a href="https://www.sites.google.com/site/unoardusim/">https://www.sites.google.com/site/unoardusim/</a></p>
+<h4>PIC Simulator Labortory</h4>
+<p style="padding-left: 30px;"><a href="https://github.com/lcgamboa/picsimlab">https://github.com/lcgamboa/picsimlab</a></p>
+<p style="padding-left: 30px;"><a href="https://lcgamboa.github.io/">https://lcgamboa.github.io/</a></p>
+<p style="padding-left: 30px;"><a href="https://mplabxpress.microchip.com/mplabcloud/ide">https://mplabxpress.microchip.com/mplabcloud/ide</a></p>
+<p style="padding-left: 30px;">Login to your gm account and <a href="https://drive.google.com/drive/folders/1ucVrqPEzyidXDzM6H1K4U6uhzkvTKFSd?usp=sharing">download all Microchip related tools</a>.</p>
+<h4>Rasberry Pi</h4>
+<p style="padding-left: 30px;"><a href="https://github.com/gavinlyonsrepo/RpiMotorLib">https://github.com/gavinlyonsrepo/RpiMotorLib</a></p>
+<h4>Python-exemplary</h4>
+<p style="padding-left: 30px;"><a href="http://www.python-exemplary.com/">http://www.python-exemplary.com/</a></p>
+<h3>MSYS2</h3>
+<p><a href="https://www.msys2.org/">https://www.msys2.org/</a></p>
+<p>Y:\py38\Lib\distutils\distutils.cfg</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[build]
+compiler=mingw32
+
+[build_ext]
+compiler=mingw32</pre>
+<h4>Reference</h4>
+<p style="padding-left: 30px;"><a href="https://github.com/KmolYuan/pyslvs/blob/master/platform/set_pycompiler.bat">https://github.com/KmolYuan/pyslvs/blob/master/platform/set_pycompiler.bat</a></p>
+<h3>Pyslvs-UI</h3>
+<h4>Compile and install python_solvespace library</h4>
+<p>Pyslvs-UI requires <a href="https://github.com/mdecourse/solvespace">https://github.com/mdecourse/solvespace</a> python_solvespace pyd dynamic library of the python branch.</p>
+<p style="padding-left: 30px;">git clone --recurse-submodules <a href="https://github.com/mdecourse/solvespace.git">https://github.com/mdecourse/solvespace.git</a> </p>
+<p style="padding-left: 30px;">cd solvespace</p>
+<p style="padding-left: 30px;">git checkout python</p>
+<p style="padding-left: 30px;">cd cython</p>
+<p style="padding-left: 30px;">python setup.py install</p>
+<h4>Compile and install Pyslvs-UI</h4>
+<p style="padding-left: 30px;">git clone --recurse-submodules <a href="https://github.com/mdecourse/pyslvs-UI.git">https://github.com/mdecourse/pyslvs-UI.git</a></p>
+<p style="padding-left: 30px;">cd pyslvs-UI</p>
+<p style="padding-left: 30px;">python -m pip install -r requirements.txt</p>
+<p style="padding-left: 30px;"><span>mingw32-make install</span></p>
+<p style="padding-left: 30px;"><span></span></p><h1>Topics</h1>
 <h4>Topic 0: From Digital to Industrial + Engineering Product Design Collaboration</h4>
 <p>Login to your gm email account and download</p>
 <p style="padding-left: 30px;"><a href="https://drive.google.com/open?id=1YHQwYduSMisiJQS-Jr_HhJghzIqP_SBc">DigitalProductCollaboration.pdf</a></p>
@@ -297,7 +302,8 @@ font-size: 100%;
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/UHBHCsrqYMw" width="560"></iframe></p>
 <p><iframe allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" frameborder="0" height="315" src="https://www.youtube.com/embed/WTQ-oCj-Gf8" width="560"></iframe></p>
 <p><a href="http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-fourbar-three-position-synthesis.html">http://lab.kmol.info/2017fall/blog/kmol-2017-fall-cadp-fourbar-three-position-synthesis.html</a></p>
-<p>Login to your gm email account and <a href="https://drive.google.com/drive/folders/1h2bc9HqF3yhB3BwZwJD_vPUdOPGroQtv?usp=sharing">download all reference files</a>.</p><h2>Mechanical Design</h2>
+<p>Login to your gm email account and <a href="https://drive.google.com/drive/folders/1h2bc9HqF3yhB3BwZwJD_vPUdOPGroQtv?usp=sharing">download all reference files</a>.</p>
+<h2>Mechanical Design</h2>
 <p>Frontend - backend and design process</p>
 <p>Frontend Dart:</p>
 <pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">// 因為要使用超文件表單, 因此導入 html 程式庫
@@ -465,24 +471,24 @@ if __name__ == '__main__':
 <h4><a href="https://www.trimble.com/">Trimble Navigation Limited</a></h4>
 <p>This is my first designer position where I designed and documented with a CAD system (AutoCAD).</p>
 <p>My work here spanned nearly 25 years from 1988 thru 2013. We installed our first 3D CAD system (ProEngineer) in 1992. Trimble’s products (portable GPS instruments) are intended to work in outdoor environments, and their customers need these products to function under adverse conditions (shock, vibration, temperature extremes, rain).</p>
-<p>I spent my early years in the Marine Division, moved on to the Survey Division, and became manager of a Mechanical Engineering Group in 1995. While manager, I was responsible for budgeting, resourcing, prioritization, design, and documentation. I also served as (overall) project manager on a number of projects and thus experienced how the "mechanical piece" fits into the overall design of products.<br/> <br/>All of the above corporations had different accepted working processes for overall product design and different corporate cultures to operate in. It’s hoped that most of the words written here serve as a valuable contribution to the reader’s design process regardless of the corporate cultures they are in. The above work resume certainly spans<br/>a history of both how computers came to be used in the design process and how the industries evolved in their design processes. The design tools and products made for the marketplace will continue to evolve in the future, but we will still need basic mechanical design fundamentals to positively affect the overall product design process.</p><h1>Project</h1>
-<p>專案執行流程:</p>
-<p style="padding-left: 30px;">Grouping - 分組</p>
-<p style="padding-left: 30px;">Design - 設計</p>
-<p style="padding-left: 30px;">Deliverables-交付結果</p>
-<p style="padding-left: 30px;">Presentation-發表</p>
-<p style="padding-left: 30px;">Grading-評分</p>
-<p>W1-W4:  亂數分組並開始執行專案一</p>
-<p style="padding-left: 30px;"><a href="http://www.coppeliarobotics.com/helpFiles/index.html">http://www.coppeliarobotics.com/helpFiles/index.html</a></p>
-<p><span>W5-W8:  專案二</span></p>
-<p style="padding-left: 30px;"><span><a href="https://cyberbotics.com/doc/guide/index">https://cyberbotics.com/doc/guide/index</a></span></p>
-<p>W9: 期中報告</p>
-<p><span>W10-W13: 專案三</span></p>
-<p style="padding-left: 30px;"><a href="https://www.onshape.com/education-plan?hsCtaTracking=4196d591-2496-430a-9e60-cca76c971857%7C562ea402-13bb-4624-88a0-cb9d46ccc296">Onshape Education</a></p>
-<p style="padding-left: 30px;"><a href="https://learn.onshape.com/catalog?labels=%5B%22Self-Paced%20Courses%22%5D&amp;values=%5B%22All%22%5D">Self-paced Course</a></p>
-<p><span>W14-W17: 專案四</span></p>
-<p style="padding-left: 30px;"><span>協同產品設計專案</span></p>
-<p>W18: 期末報告</p><h2>Dart</h2>
+<p>I spent my early years in the Marine Division, moved on to the Survey Division, and became manager of a Mechanical Engineering Group in 1995. While manager, I was responsible for budgeting, resourcing, prioritization, design, and documentation. I also served as (overall) project manager on a number of projects and thus experienced how the "mechanical piece" fits into the overall design of products.<br/> <br/>All of the above corporations had different accepted working processes for overall product design and different corporate cultures to operate in. It’s hoped that most of the words written here serve as a valuable contribution to the reader’s design process regardless of the corporate cultures they are in. The above work resume certainly spans<br/>a history of both how computers came to be used in the design process and how the industries evolved in their design processes. The design tools and products made for the marketplace will continue to evolve in the future, but we will still need basic mechanical design fundamentals to positively affect the overall product design process.</p>
+<h1>Assignments</h1>
+<h4>Assignment 1:</h4>
+<p><span style="background-color: #ffff00;">Due March 25, 2020</span> for class 2a and <span style="background-color: #ffff00;">March 26, 2020</span> for class 2b.</p>
+<p style="padding-left: 30px;">1. Describe how to do an efficient random grouping for this course or do the roll calling randomly?</p>
+<p style="padding-left: 30px;">2. Describe how to prepare a portable Python programming system for Windows 10 64bit system to allow one the maintain <a href="https://github.com/mdecourse/cmsimde">CMSiMDE</a> website, <a href="https://github.com/getpelican/pelican">Pelican blog</a> and <a href="https://github.com/hakimel/reveal.js/">Reveal.js</a> presentation on <a href="https://github.com/">Github</a>?</p>
+<p style="padding-left: 30px;">3. What do you need to know from <a href="http://www.coppeliarobotics.com/helpFiles/index.html">http://www.coppeliarobotics.com/helpFiles/index.html</a> to implement a four-wheeled robot?</p>
+<h4><span>Assignment 2:</span></h4>
+<p><span><span><span style="background-color: #ffff00;">Due April 22, 2020</span> for class 2a and <span style="background-color: #ffff00;">April 23, 2020</span> for class 2b.</span></span></p>
+<p style="padding-left: 30px;"><span><span>1. According to the material of Topic 0 and Topic 1, can you describe spcifically what the mechanical design team need to do for accomplishing Assignment 1's  four wheeled robot.</span></span></p>
+<p style="padding-left: 30px;"><span>2. What do you need to know from <a href="https://cyberbotics.com/doc/guide/index">https://cyberbotics.com/doc/guide/index</a> <span> to implement a four-wheeled robot?</span></span></p>
+<h4>W9: Midterm presentation</h4>
+<h4><span>Assignment 3:</span></h4>
+<p><span><span>Due <span style="background-color: #ffff00;">May 27, 2020</span> for class 2a and <span style="background-color: #ffff00;">May 28, 2020</span> for class 2b.</span></span></p>
+<p style="padding-left: 30px;">According to the reading of Topic 2 and Topic 3, proposal a Mechatronic project by using <a href="https://www.coppeliarobotics.com/">CoppeliaSim</a> or <a href="https://cyberbotics.com/">Webots</a> and <a href="https://www.onshape.com/">Onshape</a>.</p>
+<h4>Final project:</h4>
+<p><span style="background-color: #ffff00;">Due June 24, 2020.</span></p>
+<p style="padding-left: 30px;">Realize your Mechatronic project and conclude with a presentation video and pdf report.</p><h1>Reference</h1><h2>Dart</h2>
 <p><a href="https://flutter.dev/docs/reference/tutorials">https://flutter.dev/docs/reference/tutorials</a></p>
 <p><a href="https://www.raywenderlich.com/4529993-getting-started-with-flutter">https://www.raywenderlich.com/4529993-getting-started-with-flutter</a></p>
 <p><a href="https://www.raywenderlich.com/flutter/">https://www.raywenderlich.com/flutter/</a></p>
@@ -593,7 +599,8 @@ void main() {
 <p>References:</p>
 <p style="padding-left: 30px;"><a href="https://pub.dev/packages/f_orm_m8_sqlite">https://pub.dev/packages/f_orm_m8_sqlite</a></p>
 <p style="padding-left: 30px;"></p>
-<p style="padding-left: 60px;"></p><h2>Fossil SCM</h2>
+<p style="padding-left: 60px;"></p>
+<h2>Fossil SCM</h2>
 <p><a href="https://www.fossil-scm.org/">https://www.fossil-scm.org/</a></p>
 <h2>Jupyterlab</h2>
 <p><a href="https://github.com/jupyterlab/jupyterlab">https://github.com/jupyterlab/jupyterlab</a></p>

@@ -15,8 +15,14 @@
 <p style="padding-left: 30px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSdSvo89BOMfQOxFflhx-b3eDa_kYP0lUkTLfotdr1AEyQbItw/viewform?usp=sf_link">課程回饋表單</a></p>
 <p style="padding-left: 30px;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSeBw2zOZZvLzREkonbtrEeMLixmSVqsxGwq7LZekra2lcBXgQ/viewform?usp=sf_link">協同產品設計實習自評與互評表單</a></p>
 <h2>Grouping</h2>
-<h4>Random Grouping</h4>
-<p>Student List URL: <input id="studListUrl" size="70" type="text" value="https://mde.tw/cd2020/downloads/2020spring_cd_2a_list.txt"/><br/> <input id="submit" type="submit" value="Grouping"/><br/> <textarea cols="80" id="output" rows="10"></textarea></p>
+<h4>亂數分組:</h4>
+<p><a href="https://mde.tw/wcm2020/downloads/2020spring_wcm_1a_list.txt">https://mde.tw/wcm2020/downloads/2020spring_wcm_1a_list.txt</a> was taken from <a href="https://osa.nfu.edu.tw/">https://osa.nfu.edu.tw/</a> on Feb. 19, 2020.</p>
+<p>The most updated list: <a href="http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=0744">http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=0744</a> </p>
+<p>semester: 1082</p>
+<p>courseno for 2a:  0767</p>
+<p>courseno for 2b: 0780</p>
+<p>Under https protocol use port 7443, for http use port 8000.</p>
+<p>學員名單 URL: <input id="studListUrl" size="70" type="text" value="http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=0767 "/><br/> <input id="submit" type="submit" value="開始分組"/><br/> <textarea cols="80" id="output" rows="10"></textarea></p>
 <script src="https://mde.tw/cd2020/downloads/dart_ex/even_grouping/evenGrouping.js"></script>
 <p><a href="https://dartpad.github.io/embed-html.html?gh_owner=mdecourse&amp;gh_repo=cd2020&amp;gh_path=downloads/dart_ex/even_grouping&amp;theme=dark">Dart source code for random grouping</a></p>
 <h4>evenGrouping.dart:</h4>
@@ -127,7 +133,7 @@ List getNumList(int total){
 </pre>
 <h4>index.html:</h4>
 <pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;h1&gt;亂數分組:&lt;/h1&gt;
-學員名單 URL: &lt;input type="text" id="studListUrl" size="50" value="https://mde.tw/cp2019/downloads/2019fall_cp_1a_list.txt"&gt;&lt;br /&gt;
+學員名單 URL: &lt;input type="text" id="studListUrl" size="50" value="https://mde.tw/wcm2020/downloads/2020spring_wcm_1a_list.txt"&gt;&lt;br /&gt;
 &lt;input type="submit" value="開始分組" id="submit"&gt;&lt;br /&gt;
 &lt;textarea id="output" cols="80" rows="10"&gt;&lt;/textarea&gt;</pre>
 <h4>style.css:</h4>
@@ -139,8 +145,134 @@ List getNumList(int total){
 input, select, textarea {
 font-size: 100%;
 }</pre>
-<p></p>
-<h2>Grading</h2>
+<h4>get_student.py</h4>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from flask import Flask, request 
+from flask_cors import CORS
+
+import requests
+import bs4
+import ssl
+
+'''
+https://s1.mde.nfu.edu.tw:7443/?semester=1082&amp;courseno=0767
+cd
+2a 1082/0767
+2b 1082/0780
+
+2a 1072/0777
+2b 1072/0790
+2a 1062/0788
+2a 1062/0802
+
+wcm
+1082/0744
+
+1072/0754
+1062/0765
+
+wcmj
+1082/2418
+'''
+
+app = Flask(__name__)
+CORS(app)
+
+@app.route('/studlist')
+@app.route('/')
+def studlist():
+    semester = request.args.get('semester')
+    courseno = request.args.get('courseno')
+    if semester == None:
+        semester = '1082'
+    if courseno == None:
+        courseno = '0744'
+    
+    url = 'https://osa.nfu.edu.tw/query/studlist_ajax.php'
+    post_var = {'pselyr': semester, 'pseqno': courseno}
+
+    result = requests.post(url, data = post_var)
+
+    soup = bs4.BeautifulSoup(result.content, 'lxml')
+    table = soup.find('table', {'class': 'tbcls'})
+    data = []
+    rows = table.find_all('tr')
+    for row in rows:
+        cols = row.find_all('td')
+        cols = [ele.text.strip() for ele in cols]
+        data.append([ele for ele in cols if ele]) # Get rid of empty values
+    output = ""
+    for i in data[2:]:
+        #print(i[0])
+        output +=i[0] + "\n"
+    return output
+    #return  str(pselyr) + " + " +str(pseqno)
+
+# 即使在近端仍希望以 https 模式下執行
+context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+context.load_cert_chain('localhost.crt', 'localhost.key')
+
+# 取 flaskapp.py 中的 uwsgi 變數設定
+uwsgi = False
+if uwsgi:
+    # 表示程式在雲端執行
+    application = app
+else:
+    # 表示在近端執行, 以 python3 wsgi.py 執行
+    app.run(host='127.0.0.1', port=5443, debug=True, ssl_context=context)
+</pre>
+<h4>nginx sites-available/default settings:</h4>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">server {
+    listen 8000;
+    server_name s1.mde.nfu.edu.tw;
+    charset utf-8;
+    
+    listen 7443 ssl;
+ 
+    location /static {
+        alias /home/kmol2019/course_studlist/static/;
+    }
+ 
+    location / {
+        include uwsgi_params;
+        uwsgi_pass  127.0.0.1:8087;
+    }
+    
+    ssl_certificate /etc/stunnel/localhost.crt;
+    ssl_certificate_key /etc/stunnel/localhost.key;
+    ssl_session_timeout 5m;
+    ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
+    ssl_prefer_server_ciphers on;
+    try_files $uri $uri/ =404;
+}</pre>
+<h4>uwsgi7.ini</h4>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[uwsgi]
+socket = 127.0.0.1:8087
+uid = kmol2019
+gid = kmol2019
+plugins-dir = /usr/lib/uwsgi/plugins/
+plugin = python3
+master = true
+logto = /var/log/uwsgi/emperor.log
+logfile-chown = kmol2019:kmol2019
+processes = 4
+threads = 2
+chdir = /home/kmol2019/course_studlist
+wsgi-file = /home/kmol2019/course_studlist/get_student.py</pre>
+<h4>/etc/systemd/system/cmsimfly.service</h4>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[Unit]
+Description=uWSGI to serve CMSimfly
+After=network.target
+
+[Service]
+User=kmol2019
+Group=kmol2019
+WorkingDirectory=/home/kmol2019/uwsgi_ini
+ExecStart=/usr/local/bin/uwsgi --emperor /home/kmol2019/uwsgi_ini
+
+[Install]
+WantedBy=multi-user.target</pre>
+<p></p><h2>Grading</h2>
 <h4>Grading percentage:</h4>
 <p style="padding-left: 30px;">Self-evaluation (30%)</p>
 <p style="padding-left: 30px;">Peer Review (30%)</p>

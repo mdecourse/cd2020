@@ -2634,6 +2634,9 @@
     remove$0$x: function(receiver) {
       return J.getInterceptor$x(receiver).remove$0(receiver);
     },
+    startsWith$1$s: function(receiver, a0) {
+      return J.getInterceptor$s(receiver).startsWith$1(receiver, a0);
+    },
     toLowerCase$0$s: function(receiver) {
       return J.getInterceptor$s(receiver).toLowerCase$0(receiver);
     },
@@ -3726,12 +3729,12 @@
       if (t2 !== "")
         $.studUrl = t2;
       else
-        t2 = $.studUrl = "https://mde.tw/cp2019/downloads/2019fall_cp_1a_list.txt";
+        t2 = $.studUrl = "https://mde.tw/group/downloads/2019fall_cp_1a_list.txt";
       t1.gth = 1;
       t1.inc = t1.total = t1.j = t1.i = null;
       t1.gpList = [];
       t1.numList = [];
-      W.HttpRequest_getString(t2).then$1$1(new N.grouping_closure(t1, []), type$.Null);
+      W.HttpRequest_getString(t2).then$1$1(new N.grouping_closure(t1, [], "cd2020"), type$.Null);
     },
     getNumList: function(total) {
       var i,
@@ -3750,9 +3753,10 @@
     },
     main_closure: function main_closure() {
     },
-    grouping_closure: function grouping_closure(t0, t1) {
+    grouping_closure: function grouping_closure(t0, t1, t2) {
       this._box_0 = t0;
-      this.cp2019 = t1;
+      this.group = t1;
+      this.courseTitle = t2;
     }
   };
   var holders = [C, H, J, P, W, N];
@@ -6112,7 +6116,7 @@
       t2.textContent = J.$add$ansx(t2.textContent, "\u5168\u73ed\u7e3d\u8a08" + C.JSInt_methods.toString$0(total) + " \u4eba\n");
       numList = t1.numList = N.getNumList(studList.length);
       t1.inc = 0;
-      for (t2 = numList.length, t3 = this.cp2019, _i = 0; _i < numList.length; numList.length === t2 || (0, H.throwConcurrentModificationError)(numList), ++_i) {
+      for (t2 = numList.length, t3 = this.group, _i = 0; _i < numList.length; numList.length === t2 || (0, H.throwConcurrentModificationError)(numList), ++_i) {
         t1.i = numList[_i];
         t4 = $.$get$output();
         t4.textContent = J.$add$ansx(t4.textContent, C.JSString_methods.$mul("=", 20) + "\n");
@@ -6205,6 +6209,40 @@
         i = t2 + 1;
         t1.i = i;
         t2 = i;
+      }
+      t1.gth = 1;
+      t1.i = 0;
+      t2 = this.courseTitle;
+      t4 = 0;
+      while (t4 < t3.length) {
+        t4 = $.$get$output();
+        t4.textContent = J.$add$ansx(t4.textContent, "\n" + C.JSString_methods.$mul("=", 30) + "<br >");
+        t4 = $.$get$output();
+        t4.textContent = J.$add$ansx(t4.textContent, "group " + t1.gth + " <br >");
+        t1.gpList = [];
+        t4 = t1.j = 0;
+        while (t4 < C.JSArray_methods.$index(t3, t1.i).length) {
+          if (J.startsWith$1$s(C.JSArray_methods.$index(C.JSArray_methods.$index(t3, t1.i), t1.j), "4052") || J.startsWith$1$s(C.JSArray_methods.$index(C.JSArray_methods.$index(t3, t1.i), t1.j), "4072")) {
+            t4 = $.$get$output();
+            t4.textContent = J.$add$ansx(t4.textContent, C.JSString_methods.$add(C.JSString_methods.$add(C.JSString_methods.$add(C.JSString_methods.$add("Repository: <a href='https://github.com/s", C.JSArray_methods.$index(C.JSArray_methods.$index(t3, t1.i), t1.j)) + "/" + t2 + "'>", C.JSArray_methods.$index(C.JSArray_methods.$index(t3, t1.i), t1.j)) + "</a> | Site: <a href='https://s", C.JSArray_methods.$index(C.JSArray_methods.$index(t3, t1.i), t1.j)) + ".github.io/" + t2 + "'>", C.JSArray_methods.$index(C.JSArray_methods.$index(t3, t1.i), t1.j)) + "</a><br >");
+          } else {
+            t4 = $.$get$output();
+            t4.textContent = J.$add$ansx(t4.textContent, C.JSString_methods.$add(C.JSString_methods.$add(C.JSString_methods.$add(C.JSString_methods.$add("Repository: <a href='https://github.com/", C.JSArray_methods.$index(C.JSArray_methods.$index(t3, t1.i), t1.j)) + "/" + t2 + "'>", C.JSArray_methods.$index(C.JSArray_methods.$index(t3, t1.i), t1.j)) + "</a> | Site: <a href='https://", C.JSArray_methods.$index(C.JSArray_methods.$index(t3, t1.i), t1.j)) + ".github.io/" + t2 + "'>", C.JSArray_methods.$index(C.JSArray_methods.$index(t3, t1.i), t1.j)) + "</a><br >");
+          }
+          t4 = t1.j;
+          if (typeof t4 !== "number")
+            return t4.$add();
+          j = t4 + 1;
+          t1.j = j;
+          t4 = j;
+        }
+        ++t1.gth;
+        t4 = t1.i;
+        if (typeof t4 !== "number")
+          return t4.$add();
+        i = t4 + 1;
+        t1.i = i;
+        t4 = i;
       }
     },
     $signature: 22

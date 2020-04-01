@@ -154,26 +154,31 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Grading << <a href='Grading.html'>Previous</a> <a href='Python.html'>Next</a> >> Python<br /><h1>KMOL2020</h1>
-<h4>Create Portable Programming System for Windows 10:</h4>
-<p>PortableGit: <a href="https://git-scm.com/download/win">https://git-scm.com/download/win</a></p>
-<p>MSYS2: <a href="https://www.msys2.org/">https://www.msys2.org/</a></p>
-<p>Python 3.8.1: <a href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p>
-<p style="padding-left: 30px;">CMSiMDE: <a href="https://github.com/mdecourse/cmsimde">https://github.com/mdecourse/cmsimde</a></p>
-<p style="padding-left: 60px;">Flask: <a href="https://github.com/pallets/flask">https://github.com/pallets/flask</a></p>
-<p style="padding-left: 60px;">lxml: <a href="https://github.com/lxml/lxml">https://github.com/lxml/lxml</a></p>
-<p style="padding-left: 60px;">bs4: <a href="https://pypi.org/project/beautifulsoup4/">https://pypi.org/project/beautifulsoup4/</a></p>
-<p style="padding-left: 60px;">markdown: <a href="https://github.com/Python-Markdown/markdown">https://github.com/Python-Markdown/markdown</a></p>
-<p style="padding-left: 60px;">flask-cors: <a href="https://github.com/corydolphin/flask-cors">https://github.com/corydolphin/flask-cors</a></p>
-<p style="padding-left: 60px;">Pelican: <a href="https://github.com/getpelican/pelican">https://github.com/getpelican/pelican</a></p>
-<p style="padding-left: 60px;">Reveal.js: <a href="https://github.com/hakimel/reveal.js/">https://github.com/hakimel/reveal.js/</a></p>
-<p style="padding-left: 30px;">Leo Editor: <a href="https://github.com/leo-editor/leo-editor">https://github.com/leo-editor/leo-editor</a></p>
-<p>SciTE: <a href="https://www.scintilla.org/SciTEDownload.html">https://www.scintilla.org/SciTEDownload.html</a></p>
-<p>Tiny C Compiler: <a href="https://github.com/TinyCC/tinycc">https://github.com/TinyCC/tinycc</a></p>
-<p>Fossil SCM: <a href="https://www.fossil-scm.org/">https://www.fossil-scm.org/</a></p>
-<p>Jupyterlab: <a href="https://github.com/jupyterlab/jupyterlab">https://github.com/jupyterlab/jupyterlab</a></p>
-<p>Flutter: <a href="https://github.com/flutter/flutter">https://github.com/flutter/flutter</a></p>
-<p>Visual Studio Code: <a href="https://github.com/microsoft/vscode">https://github.com/microsoft/vscode</a></p><br />Grading << <a href='Grading.html'>Previous</a> <a href='Python.html'>Next</a> >> Python</div>
+    <div id="tipue_search_content">Topics << <a href='Topics.html'>Previous</a> <a href='Video Streaming.html'>Next</a> >> Video Streaming<br /><h1>Startup</h1>
+<p><a href="https://drive.google.com/open?id=114VzfkkEBzznX8LuRwzHkf5HHrB1MTeo">windows_commands.pdf</a></p>
+<p>cd.bat</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">REM  關閉命令執行回應功能
+@echo off
+
+REM 直接更換目錄至 cmsimde
+cd /d y:\tmp\2020\cd2020\cmsimde
+
+REM 利用 ping 等候兩秒, 讓 python 有時間啟動 wsgi.py 後才開啟 chrome
+start /WAIT python wsgi.py | ping -n 2 127.0.0.1 &gt; NUL | start chrome https://localhost:9443
+cd \
+cls</pre>
+<p>cdh.bat</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">@echo off
+y:
+cd tmp\2020\cd2020\
+start python http-server.py | ping -n 2 127.0.0.1 &gt; NUL | start chrome https://localhost:8444
+cd \
+cls</pre>
+<p>cdg.bat</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">@echo off
+y:
+Y:\GitExtensions\gitextensions.exe  browse y:\tmp\2020\cd2020\</pre>
+<br />Topics << <a href='Topics.html'>Previous</a> <a href='Video Streaming.html'>Next</a> >> Video Streaming</div>
         
     <!-- footer -->
       <div class="container">

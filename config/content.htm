@@ -478,7 +478,34 @@ compiler=mingw32</pre>
 <p style="padding-left: 30px;">Challenges in Mechatronics</p>
 <p><span>Login to your gm email account and download <a href="https://drive.google.com/file/d/1AFADmyNrwprE7AesaFAecZZquIfzbLw-/view?usp=sharing">MechaEducFutureNeed.pdf</a>.</span></p>
 <p style="padding-left: 30px;">Education to meet future need</p>
-<p>Login to your gm email account and <a href="https://drive.google.com/drive/folders/1h2bc9HqF3yhB3BwZwJD_vPUdOPGroQtv?usp=sharing">download all reference files</a>.</p><h2>Mechanical Design</h2>
+<p>Login to your gm email account and <a href="https://drive.google.com/drive/folders/1h2bc9HqF3yhB3BwZwJD_vPUdOPGroQtv?usp=sharing">download all reference files</a>.</p>
+<h2>Startup</h2>
+<p><a href="https://drive.google.com/open?id=114VzfkkEBzznX8LuRwzHkf5HHrB1MTeo">windows_commands.pdf</a></p>
+<p>cd.bat</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">REM  關閉命令執行回應功能
+@echo off
+
+REM 直接更換目錄至 cmsimde
+cd /d y:\tmp\2020\cd2020\cmsimde
+
+REM 利用 ping 等候兩秒, 讓 python 有時間啟動 wsgi.py 後才開啟 chrome
+start /WAIT python wsgi.py | ping -n 2 127.0.0.1 &gt; NUL | start chrome https://localhost:9443
+cd \
+cls</pre>
+<p>cdh.bat</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">@echo off
+y:
+cd tmp\2020\cd2020\
+start python http-server.py | ping -n 2 127.0.0.1 &gt; NUL | start chrome https://localhost:8444
+cd \
+cls</pre>
+<p>cdg.bat</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">@echo off
+y:
+Y:\GitExtensions\gitextensions.exe  browse y:\tmp\2020\cd2020\</pre>
+<h2>Video Streaming</h2>
+<p>OBS studio portable</p>
+<p style="padding-left: 30px;"><a href="https://portableapps.com/apps/music_video/obs-studio-portable">https://portableapps.com/apps/music_video/obs-studio-portable</a></p><h2>Mechanical Design</h2>
 <p>Frontend - backend and design process</p>
 <p>Frontend Dart:</p>
 <pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">// 因為要使用超文件表單, 因此導入 html 程式庫

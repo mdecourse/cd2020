@@ -168,6 +168,7 @@ img.add_border {
 <p>學員名單 URL: <input id="studListUrl" size="70" type="text" value="http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=0767 "/><br/> <input id="submit" type="submit" value="開始分組"/><br/> <textarea cols="80" id="output" rows="10"></textarea></p>
 <script src="https://mde.tw/cd2020/downloads/dart_ex/even_grouping/evenGrouping.js"></script>
 <p><a href="https://dartpad.github.io/embed-html.html?gh_owner=mdecourse&amp;gh_repo=cd2020&amp;gh_path=downloads/dart_ex/even_grouping&amp;theme=dark">Dart source code for random grouping</a></p>
+<hr/>
 <h4>evenGrouping.dart:</h4>
 <pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">import 'dart:html';
  
@@ -450,7 +451,84 @@ WorkingDirectory=/home/kmol2019/uwsgi_ini
 ExecStart=/usr/local/bin/uwsgi --emperor /home/kmol2019/uwsgi_ini
 
 [Install]
-WantedBy=multi-user.target</pre><br />About << <a href='About.html'>Previous</a> <a href='2a.html'>Next</a> >> 2a</div>
+WantedBy=multi-user.target</pre>
+<p></p>
+<hr/>
+<h4>Random Select:</h4>
+<p><a href="https://mde.tw/wcm2020/downloads/dartpad/embed-html.html?gh_owner=mdecourse&amp;gh_repo=cd2020&amp;gh_path=downloads/dart_ex/random_select&amp;theme=dark">https://mde.tw/wcm2020/downloads/dartpad/embed-html.html?gh_owner=mdecourse&amp;gh_repo=cd2020&amp;gh_path=downloads/dart_ex/random_select&amp;theme=dark</a></p>
+<p></p>
+<script src="https://mde.tw/cd2020/downloads/dart_ex/random_select/random_select.js"></script>
+<h4>每組隨機抽選:</h4>
+<p>學員名單 URL:<select id="RstudListUrl">
+<option selected="selected" value="https://mde.tw/cd2020/downloads/2a_group_list.txt">2a</option>
+<option value="https://mde.tw/cd2020/downloads/2b_group_list.txt">2b</option>
+</select></p>
+<p>每組抽選人數: <input id="RnumOfStud" size="2" type="text" value="1"/><br/> <input id="Rsubmit" type="submit" value="開始"/><br/> <textarea cols="80" id="Routput" rows="10"></textarea></p>
+<h4>random_select.dart</h4>
+<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">import 'dart:html';
+import 'dart:convert';
+
+SelectElement studListUrl = querySelector("#RstudListUrl");
+String grpList;
+InputElement numOfStud = querySelector("#RnumOfStud");
+int num;
+// 將 Label 改為 Textarea, 避免產生過程結果嵌入所在頁面
+TextAreaElement output = querySelector("#Routput");
+
+main() {
+  querySelector("#Rsubmit").onClick.listen((e) =&gt; randomSelect());
+}
+
+randomSelect() {
+  output.innerHtml = "";
+
+  if (studListUrl.value != "") {
+    grpList = studListUrl.value;
+  } else {
+    grpList = 'https://mde.tw/cd2020/downloads/2a_group_list.txt';
+  }
+
+  if (numOfStud.value != "") {
+    num = int.parse(numOfStud.value);
+  } else {
+    num = 2;
+  }
+
+  HttpRequest.getString(grpList).then((String resp) {
+    final replaced = resp.replaceAll("'", '');
+    List studList = jsonDecode(replaced);
+    for (int i = 0; i &lt; studList.length; i++) {
+      // shuffle studList element
+      studList[i].shuffle();
+      // draw num of member from each group
+      output.text += "-" * 20 + "\n";
+      for (int j = 0; j &lt; num; j++) {
+        output.text += "group ${i + 1}:" + studList[i][j].toString() + "\n";
+      }
+    }
+  });
+}
+</pre>
+<h4>index.html</h4>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;h1&gt;每組隨機抽選:&lt;/h1&gt;
+學員名單 URL: 
+&lt;select id="RstudListUrl"&gt;
+  &lt;option value="https://mde.tw/cd2020/downloads/2a_group_list.txt" selected&gt;2a&lt;/option&gt;
+  &lt;option value="https://mde.tw/cd2020/downloads/2b_group_list.txt"&gt;2b&lt;/option&gt;
+&lt;/select&gt;&lt;br /&gt;
+每組抽選人數: &lt;input type="text" id="RnumOfStud" size="2" value="1"&gt;&lt;br /&gt;
+&lt;input type="submit" value="開始" id="Rsubmit"&gt;&lt;br /&gt;
+&lt;textarea id="Routput" cols="80" rows="10"&gt;&lt;/textarea&gt;</pre>
+<h4>main.css</h4>
+<pre class="brush:css;auto-links:false;toolbar:false" contenteditable="false">body {
+  color: white;
+  font-size: 20px;
+}
+
+input, select, textarea {
+font-size: 100%;
+}</pre>
+<p></p><br />About << <a href='About.html'>Previous</a> <a href='2a.html'>Next</a> >> 2a</div>
         
     <!-- footer -->
       <div class="container">

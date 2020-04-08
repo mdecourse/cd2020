@@ -1,15 +1,15 @@
 import 'dart:html';
 import 'dart:convert';
 
-SelectElement studListUrl = querySelector("#studListUrl");
+SelectElement studListUrl = querySelector("#RstudListUrl");
 String grpList;
-InputElement numOfStud = querySelector("#numOfStud");
+InputElement numOfStud = querySelector("#RnumOfStud");
 int num;
 // 將 Label 改為 Textarea, 避免產生過程結果嵌入所在頁面
-TextAreaElement output = querySelector("#output");
+TextAreaElement output = querySelector("#Routput");
 
 main() {
-  querySelector("#submit").onClick.listen((e) => randomSelect());
+  querySelector("#Rsubmit").onClick.listen((e) => randomSelect());
 }
 
 randomSelect() {

@@ -29,6 +29,7 @@
 <p>學員名單 URL: <input id="studListUrl" size="70" type="text" value="http://s1.mde.nfu.edu.tw:8000/?semester=1082&amp;courseno=0767 "/><br/> <input id="submit" type="submit" value="開始分組"/><br/> <textarea cols="80" id="output" rows="10"></textarea></p>
 <script src="https://mde.tw/cd2020/downloads/dart_ex/even_grouping/evenGrouping.js"></script>
 <p><a href="https://dartpad.github.io/embed-html.html?gh_owner=mdecourse&amp;gh_repo=cd2020&amp;gh_path=downloads/dart_ex/even_grouping&amp;theme=dark">Dart source code for random grouping</a></p>
+<hr/>
 <h4>evenGrouping.dart:</h4>
 <pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">import 'dart:html';
  
@@ -311,7 +312,84 @@ WorkingDirectory=/home/kmol2019/uwsgi_ini
 ExecStart=/usr/local/bin/uwsgi --emperor /home/kmol2019/uwsgi_ini
 
 [Install]
-WantedBy=multi-user.target</pre><h3>2a</h3>
+WantedBy=multi-user.target</pre>
+<p></p>
+<hr/>
+<h4>Random Select:</h4>
+<p><a href="https://mde.tw/wcm2020/downloads/dartpad/embed-html.html?gh_owner=mdecourse&amp;gh_repo=cd2020&amp;gh_path=downloads/dart_ex/random_select&amp;theme=dark">https://mde.tw/wcm2020/downloads/dartpad/embed-html.html?gh_owner=mdecourse&amp;gh_repo=cd2020&amp;gh_path=downloads/dart_ex/random_select&amp;theme=dark</a></p>
+<p></p>
+<script src="https://mde.tw/cd2020/downloads/dart_ex/random_select/random_select.js"></script>
+<h4>每組隨機抽選:</h4>
+<p>學員名單 URL:<select id="RstudListUrl">
+<option selected="selected" value="https://mde.tw/cd2020/downloads/2a_group_list.txt">2a</option>
+<option value="https://mde.tw/cd2020/downloads/2b_group_list.txt">2b</option>
+</select></p>
+<p>每組抽選人數: <input id="RnumOfStud" size="2" type="text" value="1"/><br/> <input id="Rsubmit" type="submit" value="開始"/><br/> <textarea cols="80" id="Routput" rows="10"></textarea></p>
+<h4>random_select.dart</h4>
+<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">import 'dart:html';
+import 'dart:convert';
+
+SelectElement studListUrl = querySelector("#RstudListUrl");
+String grpList;
+InputElement numOfStud = querySelector("#RnumOfStud");
+int num;
+// 將 Label 改為 Textarea, 避免產生過程結果嵌入所在頁面
+TextAreaElement output = querySelector("#Routput");
+
+main() {
+  querySelector("#Rsubmit").onClick.listen((e) =&gt; randomSelect());
+}
+
+randomSelect() {
+  output.innerHtml = "";
+
+  if (studListUrl.value != "") {
+    grpList = studListUrl.value;
+  } else {
+    grpList = 'https://mde.tw/cd2020/downloads/2a_group_list.txt';
+  }
+
+  if (numOfStud.value != "") {
+    num = int.parse(numOfStud.value);
+  } else {
+    num = 2;
+  }
+
+  HttpRequest.getString(grpList).then((String resp) {
+    final replaced = resp.replaceAll("'", '');
+    List studList = jsonDecode(replaced);
+    for (int i = 0; i &lt; studList.length; i++) {
+      // shuffle studList element
+      studList[i].shuffle();
+      // draw num of member from each group
+      output.text += "-" * 20 + "\n";
+      for (int j = 0; j &lt; num; j++) {
+        output.text += "group ${i + 1}:" + studList[i][j].toString() + "\n";
+      }
+    }
+  });
+}
+</pre>
+<h4>index.html</h4>
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;h1&gt;每組隨機抽選:&lt;/h1&gt;
+學員名單 URL: 
+&lt;select id="RstudListUrl"&gt;
+  &lt;option value="https://mde.tw/cd2020/downloads/2a_group_list.txt" selected&gt;2a&lt;/option&gt;
+  &lt;option value="https://mde.tw/cd2020/downloads/2b_group_list.txt"&gt;2b&lt;/option&gt;
+&lt;/select&gt;&lt;br /&gt;
+每組抽選人數: &lt;input type="text" id="RnumOfStud" size="2" value="1"&gt;&lt;br /&gt;
+&lt;input type="submit" value="開始" id="Rsubmit"&gt;&lt;br /&gt;
+&lt;textarea id="Routput" cols="80" rows="10"&gt;&lt;/textarea&gt;</pre>
+<h4>main.css</h4>
+<pre class="brush:css;auto-links:false;toolbar:false" contenteditable="false">body {
+  color: white;
+  font-size: 20px;
+}
+
+input, select, textarea {
+font-size: 100%;
+}</pre>
+<p></p><h3>2a</h3>
 <p>==============================<br/> group 1 <br/>Repository: <a href="https://github.com/s40723104/cd2020">40723104</a> | Site: <a href="https://s40723104.github.io/cd2020">40723104</a><br/>Repository: <a href="https://github.com/s40723107/cd2020">40723107</a> | Site: <a href="https://s40723107.github.io/cd2020">40723107</a><br/>Repository: <a href="https://github.com/s40723114/cd2020">40723114</a> | Site: <a href="https://s40723114.github.io/cd2020">40723114</a> <span>(group leader)</span><br/>Repository: <a href="https://github.com/s40723115/cd2020">40723115</a> | Site: <a href="https://s40723115.github.io/cd2020">40723115</a><br/>Repository: <a href="https://github.com/s40723118/cd2020">40723118</a> | Site: <a href="https://s40723118.github.io/cd2020">40723118</a><br/>Repository: <a href="https://github.com/s40723122/cd2020">40723122</a> | Site: <a href="https://s40723122.github.io/cd2020">40723122</a><br/>Repository: <a href="https://github.com/s40723123/cd2020">40723123</a> | Site: <a href="https://s40723123.github.io/cd2020">40723123</a><br/>Repository: <a href="https://github.com/s40723140/cd2020">40723140</a> | Site: <a href="https://s40723140.github.io/cd2020">40723140</a><br/>Repository: <a href="https://github.com/s40723149/cd2020">40723149</a> | Site: <a href="https://s40723149.github.io/cd2020">40723149</a><br/>Repository: <a href="https://github.com/s40723151/cd2020">40723151</a> | Site: <a href="https://s40723151.github.io/cd2020">40723151</a><br/>Repository: <a href="https://github.com/s40723153/cd2020">40723153</a> | Site: <a href="https://s40723153.github.io/cd2020">40723153</a><br/>Repository: <a href="https://github.com/s40723154/cd2020">40723154</a> | Site: <a href="https://s40723154.github.io/cd2020">40723154</a><br/>Repository: <a href="https://github.com/s40723155/cd2020">40723155</a> | Site: <a href="https://s40723155.github.io/cd2020">40723155</a><br/> ==============================<br/>group 2 <br/>Repository: <a href="https://github.com/40623143/cd2020">40623143</a> | Site: <a href="https://40623143.github.io/cd2020">40623143</a><br/>Repository: <a href="https://github.com/s40723108/cd2020">40723108</a> | Site: <a href="https://s40723108.github.io/cd2020">40723108</a><br/>Repository: <a href="https://github.com/s40723127/cd2020">40723127</a> | Site: <a href="https://s40723127.github.io/cd2020">40723127</a><br/>Repository: <a href="https://github.com/s40723132/cd2020">40723132</a> | Site: <a href="https://s40723132.github.io/cd2020">40723132</a><br/>Repository: <a href="https://github.com/s40723133/cd2020">40723133</a> | Site: <a href="https://s40723133.github.io/cd2020">40723133</a><br/>Repository: <a href="https://github.com/s40723137/cd2020">40723137</a> | Site: <a href="https://s40723137.github.io/cd2020">40723137</a><br/>Repository: <a href="https://github.com/s40723141/cd2020">40723141</a> | Site: <a href="https://s40723141.github.io/cd2020">40723141</a><br/>Repository: <a href="https://github.com/s40723143/cd2020">40723143</a> | Site: <a href="https://s40723143.github.io/cd2020">40723143</a><br/>Repository: <a href="https://github.com/s40723144/cd2020">40723144</a> | Site: <a href="https://s40723144.github.io/cd2020">40723144</a><br/>Repository: <a href="https://github.com/s40723147/cd2020">40723147</a> | Site: <a href="https://s40723147.github.io/cd2020">40723147</a><br/>Repository: <a href="https://github.com/s40723148/cd2020">40723148</a> | Site: <a href="https://s40723148.github.io/cd2020">40723148</a><br/>Repository: <a href="https://github.com/s40723150/cd2020">40723150</a> | Site: <a href="https://s40723150.github.io/cd2020">40723150</a> <span>(group leader)</span><br/> ==============================<br/>group 3 <br/>Repository: <a href="https://github.com/s40723103/cd2020">40723103</a> | Site: <a href="https://s40723103.github.io/cd2020">40723103</a><br/>Repository: <a href="https://github.com/s40723110/cd2020">40723110</a> | Site: <a href="https://s40723110.github.io/cd2020">40723110</a> <span>(group leader)</span><br/>Repository: <a href="https://github.com/s40723112/cd2020">40723112</a> | Site: <a href="https://s40723112.github.io/cd2020">40723112</a><br/>Repository: <a href="https://github.com/s40723120/cd2020">40723120</a> | Site: <a href="https://s40723120.github.io/cd2020">40723120</a><br/>Repository: <a href="https://github.com/s40723125/cd2020">40723125</a> | Site: <a href="https://s40723125.github.io/cd2020">40723125</a><br/>Repository: <a href="https://github.com/s40723126/cd2020">40723126</a> | Site: <a href="https://s40723126.github.io/cd2020">40723126</a><br/>Repository: <a href="https://github.com/s40723128/cd2020">40723128</a> | Site: <a href="https://s40723128.github.io/cd2020">40723128</a><br/>Repository: <a href="https://github.com/s40723130/cd2020">40723130</a> | Site: <a href="https://s40723130.github.io/cd2020">40723130</a><br/>Repository: <a href="https://github.com/s40723139/cd2020">40723139</a> | Site: <a href="https://s40723139.github.io/cd2020">40723139</a><br/>Repository: <a href="https://github.com/s40723142/cd2020">40723142</a> | Site: <a href="https://s40723142.github.io/cd2020">40723142</a><br/>Repository: <a href="https://github.com/s40723145/cd2020">40723145</a> | Site: <a href="https://s40723145.github.io/cd2020">40723145</a><br/>Repository: <a href="https://github.com/s40723146/cd2020">40723146</a> | Site: <a href="https://s40723146.github.io/cd2020">40723146</a><br/> ==============================<br/>group 4 <br/>Repository: <a href="https://github.com/40423155/cd2020">40423155</a> | Site: <a href="https://40423155.github.io/cd2020">40423155</a><br/>Repository: <a href="https://github.com/s40723101/cd2020">40723101</a> | Site: <a href="https://s40723101.github.io/cd2020">40723101</a><br/>Repository: <a href="https://github.com/s40723102/cd2020">40723102</a> | Site: <a href="https://s40723102.github.io/cd2020">40723102</a><br/>Repository: <a href="https://github.com/s40723106/cd2020">40723106</a> | Site: <a href="https://s40723106.github.io/cd2020">40723106</a><br/>Repository: <a href="https://github.com/s40723111/cd2020">40723111</a> | Site: <a href="https://s40723111.github.io/cd2020">40723111</a><br/>Repository: <a href="https://github.com/s40723119/cd2020">40723119</a> | Site: <a href="https://s40723119.github.io/cd2020">40723119</a><br/>Repository: <a href="https://github.com/s40723121/cd2020">40723121</a> | Site: <a href="https://s40723121.github.io/cd2020">40723121</a><br/>Repository: <a href="https://github.com/s40723124/cd2020">40723124</a> | Site: <a href="https://s40723124.github.io/cd2020">40723124</a><br/>Repository: <a href="https://github.com/s40723134/cd2020">40723134</a> | Site: <a href="https://s40723134.github.io/cd2020">40723134</a><br/>Repository: <a href="https://github.com/s40723135/cd2020">40723135</a> | Site: <a href="https://s40723135.github.io/cd2020">40723135</a><br/>Repository: <a href="https://github.com/s40723136/cd2020">40723136</a> | Site: <a href="https://s40723136.github.io/cd2020">40723136</a><br/>Repository: <a href="https://github.com/s40723138/cd2020">40723138</a> | Site: <a href="https://s40723138.github.io/cd2020">40723138</a> <span>(group leader)</span></p>
 <p>Grouping List:</p>
 <p>[['40723104', '40723107', '40723114', '40723115', '40723118', '40723122', '40723123', '40723140', '40723149', '40723151', '40723153', '40723154', '40723155'], ['40623143', '40723108', '40723127', '40723132', '40723133', '40723137', '40723141', '40723143', '40723144', '40723147', '40723148', '40723150'], ['40723103', '40723110', '40723112', '40723120', '40723125', '40723126', '40723128', '40723130', '40723139', '40723142', '40723145', '40723146'], ['40423155', '40723101', '40723102', '40723106', '40723111', '40723119', '40723121', '40723124', '40723134', '40723135', '40723136', '40723138']]</p><h3>2b</h3>

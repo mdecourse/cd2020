@@ -154,159 +154,18 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Online course << <a href='Online course.html'>Previous</a> <a href='Topic1Author.html'>Next</a> >> Topic1Author<br /><h1>Mechanical Design</h1>
-<p>Frontend - backend and design process</p>
-<p>Frontend Dart:</p>
-<pre class="brush:dart;auto-links:false;toolbar:false" contenteditable="false">// 因為要使用超文件表單, 因此導入 html 程式庫
-import "dart:html";
-
-// 每一個 Dart 程式都從 main() 開始執行
-main() {
-  // 透過表單, 取得使用者輸入的溫度值, 語法為數字加上 C 或 F
-  InputElement tempInput = querySelector("#temp");
-  querySelector("#submit").onClick.listen((e) =&gt; pyconvert(tempInput.value));
-}
-
-pyconvert(String data) {
-  // 準備將轉換結果顯示在 output Label 區
-  LabelElement output = querySelector("#output");
-  // 將 data 送到遠端 python flask 程式區
-  request(data);
-} // pyconvert
-
-request(String asset) {
-  var response = document.querySelector('#response');
-  var url = 'http://localhost:5000/${asset}';
-
-  HttpRequest.getString(url, onProgress: (_) =&gt; response.text = 'Loading ...')
-      .then((resp) =&gt; response.setInnerHtml('&lt;pre&gt;${resp}&lt;/pre&gt;'))
-      .catchError((error) =&gt; response.text = 'ERROR !!!: ${error.toString()}');
-}
-
-/* 以下為 Python Flask 伺服器端的程式碼, 可以接受 Dart 前端送來的字串, 進行溫度轉換運算後, 將結果傳回
-import flask
-# 導入 flask_cors 模組中的 CORS
-# 目的在讓伺服器可以被遠端的 Dart 程式跨網域擷取資料
-from flask_cors import CORS
-
-app = flask.Flask(__name__)
-# 讓應用程式啟動後, 可以跨網域被截取資料
-CORS(app, support_credentials=False)
-global data
-
-@app.route('/', methods =['POST', 'GET'])
-def root():
-    if flask.request.method == 'POST': 
-        data = flask.request.form['data'] 
-        print(data)
-        resp = {"data": data}
-        output = flask.json.dumps(data)
-    else:
-        # 將 Python 中的 dictionary 資料透過 json 格式送出後
-        # 讓遠端的 Dart 程式可以擷取
-        data = {"a": 1, "b": data+"yen", "c": "字串"}
-        output = flask.json.dumps(data)
-    return output
-    
-@app.route('/&lt;name&gt;', methods=['POST', 'GET'])
-def convert(name):
-    #name[-1] 為字串最後一個字元
-    # name[:-1] 則為數字
-    if name[-1] is "F" or name[-1] is "f":
-        # 表示要將華氏溫度轉為攝氏
-        return FtoC(name[:-1])
-    else:
-        return CtoF(name[:-1])
-    
-#celsius = 5/9 ( fahrenheit − 32)
-#定義一個 celsius 轉 fahrenheit  函式
-def CtoF(c):
-    return "攝氏" + c + "度=華氏" + str(round(int(c)*9/5 + 32, 2)) + "度"
-
-#定義一個 celsius 轉 fahrenheit  函式
-def FtoC(f):
-    return "華氏" + f + "度=攝氏" + str(round((int(f) - 32)*5/9, 2)) + "度"
-
-
-if __name__ == '__main__':
-    # 內建的 Flask Web 啟動埠號為 5000
-    app.run()
-*/</pre>
-<p>Backend Python:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import flask
-# 導入 flask_cors 模組中的 CORS
-# 目的在讓伺服器可以被遠端的 Dart 程式跨網域擷取資料
-from flask_cors import CORS
- 
-app = flask.Flask(__name__)
-# 讓應用程式啟動後, 可以跨網域被截取資料
-CORS(app, support_credentials=False)
-global data
- 
-@app.route('/', methods =['POST', 'GET'])
-def root():
-    if flask.request.method == 'POST': 
-        data = flask.request.form['data'] 
-        print(data)
-        resp = {"data": data}
-        output = flask.json.dumps(data)
-    else:
-        # 將 Python 中的 dictionary 資料透過 json 格式送出後
-        # 讓遠端的 Dart 程式可以擷取
-        data = {"a": 1, "b": data+"yen", "c": "字串"}
-        output = flask.json.dumps(data)
-    return output
-     
-@app.route('/&lt;name&gt;', methods=['POST', 'GET'])
-def convert(name):
-    #name[-1] 為字串最後一個字元
-    # name[:-1] 則為數字
-    if name[-1] is "F" or name[-1] is "f":
-        # 表示要將華氏溫度轉為攝氏
-        return FtoC(name[:-1])
-    else:
-        return CtoF(name[:-1])
-     
-#celsius = 5/9 ( fahrenheit − 32)
-#定義一個 celsius 轉 fahrenheit  函式
-def CtoF(c):
-    return "攝氏" + c + "度=華氏" + str(round(int(c)*9/5 + 32, 2)) + "度"
- 
-#定義一個 celsius 轉 fahrenheit  函式
-def FtoC(f):
-    return "華氏" + f + "度=攝氏" + str(round((int(f) - 32)*5/9, 2)) + "度"
- 
- 
-if __name__ == '__main__':
-    # 內建的 Flask Web 啟動埠號為 5000
-    app.run()</pre>
-<p>What can these programs do to the mechanical design process?</p>
-<p style="padding-left: 30px;"><a href="https://flutter.dev/">Flutter</a> mobile frontend and Python backend?</p>
-<p style="padding-left: 30px;">Learning Python?</p>
-<p style="padding-left: 60px;">Login to gm account and download</p>
-<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/17_LCSvwgtnIG8FnpezfUlEdbo3Y6G6CP/view?usp=sharing">2019_ABeginnersGuideToPython3Programming.pdf</a></p>
-<p style="padding-left: 90px;">and</p>
-<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1z6v5j4TtFwBmo00URNpBBoLfQVmlTSZv/view?usp=sharing">2019_AdvancedGuideToPython3Programming.pdf</a></p>
-<p style="padding-left: 30px;">Learning Dart and Flutter?</p>
-<p style="padding-left: 60px;">Login to gm account and download </p>
-<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1RyCFxXrh0skRAWafX7nyYFVHuMO68iTS/view?usp=sharing">2020_ QuickStartGuideToDartProgramming.pdf</a></p>
-<p style="padding-left: 90px;">and</p>
-<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1RyCFxXrh0skRAWafX7nyYFVHuMO68iTS/view?usp=sharing">2019_BeginningAppDevelopmentWithFlutter.pdf</a></p>
-<p style="padding-left: 30px;"><a href="https://flutter.dev/">Flutter</a> mobile frontend, Python backend and <a href="https://www.coppeliarobotics.com/">CoppeliaSim</a> through <a href="https://www.coppeliarobotics.com/helpFiles/en/remoteApiOverview.htm">remote API</a>?</p>
-<p style="padding-left: 30px;"><a href="https://flutter.dev/">Flutter</a> mobile frontend, <a href="https://cython.org/">Cython</a> backend and <a href="https://github.com/solvespace/solvespace">Solvespace</a> through <a href="https://github.com/KmolYuan/solvespace/tree/python">Python Geometric Constranin Solver</a>?</p>
-<p style="padding-left: 60px;">Learning C++?</p>
-<p style="padding-left: 90px;">Login to gm account and download <a href="https://drive.google.com/file/d/1KZCqddCxs1CCK-thaYpM1ssuz3nMNn3t/view?usp=sharing">2018_Book_BeginningC17.pdf</a>.</p>
-<p style="padding-left: 90px;">Also check into <a href="https://www.msys2.org/">MSYS2</a> for reference.</p>
-<p style="padding-left: 30px;">Where can we save the data during a web/mobile frontend and backend based design process?</p>
-<p style="padding-left: 60px;">Login to gm account and download</p>
-<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1u3PHIbGWz3r4bct_molJg8FODkS8tf02/view?usp=sharing">2019_BuildingRESTAPIsWithFlask.pdf</a> </p>
-<p style="padding-left: 90px;">and</p>
-<p style="padding-left: 90px;"><a href="https://drive.google.com/file/d/1REP4GKqo_RkLmPj2MqiuG-YR59TTqHPF/view?usp=sharing">2010_TheDefinitiveGuideToSQLite.pdf</a></p>
-<p style="padding-left: 60px;">Also check into <a href="https://github.com/chiamingyen/pygrouf">https://github.com/chiamingyen/pygrouf</a>, <a href="https://github.com/mdecourse/wcms-scrum1">https://github.com/mdecourse/wcms-scrum1</a> and <a href="https://wcms-scrum1.herokuapp.com/gear_index">https://wcms-scrum1.herokuapp.com/gear_index</a> for reference.</p>
-<h4>Recall application of <a href="https://www.google.com/search?q=pro%2Fweblink">Pro/Weblink</a></h4>
-<p>Take <a href="https://support.ptc.com/help/creo/creo_pma/usascii/index.html#page/fundamentals/fundamentals/fund_three_sub/About_Pro_Web_Link.html">Pro/Weblink</a> as an example. Javascript is used as the frontend working with a local host Pro/Engineer under the trusted Internet Explorer environment to enable programmable 3d mechanical Part and Assembly processes.</p>
-<p>Download <a href="https://drive.google.com/file/d/1CKB_lZ0ujiUC3zx2juRACUJaA8VCAHhW/view?usp=sharing">2002_ProEweblinkUserGuide.pdf</a></p>
-<br />Online course << <a href='Online course.html'>Previous</a> <a href='Topic1Author.html'>Next</a> >> Topic1Author</div>
+    <div id="tipue_search_content">Topics << <a href='Topics.html'>Previous</a> <a href='Topic 0.html'>Next</a> >> Topic 0<br /><h1>Covid-19</h1>
+<p><a href="./../downloads/covid19_post.pdf">School post.pdf</a></p>
+<p>為確保遠距教學之授課品質與學習成效，請教師於109 年4 月24日之前先行演練同步或非同步遠距教學，並於演練後，請將演練實況紀錄上傳eCampus(或上傳雲端硬碟並將連結點發布至eCampus)作為影音教材，並請於線上填寫演練紀錄與回饋單(https://forms.gle/CoTQaE3Hs31yzUX37)。</p>
+<p><a href="./../downloads/covid19_elearning.pdf">Course arrangement.pdf</a></p>
+<p>Since we do not use eCampus but the Github, Gitter and Youtube, therefore we will use Youtube + Portable OBS as online course tool. And we will use <a href="https://meet.google.com">https://meet.google.com</a> to meet with each group leader online to give assignment for each group.</p>
+<p>Online course process:</p>
+<p style="padding-left: 30px;">EMail <a href="https://meet.google.com">https://meet.google.com</a> meeting url to each group leader to conduct online meeting.</p>
+<p style="padding-left: 30px;">Instructor use Youtube and <a href="https://portableapps.com/apps/music_video/obs-studio-portable">OBS</a> to stream weekly course lecture and post its live URL on class Gitter.</p>
+<p style="padding-left: 30px;">All the students use Youtube and <a href="https://portableapps.com/apps/music_video/obs-studio-portable">OBS</a> to stream weekly assignment and post its live URL on each group's website.</p>
+<p style="padding-left: 30px;">All the students complete self-assessment and peer-assessment process according to the results on each member's Github commits, Github Page website and Youtube video.</p>
+<p>線上課程流程：</p>
+<p style="padding-left: 30px;">通過電子郵件將 <a href="https://meet.google.com">https://meet.google.com</a> 會議網址發送給各組組長 以進行線上會議.<br/><br/>講師使用 <a href="https://www.youtube.com/">Youtube</a> 和 <a href="https://portableapps.com/apps/music_video/obs-studio-portable">OBS</a> 直播每週的課程內容，並將其 URL 發佈到各班 Gitter.<br/><br/>所有學員使用 <a href="https://www.youtube.com/">Youtube</a> 和 <a href="https://portableapps.com/apps/music_video/obs-studio-portable">OBS</a> 直播並錄製當週作業, 並將其 URL 發佈到各分組的網站上.<br/><br/>所有學員根據各學員的 Github 提交, Github Page 網站與 Youtube 影片內容, 完成自評與互評.</p><br />Topics << <a href='Topics.html'>Previous</a> <a href='Topic 0.html'>Next</a> >> Topic 0</div>
         
     <!-- footer -->
       <div class="container">

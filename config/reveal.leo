@@ -24,6 +24,12 @@
 <v t="leo.20200125115049.1"><vh>Project</vh>
 <v t="leo.20200125115049.2"><vh>Project 內容</vh></v>
 </v>
+<v t="yen.20200414160005.1"><vh>W7 online course-1</vh>
+<v t="yen.20200414160005.2"><vh>W7 online course-1</vh></v>
+</v>
+<v t="yen.20200414160846.1"><vh>W7 online course-2</vh>
+<v t="yen.20200414160846.2"><vh>W7 online course-2</vh></v>
+</v>
 <v t="leo.20180902120523.11"><vh>快捷鍵</vh>
 <v t="leo.20180902120523.12"><vh>投影片快捷鍵</vh></v>
 </v>
@@ -343,6 +349,46 @@ vertical: body pane on the botton</t>
 * W10-W13 [Project3](https://learn.onshape.com/catalog?labels=%5B%22Self-Paced%20Courses%22%5D&amp;values=%5B%22All%22%5D)
 * W14-W17 期末專案
 * W18 期末簡報
+
+
+</t>
+<t tx="yen.20200414160005.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="yen.20200414160005.2">## W7 線上課程-1
+
+* 使用 Google Meet 與 Youtube + OBS 直播上課
+* 在 Windows Firefox 可直接同意擷取 camera, microphone 與 screen sharing
+* 在 Mac Firefox 可以直接同意擷取 camera 與 microphone 
+* 在 Mac Firefox screen sharing 必須至 System Preferences-&gt; Security &amp; Privacy -&gt; Screen Recording 設定中, 同意 Firefox 與 OBS 執行 Screen 分享與錄影
+* 在 Mac 若使用 Safari 則必須至 Preferences -&gt; Websites -&gt; Screen Sharing 中加入 meet.google.com
+* 利用 Google Meet 線上開會, 可以選擇錄製會議過程, 影片檔案將存在會議發起者的 Google Drive 中的 Meet Recordings 目錄
+
+
+
+</t>
+<t tx="yen.20200414160846.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="yen.20200414160846.2">## W7 線上課程-2
+
+* 目前教育版的 GSuite 中的 Google Meet, 也支援同網域使用者觀看會議對應的 live streaming
+* 因為 @gm 中的 GSuite 並未開啟 Google Meet 同時建立 live streaming 的功能
+* 目前採用 @mde 對各組長發出 Meet 會議要求, 然後再設法將會議以 Youtube live 播出
+
+
 
 
 </t>

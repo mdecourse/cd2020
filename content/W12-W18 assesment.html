@@ -154,9 +154,70 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">cd2020pj1 << <a href='cd2020pj1.html'>Previous</a> <a href='Reference.html'>Next</a> >> Reference<br /><h1>Planar linkage</h1>
-<p>Use <a href="https://github.com/KmolYuan/Pyslvs-UI">https://github.com/KmolYuan/Pyslvs-UI</a> to design planar linkage mechanism.</p>
-<p><a href="https://drive.google.com/open?id=1aBT_WhoTNlt_NBQERcbAYCrZ1oZARvgH">Download pyslvs.exe</a></p><br />cd2020pj1 << <a href='cd2020pj1.html'>Previous</a> <a href='Reference.html'>Next</a> >> Reference</div>
+    <div id="tipue_search_content">Assignments << <a href='Assignments.html'>Previous</a> <a href='cd2020pj1.html'>Next</a> >> cd2020pj1<br /><h1>W12-W18 assesment</h1>
+<p>Random selection of mini project collaboration members.</p>
+<p>w12-w18_selection.py</p>
+<p style="padding-left: 30px;">pip install pygithub</p>
+<p style="padding-left: 30px;">need mdecourse_github_token.txt to execute.</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from github import Github
+import random
+
+# every group select num of student
+num = 5
+repoName = "cdaw12-1"
+repoDesp = "cd2020 W12-1 mini project for 2a"
+
+# 2a Grouping list
+cdaList = [['40723104', '40723107', '40723114', '40723115', '40723118', '40723122', '40723123', '40723140', '40723149', '40723151', '40723153', '40723154', '40723155'], ['40623143', '40723108', '40723127', '40723132', '40723133', '40723137', '40723141', '40723143', '40723144', '40723147', '40723148', '40723150'], ['40723103', '40723110', '40723112', '40723120', '40723125', '40723126', '40723128', '40723130', '40723139', '40723142', '40723145', '40723146'], ['40423155', '40723101', '40723102', '40723106', '40723111', '40723119', '40723121', '40723124', '40723134', '40723135', '40723136', '40723138']]
+
+# 2b Grouping list
+cdbList = [['40723104', '40723107', '40723114', '40723115', '40723118', '40723122', '40723123', '40723140', '40723149', '40723151', '40723153', '40723154', '40723155'], ['40623143', '40723108', '40723127', '40723132', '40723133', '40723137', '40723141', '40723143', '40723144', '40723147', '40723148', '40723150'], ['40723103', '40723110', '40723112', '40723120', '40723125', '40723126', '40723128', '40723130', '40723139', '40723142', '40723145', '40723146'], ['40423155', '40723101', '40723102', '40723106', '40723111', '40723119', '40723121', '40723124', '40723134', '40723135', '40723136', '40723138']]
+
+studList = cdaList
+selStud = []
+
+# random selection loop
+
+for i in range(len(studList)):
+    random.shuffle(studList[i])
+    print("group:" + str(i+1))
+    print()
+    for j in range(num):
+        stud = studList[i][j]
+        print(stud)
+        # 405 and 407 with s
+        if stud[2] == "5" or stud[2] == "7":
+            selStud.append("s" + str(stud))
+        else:
+            selStud.append(stud)
+    print("----")
+
+# got selected student list
+
+#print(selStud)
+
+with open('./../mdecourse_github_token.txt', 'r') as f:
+    token = f.read().splitlines()
+print(token[0])
+
+# or using an access token
+github = Github(token[0])
+user = github.get_user()
+repo = user.create_repo(name=repoName, description=repoDesp, auto_init=True)
+
+# grand selected user permission to push
+for i in selStud:
+    repo.add_to_collaborators(selStud[i], permission='push')
+
+'''
+# list app repository of user
+for repo in github.get_user().get_repos():
+    print(repo.name)
+'''
+
+
+</pre>
+<p></p><br />Assignments << <a href='Assignments.html'>Previous</a> <a href='cd2020pj1.html'>Next</a> >> cd2020pj1</div>
         
     <!-- footer -->
       <div class="container">

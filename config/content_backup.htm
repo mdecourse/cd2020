@@ -721,6 +721,10 @@ compiler=mingw32</pre>
 <p>Collaboration is more than new ideas</p>
 <p>選擇（有利於協同的）正確的工具</p>
 <p>Selecting the right tools</p>
+<p>工業設計與工程設計</p>
+<p>工業設計 - aesthetics and ergonomics (美學與人體工學）</p>
+<p>工程設計 - 確定產品具備預期功能, 可靠並且可投入生產製造</p>
+<p>Engineering designers provide means for the product to be functioning, reliable, and manufactured</p>
 <p></p><h2>Startup</h2>
 <p><a href="https://drive.google.com/open?id=114VzfkkEBzznX8LuRwzHkf5HHrB1MTeo">windows_commands.pdf</a></p>
 <p>cd.bat</p>
@@ -947,7 +951,70 @@ if __name__ == '__main__':
 <h4>Final project:</h4>
 <p><span style="background-color: #ffff00;">Due June 24, 2020.</span></p>
 <p style="padding-left: 30px;">Realize your Mechatronic project and conclude with a presentation video and pdf report.</p>
-<h2>cd2020pj1</h2>
+<h2>W12-W18 assesment</h2>
+<p>Random selection of mini project collaboration members.</p>
+<p>w12-w18_selection.py</p>
+<p style="padding-left: 30px;">pip install pygithub</p>
+<p style="padding-left: 30px;">need mdecourse_github_token.txt to execute.</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from github import Github
+import random
+
+# every group select num of student
+num = 5
+repoName = "cdaw12-1"
+repoDesp = "cd2020 W12-1 mini project for 2a"
+
+# 2a Grouping list
+cdaList = [['40723104', '40723107', '40723114', '40723115', '40723118', '40723122', '40723123', '40723140', '40723149', '40723151', '40723153', '40723154', '40723155'], ['40623143', '40723108', '40723127', '40723132', '40723133', '40723137', '40723141', '40723143', '40723144', '40723147', '40723148', '40723150'], ['40723103', '40723110', '40723112', '40723120', '40723125', '40723126', '40723128', '40723130', '40723139', '40723142', '40723145', '40723146'], ['40423155', '40723101', '40723102', '40723106', '40723111', '40723119', '40723121', '40723124', '40723134', '40723135', '40723136', '40723138']]
+
+# 2b Grouping list
+cdbList = [['40723104', '40723107', '40723114', '40723115', '40723118', '40723122', '40723123', '40723140', '40723149', '40723151', '40723153', '40723154', '40723155'], ['40623143', '40723108', '40723127', '40723132', '40723133', '40723137', '40723141', '40723143', '40723144', '40723147', '40723148', '40723150'], ['40723103', '40723110', '40723112', '40723120', '40723125', '40723126', '40723128', '40723130', '40723139', '40723142', '40723145', '40723146'], ['40423155', '40723101', '40723102', '40723106', '40723111', '40723119', '40723121', '40723124', '40723134', '40723135', '40723136', '40723138']]
+
+studList = cdaList
+selStud = []
+
+# random selection loop
+
+for i in range(len(studList)):
+    random.shuffle(studList[i])
+    print("group:" + str(i+1))
+    print()
+    for j in range(num):
+        stud = studList[i][j]
+        print(stud)
+        # 405 and 407 with s
+        if stud[2] == "5" or stud[2] == "7":
+            selStud.append("s" + str(stud))
+        else:
+            selStud.append(stud)
+    print("----")
+
+# got selected student list
+
+#print(selStud)
+
+with open('./../mdecourse_github_token.txt', 'r') as f:
+    token = f.read().splitlines()
+print(token[0])
+
+# or using an access token
+github = Github(token[0])
+user = github.get_user()
+repo = user.create_repo(name=repoName, description=repoDesp, auto_init=True)
+
+# grand selected user permission to push
+for i in selStud:
+    repo.add_to_collaborators(selStud[i], permission='push')
+
+'''
+# list app repository of user
+for repo in github.get_user().get_repos():
+    print(repo.name)
+'''
+
+
+</pre>
+<p></p><h2>cd2020pj1</h2>
 <p>SQLite browser: <a href="https://sqlitebrowser.org/dl/">https://sqlitebrowser.org/dl/</a></p>
 <p><a href="https://flask-admin.readthedocs.io/en/latest/">https://flask-admin.readthedocs.io/en/latest/</a></p>
 <p><a href="https://pythonhosted.org/Flask-Security/">https://pythonhosted.org/Flask-Security/</a></p>

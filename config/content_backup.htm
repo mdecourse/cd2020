@@ -693,6 +693,7 @@ compiler=mingw32</pre>
 <p>線上課程流程：</p>
 <p style="padding-left: 30px;">通過電子郵件將 <a href="https://meet.google.com">https://meet.google.com</a> 會議網址發送給各組組長, 以進行線上會議.<br/><br/>講師使用 <a href="https://www.youtube.com/">Youtube</a> 和 <a href="https://portableapps.com/apps/music_video/obs-studio-portable">OBS</a> 直播每週的課程內容, 並將其 URL 發佈到各班 Gitter.<br/><br/>所有學員使用 <a href="https://www.youtube.com/">Youtube</a> 和 <a href="https://portableapps.com/apps/music_video/obs-studio-portable">OBS</a> 直播並錄製當週作業, 並將其 URL 發佈到各分組的網站上.<br/><br/>所有學員根據各學員的 Github 提交, Github Page 網站與 Youtube 影片內容, 完成自評與互評.</p><h2>Topic 0</h2>
 <p>Create a Better Product With Design Collaboration (<a href="https://drive.google.com/open?id=1YHQwYduSMisiJQS-Jr_HhJghzIqP_SBc">DigitalProductCollaboration.pdf</a>)</p>
+<p><img caption="false" height="551" src="/images/cd2020_topic0.png" width="600"/></p>
 <p>Digital Collaboration</p>
 <p>數位產品的協同案例</p>
 <p>Mobile App</p>
@@ -1004,7 +1005,7 @@ repo = user.create_repo(name=repoName, description=repoDesp, auto_init=True)
 
 # grand selected user permission to push
 for i in selStud:
-    repo.add_to_collaborators(selStud[i], permission='push')
+    repo.add_to_collaborators(i, permission='push')
 
 '''
 # list app repository of user

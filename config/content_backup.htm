@@ -953,6 +953,25 @@ if __name__ == '__main__':
 <p><span style="background-color: #ffff00;">Due June 24, 2020.</span></p>
 <p style="padding-left: 30px;">Realize your Mechatronic project and conclude with a presentation video and pdf report.</p>
 <h2>W12-W18 assesment</h2>
+<p><a href="https://mde.tw/cdaw12-1">https://mde.tw/cdaw12-1</a></p>
+<p style="padding-left: 30px;">group:1</p>
+<p style="padding-left: 30px;">40723122<br/>40723149<br/>40723140<br/>----<br/>group:2</p>
+<p style="padding-left: 30px;">40723148<br/>40723108<br/>40723132<br/>----<br/>group:3</p>
+<p style="padding-left: 30px;">40723112<br/>40723142<br/>40723130<br/>----<br/>group:4</p>
+<p style="padding-left: 30px;">40723111<br/>40723102<br/>40723101</p>
+<p><a href="https://mde.tw/cdaw12-2">https://mde.tw/cdaw12-2</a></p>
+<p style="padding-left: 30px;">group:1</p>
+<p style="padding-left: 30px;">40723153<br/>40723115<br/>40723151<br/>----<br/>group:2</p>
+<p style="padding-left: 30px;">40723148<br/>40723137<br/>40723144<br/>----<br/>group:3</p>
+<p style="padding-left: 30px;">40723130<br/>40723120<br/>40723145<br/>----<br/>group:4</p>
+<p style="padding-left: 30px;">40723121<br/>40423155<br/>40723138</p>
+<p><a href="https://mde.tw/cdaw12-3">https://mde.tw/cdaw12-3</a></p>
+<p style="padding-left: 30px;">group:1</p>
+<p style="padding-left: 30px;">40723151<br/>40723107<br/>40723104<br/>----<br/>group:2</p>
+<p style="padding-left: 30px;">40723147<br/>40723137<br/>40723141<br/>----<br/>group:3</p>
+<p style="padding-left: 30px;">40723128<br/>40723110<br/>40723120<br/>----<br/>group:4</p>
+<p style="padding-left: 30px;">40723111<br/>40723138<br/>40423155</p>
+<hr/>
 <p>Random selection of mini project collaboration members.</p>
 <p>w12-w18_selection.py</p>
 <p style="padding-left: 30px;">pip install pygithub</p>
@@ -1015,6 +1034,40 @@ for repo in github.get_user().get_repos():
 
 
 </pre>
+<p></p><h3>markdown and cmsimde</h3>
+<p>mymd.md</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false"># This is an H1
+
+[cd2020] is the course site, [python and yaml] shows how to use Python to read and write YAML file.
+
+[cd2020]: https://mde.tw/cd2020
+
+[python and yaml]: https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/
+
+## This is an H2
+
+[cd2020] is the course site, [python and yaml] shows how to use Python to read and write YAML file.
+
+[cd2020]: https://mde.tw/cd2020
+
+[python and yaml]: https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/
+
+### This is an H3
+
+[cd2020] is the course site, [python and yaml] shows how to use Python to read and write YAML file.
+
+[cd2020]: https://mde.tw/cd2020
+
+[python and yaml]: https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/</pre>
+<p>mdToHtml.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import markdown
+md = markdown.Markdown()
+
+with open('mymd.md', 'r') as f:
+    #file = f.read().splitlines()
+    file = f.read()
+htmlFile = md.convert(file)
+print(htmlFile)</pre>
 <p></p><h2>cd2020pj1</h2>
 <p>SQLite browser: <a href="https://sqlitebrowser.org/dl/">https://sqlitebrowser.org/dl/</a></p>
 <p><a href="https://flask-admin.readthedocs.io/en/latest/">https://flask-admin.readthedocs.io/en/latest/</a></p>

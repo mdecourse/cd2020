@@ -1024,7 +1024,9 @@ repo = user.create_repo(name=repoName, description=repoDesp, auto_init=True)
 
 # grand selected user permission to push
 for i in selStud:
-    repo.add_to_collaborators(i, permission='push')
+    #repo.add_to_collaborators(i, permission='push')
+    # 讓用戶擁有 admin 管理權
+    repo.add_to_collaborators(i, permission='admin')
 
 '''
 # list app repository of user
@@ -1034,6 +1036,40 @@ for repo in github.get_user().get_repos():
 
 
 </pre>
+<p></p><h3>markdown and cmsimde</h3>
+<p>mymd.md</p>
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false"># This is an H1
+
+[cd2020] is the course site, [python and yaml] shows how to use Python to read and write YAML file.
+
+[cd2020]: https://mde.tw/cd2020
+
+[python and yaml]: https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/
+
+## This is an H2
+
+[cd2020] is the course site, [python and yaml] shows how to use Python to read and write YAML file.
+
+[cd2020]: https://mde.tw/cd2020
+
+[python and yaml]: https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/
+
+### This is an H3
+
+[cd2020] is the course site, [python and yaml] shows how to use Python to read and write YAML file.
+
+[cd2020]: https://mde.tw/cd2020
+
+[python and yaml]: https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/</pre>
+<p>mdToHtml.py</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">import markdown
+md = markdown.Markdown()
+
+with open('mymd.md', 'r') as f:
+    #file = f.read().splitlines()
+    file = f.read()
+htmlFile = md.convert(file)
+print(htmlFile)</pre>
 <p></p><h2>cd2020pj1</h2>
 <p>SQLite browser: <a href="https://sqlitebrowser.org/dl/">https://sqlitebrowser.org/dl/</a></p>
 <p><a href="https://flask-admin.readthedocs.io/en/latest/">https://flask-admin.readthedocs.io/en/latest/</a></p>

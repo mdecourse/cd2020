@@ -1040,8 +1040,9 @@ for repo in github.get_user().get_repos():
 <p style="padding-left: 30px;">40723147<br/>40723137<br/>40723141<br/>----<br/>group:3</p>
 <p style="padding-left: 30px;">40723128<br/>40723110<br/>40723120<br/>----<br/>group:4</p>
 <p style="padding-left: 30px;">40723111<br/>40723138<br/>40423155</p><h3>markdown and cmsimde</h3>
+<pre><code>pip install markdown<br/><br/>We may use markdown module to convert .md to .html and assemble into content.htm</code></pre>
 <p>mymd.md</p>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false"># This is an H1
+<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false"># This is a H1
 
 [cd2020] is the course site, [python and yaml] shows how to use Python to read and write YAML file.
 
@@ -1049,7 +1050,7 @@ for repo in github.get_user().get_repos():
 
 [python and yaml]: https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/
 
-## This is an H2
+## This is a H2
 
 [cd2020] is the course site, [python and yaml] shows how to use Python to read and write YAML file.
 
@@ -1057,7 +1058,7 @@ for repo in github.get_user().get_repos():
 
 [python and yaml]: https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/
 
-### This is an H3
+### This is a H3
 
 [cd2020] is the course site, [python and yaml] shows how to use Python to read and write YAML file.
 
@@ -1074,11 +1075,11 @@ with open('mymd.md', 'r') as f:
 htmlFile = md.convert(file)
 print(htmlFile)</pre>
 <p>HTML output</p>
-<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;h1&gt;This is an H1&lt;/h1&gt;
+<pre class="brush:html;auto-links:false;toolbar:false" contenteditable="false">&lt;h1&gt;This is a H1&lt;/h1&gt;
 &lt;p&gt;&lt;a href="https://mde.tw/cd2020"&gt;cd2020&lt;/a&gt; is the course site, &lt;a href="https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/"&gt;python and yaml&lt;/a&gt; shows how to use Python to read and write YAML file.&lt;/p&gt;
-&lt;h2&gt;This is an H2&lt;/h2&gt;
+&lt;h2&gt;This is a H2&lt;/h2&gt;
 &lt;p&gt;&lt;a href="https://mde.tw/cd2020"&gt;cd2020&lt;/a&gt; is the course site, &lt;a href="https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/"&gt;python and yaml&lt;/a&gt; shows how to use Python to read and write YAML file.&lt;/p&gt;
-&lt;h3&gt;This is an H3&lt;/h3&gt;
+&lt;h3&gt;This is a H3&lt;/h3&gt;
 &lt;p&gt;&lt;a href="https://mde.tw/cd2020"&gt;cd2020&lt;/a&gt; is the course site, &lt;a href="https://stackabuse.com/reading-and-writing-yaml-to-a-file-in-python/"&gt;python and yaml&lt;/a&gt; shows how to use Python to read and write YAML file.&lt;/p&gt;
 </pre>
 <p></p><h2>cd2020pj1</h2>

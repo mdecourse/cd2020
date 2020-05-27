@@ -1,3 +1,9 @@
+# 每週上完進度後, 以亂數抽選出 mini project 組員, 然後在既有先前的協同內容之外, 加上當週的進度協同實習結果
+# 1. 分別選定班別, 以及分組別後, 執行亂數抽選, 程序會自動新增倉儲, 並將各組組員設為可推送版本的權限組員
+# 2. 目前採手動設定各倉儲的 Github Pages (隨後嘗試改為自動設定)
+# 3. 目前必須手動將亂數抽選結果, 加入對應倉儲內容 (隨後嘗試透過分頁程序與組合程序, 將結果納入靜態與動態網站中)
+# 4. 目前必須採手動新增提交與推送 (隨後嘗試以自動流程進行)
+
 from github import Github
 import random
  
@@ -15,14 +21,18 @@ for i in cdbList:
  
 # every group select num of student
 num = 3
-repoName = "cdaw13-3"
+repoName = "cdaw13-30"
 repoDesp = "cd2020 " + repoName + " mini project"
 studList = cdaList
 
 selStud = []
- 
+
+# 列出分組 Github Pages 與倉儲連結
+print("http://mde.tw/" + repoName)
+print()
+print("https://github.com/mdecourse/" + repoName + ".git")
+print()
 # random selection loop
- 
 for i in range(len(studList)):
     random.shuffle(studList[i])
     print("group:" + str(i+1))
@@ -31,7 +41,8 @@ for i in range(len(studList)):
         stud = studList[i][j]
         print(stud)
         # 405 and 407 with s
-        if stud[2] == "5" or stud[2] == "7":
+        #加上 "40723153" 例外判別
+        if (stud != "40723153") and (stud[2] == "5" or stud[2] == "7"):
             selStud.append("s" + str(stud))
         else:
             selStud.append(stud)
@@ -41,20 +52,24 @@ for i in range(len(studList)):
  
 #print(selStud)
  
-with open('./../../mdecourse_github_token.txt', 'r') as f:
+with open('./../mdecourse_github_token.txt', 'r') as f:
     token = f.read().splitlines()
 #print(token[0])
- 
+
+'''
+# 為抽出的各組組員建立協同倉儲
 # or using an access token
 github = Github(token[0])
 user = github.get_user()
 repo = user.create_repo(name=repoName, description=repoDesp, auto_init=True)
- 
+
+# 將各組組員設為各分組倉儲的協同者, 具有倉儲推送權限
 # grand selected user permission to push
 for i in selStud:
     repo.add_to_collaborators(i, permission='push')
     # 讓用戶擁有管理權
     #repo.add_to_collaborators(i, permission='admin')
+'''
 
 '''
 # list app repository of user

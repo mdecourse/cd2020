@@ -18,17 +18,6 @@ cdbList = [['40723201', '40723206', '40723213', '40723215', '40723216', '4072322
 
 def miniProject(studList, prjTitle, mbrNum, prjNum):
     # 建立 miniProject 各分組組員數列
-    # prjOrd: project order 專案序號
-    # prjNum: 建立專案組數
-    # 利用 for 迴圈執行指定專案次數
-    # courseTitle: 課程名稱
-    # prjDesp: project description 專案說明
-    courseTitle = "cd2020"
-    prjDesp = "mini project"
-    webPrefix = "http://mde.tw/"
-    repoPrefix = "https://github.com/mdecourse/"
-    repoSuffix = ".git"
-    nosExcept = ["40723153"]
     # 預計將各組抽選的學號放入 allGrp
     allGrp = []
     miniGrp = []
@@ -43,81 +32,103 @@ def miniProject(studList, prjTitle, mbrNum, prjNum):
         # 將前面 mbrNum *prjNum 個學號納入
         allGrp.append(eachGrp[:mbrNum*prjNum])
         # 至此, 應該已經取得所需要的 allGrp
-    print(allGrp)
+    # allGrp 為各組數列弄亂後, 取前 9 名學員所組成的大數列
+    #print(allGrp)
+    # 預計分成幾組專案迴圈
     for grp in range(prjNum):
+        # 完成各專案組抽選人員之暫存數列
         tmpGrp = []
+        # 每班各分幾組之組數迴圈
         for i in range(grpNum):
             # 各組待選數列 allGrp[i]
+            #  每組抽出幾人迴圈
             for j in range(mbrNum):
                 # 選到的組員為 allGrp[i][j]
-                tmpGrp.append(allGrp[i][j])
+                tmpGrp.append(allGrp[i][j + grp*mbrNum])
         miniGrp.append(tmpGrp)
-    print(miniGrp)        
-    
-    '''
-    for prjOrd in range(prjNum):
-        #mbrNum = 3
-        # prjTitle = cdaw14
-        #repoName = "cdbw14-3"
-        repoName = prjTitle + "-" + prjOrd
-        repoDesp = courseTitle + " " + repoName + " " + prjDesp
-        #studList = cdbList
+    # miniGrp 則由 allGrp 中, 以
+    #print(miniGrp)      
+    return miniGrp    
 
-        selStud = []
-
-        # 列出分組 Github Pages 與倉儲連結
-        print(webPrefix + repoName)
-        print()
-        print(repoPrefix + repoName + repoSuffix)
-        print()
-        # random selection loop
-        # i 為分組序號, 使用 for 迴圈逐組 shuffle 後, 按順序取出學號
-        for i in range(len(studList)):
-            random.shuffle(studList[i])
-            print("group:" + str(i+1))
-            print()
-            # 
-            for j in range(mbrNum):
-                # 抽選的學號
-                stud = studList[i][j]
-                print(stud)
-                
-                # 405 and 407 with s
-                #加上 "40723153" 例外判別
-                #if (stud != "40723153") and (stud[2] == "5" or stud[2] == "7"):
-                if (stud not in nosExcept) and (stud[2] == "5" or stud[2] == "7"):
-                    selStud.append("s" + str(stud))
-                else:
-                    selStud.append(stud)
-            print("----")
-    '''
-
-"""定義 createRepo 函式, 輸入 tokenPath 與 perm 變數
-    tokenPath: 目前 token 位於 './../mdecourse_github_token.txt'
-    perm: 目前授予用戶的權限為 'push'
-"""
-def createRepo(tokenPath, perm):
-    # 讀取 github 中與帳號綁定的 token 值
+# 根據已經完成的分組數列, 執行後續資料列印與倉儲新增設定
+def finalStep(courseTitle, prjTitle, tokenPath, prjDesp, webPrefix, repoPrefix, repoSuffix, nosExcept, perm, miniGrp):
+    #courseTitle = "cd2020"
+    #prjTitle = "cdaw14"
+    #repoName = "cdbw14-3"
+    #tokenPath =  './../mdecourse_github_token.txt'
+    #prjDesp = "mini project"
+    #webPrefix = "http://mde.tw/"
+    #repoPrefix = "https://github.com/mdecourse/"
+    #repoSuffix = ".git"
+    #nosExcept = ["40723153"]
+    #perm = "push"
     with open(tokenPath, 'r') as f:
         token = f.read().splitlines()
-    #print(token[0])
-
-
-    # 為抽出的各組組員建立協同倉儲
-    # or using an access token
+        # 確認取得 token
+        print("以下為 token:")
+        print(token[0])
     github = Github(token[0])
     user = github.get_user()
-    repo = user.create_repo(name=repoName, description=repoDesp, auto_init=True)
-
-    # 將各組組員設為各分組倉儲的協同者, 具有倉儲推送權限
-    # grand selected user permission to push
-    for i in selStud:
-        repo.add_to_collaborators(i, permission=perm)
-        # 讓用戶擁有管理權
-        #repo.add_to_collaborators(i, permission='admin')
-
+    for i in range(len(miniGrp)):
+        repoName = prjTitle + "-" + str(i+1)
+        repoDesp = courseTitle + " " + repoName + " " + prjDesp
+        subGrp = miniGrp[i]
+        # 為抽出的各組組員建立協同倉儲
+        # 測試時蓋掉 1/2
+        #repo = user.create_repo(name=repoName, description=repoDesp, auto_init=True)
+        print("根據 " + repoName + ", " + repoDesp + " 建立倉儲")
+        print("第 " + str(i+1) + "組:")
+        print()
+        # 列出分組網站連結
+        print(webPrefix + repoName)
+        print()
+        # 列出分組倉儲連結
+        print(repoPrefix + repoName + repoSuffix)
+        print()
+        for j in range(len(miniGrp[i])):
+            studNum = miniGrp[i][j]
+            # 列出各組員學號 
+            print(str(studNum))
+            if (studNum not in nosExcept) and (studNum[2] == "5" or studNum[2] == "7"):
+                studAccount = "s" + str(studNum)
+            else:
+                studAccount = str(studNum)
+            # 依據學員 github 帳號, 設定權限
+            # 測試時關閉 2/2
+            #repo.add_to_collaborators(studAccount, permission=perm)
+            #print("根據 " + studAccount + " 以及 permission: "+ perm + " 加為協同者")
+        print()
+            
+ 
+ # -------------------------------------
+# 專案名稱
+prjTitle = "cdaw14"
+# 選擇班級分組數列            
 studList = cdaList
-prjTitle = "cd2020"
+# 每組選出 3 人組成 mini project
 mbrNum = 3
+# 共組成 3 組 mini projects
 prjNum = 3
-miniProject(studList, prjTitle, mbrNum, prjNum)
+# -------------------------------------
+# 課程名稱
+courseTitle = "cd2020"
+# token 路徑
+tokenPath =  './../mdecourse_github_token.txt'
+# 專案說明
+prjDesp = "mini project"
+# 網站前綴
+webPrefix = "http://mde.tw/"
+# 倉儲前綴
+repoPrefix = "https://github.com/mdecourse/"
+# 倉儲後綴
+repoSuffix = ".git"
+# 帳號不以 s 開頭的例外學號數列
+nosExcept = ["40723153"]
+# 倉儲允許使用者 push
+perm = "push"
+# 呼叫 miniProject 進行分組, 完成後傳回分組人員數列
+miniGrp = miniProject(studList, prjTitle, mbrNum, prjNum)
+print(miniGrp)
+# 準備根據分組結果, 進行資料列印與倉儲新增及設定
+finalStep(courseTitle, prjTitle, tokenPath, prjDesp, webPrefix, repoPrefix, repoSuffix, nosExcept, perm, miniGrp)
+

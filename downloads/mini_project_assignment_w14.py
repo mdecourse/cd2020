@@ -75,8 +75,8 @@ def finalStep(courseTitle, prjTitle, tokenPath, prjDesp, webPrefix, repoPrefix, 
         subGrp = miniGrp[i]
         # 為抽出的各組組員建立協同倉儲
         # 測試時蓋掉 1/2
-        #repo = user.create_repo(name=repoName, description=repoDesp, auto_init=True)
-        print("根據 " + repoName + ", " + repoDesp + " 建立倉儲")
+        repo = user.create_repo(name=repoName, description=repoDesp, auto_init=True)
+        #print("根據 " + repoName + ", " + repoDesp + " 建立倉儲")
         print("第 " + str(i+1) + "組:")
         print()
         # 列出分組網站連結
@@ -95,14 +95,14 @@ def finalStep(courseTitle, prjTitle, tokenPath, prjDesp, webPrefix, repoPrefix, 
                 studAccount = str(studNum)
             # 依據學員 github 帳號, 設定權限
             # 測試時關閉 2/2
-            #repo.add_to_collaborators(studAccount, permission=perm)
+            repo.add_to_collaborators(studAccount, permission=perm)
             #print("根據 " + studAccount + " 以及 permission: "+ perm + " 加為協同者")
         print()
             
  
  # -------------------------------------
 # 專案名稱
-prjTitle = "cdaw14"
+prjTitle = "cdaw16"
 # 選擇班級分組數列            
 studList = cdaList
 # 每組選出 3 人組成 mini project
